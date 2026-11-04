@@ -33,7 +33,7 @@ import { BrandLogoComponent } from '../../shared/components/brand-logo/brand-log
 
           <a routerLink="/dashboard" class="flex items-center gap-2.5 lg:hidden font-bold text-slate-900 dark:text-white group">
             <app-brand-logo [size]="28" />
-            <span class="text-base tracking-tight font-semibold group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">DevTools Hub</span>
+            <span class="text-base tracking-tight font-semibold group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">ZeroTrace Tools</span>
           </a>
         </div>
 

@@ -38,8 +38,8 @@ import { BrandLogoComponent } from '../../shared/components/brand-logo/brand-log
           <a routerLink="/dashboard" (click)="closeMobile.emit()" class="flex items-center gap-3 overflow-hidden group">
             <app-brand-logo [size]="32" />
             <div class="flex flex-col truncate">
-              <span class="font-bold text-base tracking-tight text-slate-900 dark:text-slate-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">DevTools Hub</span>
-              <span class="text-[10px] font-mono text-primary-500 font-semibold tracking-wider uppercase">In-Browser Suite</span>
+              <span class="font-bold text-base tracking-tight text-slate-900 dark:text-slate-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">ZeroTrace Tools</span>
+              <span class="text-[10px] font-mono text-primary-500 font-semibold tracking-wider uppercase">100% In-Browser</span>
             </div>
           </a>
 
@@ -71,8 +71,8 @@ import { BrandLogoComponent } from '../../shared/components/brand-logo/brand-log
             routerLink="/dashboard"
             (click)="closeMobile.emit()"
             class="flex items-center justify-center p-1 rounded-xl hover:scale-105 transition-all focus:outline-none focus:ring-2 focus:ring-primary-500"
-            title="DevTools Hub Dashboard"
-            aria-label="DevTools Hub Dashboard"
+            title="ZeroTrace Tools Dashboard"
+            aria-label="ZeroTrace Tools Dashboard"
           >
             <app-brand-logo [size]="34" />
           </a>

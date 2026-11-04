@@ -23,11 +23,11 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
           </div>
 
           <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            DevTools Hub
+            ZeroTrace Tools
           </h1>
 
           <p class="text-slate-100 text-sm sm:text-base leading-relaxed opacity-95">
-            A fast, private, browser-based suite of 12 developer utilities. Format, convert, encode, and test without your sensitive data ever leaving your machine.
+            A fast, private, browser-based suite of 13 developer utilities. Format, convert, encode, and test without your sensitive data ever leaving your machine.
           </p>
 
           <!-- Interactive Search Bar inside Hero -->

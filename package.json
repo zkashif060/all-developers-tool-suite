@@ -1,9 +1,9 @@
 {
-  "name": "devtools-hub",
+  "name": "zerotrace-tools",
   "version": "1.0.0",
   "description": "Precision In-Browser & Native Desktop Developer Utilities Suite",
   "main": "electron/main.js",
-  "author": "DevTools Hub",
+  "author": "ZeroTrace Tools",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -51,9 +51,9 @@
     "vitest": "^4.0.8"
   },
   "build": {
-    "appId": "com.devtoolshub.app",
-    "productName": "DevTools Hub",
-    "copyright": "Copyright © 2026 DevTools Hub",
+    "appId": "com.zerotracetools.app",
+    "productName": "ZeroTrace Tools",
+    "copyright": "Copyright © 2026 ZeroTrace Tools",
     "directories": {
       "output": "release"
     },

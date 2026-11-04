@@ -1,7 +1,7 @@
 {
-  "name": "DevTools Hub — In-Browser Precision Developer Utilities",
-  "short_name": "DevTools Hub",
-  "description": "Privacy-first, 100% in-browser developer utility suite with 12 essential tools for JSON, JWT, Base64, Regex, Cron, SHA-256, and more.",
+  "name": "ZeroTrace Tools — 100% Private Developer Utilities",
+  "short_name": "ZeroTrace",
+  "description": "Privacy-first, 100% in-browser developer utility suite with 13 essential tools for Image Base64, JSON, JWT, Base64, Regex, Cron, SHA-256, and more.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

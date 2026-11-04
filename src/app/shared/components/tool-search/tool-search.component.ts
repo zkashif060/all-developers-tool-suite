@@ -98,7 +98,7 @@ import { AppIconComponent } from '../app-icon/app-icon.component';
               <span><kbd class="font-mono bg-white dark:bg-slate-800 px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-700">↑↓</kbd> Navigate</span>
               <span><kbd class="font-mono bg-white dark:bg-slate-800 px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-700">Enter</kbd> Open</span>
             </div>
-            <span>DevTools Hub</span>
+            <span>ZeroTrace Tools</span>
           </div>
         </div>
       </div>

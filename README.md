@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ DevTools Hub
+# 🛡️ ZeroTrace Tools
 
 ### Precision In-Browser & Native Desktop Developer Utilities Suite
 **Fast, beautiful, offline-ready developer utilities — 100% private, client-side, zero tracking.**
@@ -23,7 +23,7 @@
 
 ## 🔒 100% In-Browser Privacy Guarantee
 
-Unlike common online developer utilities that send your sensitive data, production API payloads, and internal credentials to remote servers, **DevTools Hub executes 100% inside your local browser sandbox**:
+Unlike common online developer utilities that send your sensitive data, production API payloads, and internal credentials to remote servers, **ZeroTrace Tools executes 100% inside your local browser sandbox**:
 
 - 🛡️ **Zero Remote Network Calls:** Your tokens, database dumps, JSON structures, and images never leave your machine.
 - ⚡ **Hardware-Accelerated Cryptography:** Uses browser native `crypto.subtle` and `crypto.getRandomValues()` for NIST FIPS-compliant hashes and secure UUIDs.
@@ -124,7 +124,7 @@ Visit `http://localhost:4200` in your browser. The application will automaticall
 
 ## 🧪 Testing & Quality Assurance
 
-DevTools Hub features an extensive Vitest automated test suite covering every parsing engine, cryptographic algorithm, and utility service:
+ZeroTrace Tools features an extensive Vitest automated test suite covering every parsing engine, cryptographic algorithm, and utility service:
 
 ```bash
 # Run all unit tests
@@ -141,7 +141,7 @@ npm test -- --watch=false
 
 ## 💻 Native Desktop App (Electron)
 
-Package DevTools Hub as an offline, hardware-accelerated desktop application for your operating system:
+Package ZeroTrace Tools as an offline, hardware-accelerated desktop application for your operating system:
 
 ```bash
 # Launch Electron locally in development mode
@@ -163,7 +163,7 @@ Desktop builds output to the `release/` directory.
 
 ## 📱 Progressive Web App (PWA)
 
-DevTools Hub is fully configured with a Service Worker (`public/sw.js`) and Web Application Manifest (`public/manifest.webmanifest`).
+ZeroTrace Tools is fully configured with a Service Worker (`public/sw.js`) and Web Application Manifest (`public/manifest.webmanifest`).
 - Installable on desktop Chrome, Edge, Brave, and macOS Safari.
 - Installable on mobile iOS (Add to Home Screen) and Android.
 - Pre-caches core application bundles for complete offline usage.

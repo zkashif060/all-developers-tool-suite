@@ -10,7 +10,7 @@ function createMainWindow() {
     height: 860,
     minWidth: 960,
     minHeight: 640,
-    title: 'DevTools Hub — Precision Developer Utilities',
+    title: 'ZeroTrace Tools — 100% Private Developer Utilities',
     backgroundColor: '#0B0F19',
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
     trafficLightPosition: { x: 16, y: 16 },
@@ -120,7 +120,7 @@ function setupNativeMenu() {
       role: 'help',
       submenu: [
         {
-          label: 'DevTools Hub GitHub',
+          label: 'ZeroTrace Tools GitHub',
           click: async () => {
             await shell.openExternal('https://github.com');
           }

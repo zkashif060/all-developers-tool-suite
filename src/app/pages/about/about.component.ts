@@ -18,11 +18,11 @@ import { BrandLogoComponent } from '../../shared/components/brand-logo/brand-log
         <div class="flex items-center gap-3.5">
           <app-brand-logo [size]="42" />
           <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
-            About DevTools Hub
+            About ZeroTrace Tools
           </h1>
         </div>
         <p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-          DevTools Hub is built on a fundamental principle: <strong>developer data must remain private, secure, and entirely within the user's control.</strong>
+          ZeroTrace Tools is built on a fundamental principle: <strong>developer data must remain private, secure, and entirely within the user's control.</strong>
         </p>
       </div>
 
@@ -64,7 +64,7 @@ import { BrandLogoComponent } from '../../shared/components/brand-logo/brand-log
           </div>
           <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100">Zero Analytics & Tracking</h2>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-            DevTools Hub contains zero tracking scripts, telemetry pixels, Google Analytics, or third-party advertising beacons. We have no access to what tools you use or what data you process.
+            ZeroTrace Tools contains zero tracking scripts, telemetry pixels, Google Analytics, or third-party advertising beacons. We have no access to what tools you use or what data you process.
           </p>
         </div>
       </section>
@@ -76,7 +76,7 @@ import { BrandLogoComponent } from '../../shared/components/brand-logo/brand-log
           <span>Transparent LocalStorage Usage Disclosure</span>
         </h2>
         <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-          DevTools Hub uses your browser's <code class="font-mono text-primary-500">localStorage</code> strictly for non-sensitive client preferences to deliver a seamless user experience across visits:
+          ZeroTrace Tools uses your browser's <code class="font-mono text-primary-500">localStorage</code> strictly for non-sensitive client preferences to deliver a seamless user experience across visits:
         </p>
         <ul class="list-disc list-inside text-xs text-slate-600 dark:text-slate-400 space-y-1 font-mono">
           <li><strong>devtools_theme:</strong> Stores your chosen color theme (<code class="text-primary-500">light</code>, <code class="text-primary-500">dark</code>, or <code class="text-primary-500">system</code>).</li>
@@ -100,7 +100,7 @@ import { BrandLogoComponent } from '../../shared/components/brand-logo/brand-log
         <ol class="list-decimal list-inside text-xs text-slate-600 dark:text-slate-400 space-y-1.5 font-mono">
           <li>Open your browser's Developer Tools (<kbd class="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700">F12</kbd> or <kbd class="px-1.5 py-0.5 rounded bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700">Ctrl+Shift+I</kbd>).</li>
           <li>Navigate to the <strong>Network</strong> tab.</li>
-          <li>Paste sensitive JSON, CSV, or a JWT token into any tool on DevTools Hub and trigger formatting or decoding.</li>
+          <li>Paste sensitive JSON, CSV, or a JWT token into any tool on ZeroTrace Tools and trigger formatting or decoding.</li>
           <li>Notice that zero HTTP requests are recorded. Data never leaves your machine.</li>
         </ol>
       </section>
