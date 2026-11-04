@@ -72,7 +72,33 @@ Execute the Vitest unit test suite across all 16 test suites:
 ```bash
 npm test -- --watch=false
 ```
-**Current Test Coverage:** 150/150 passing unit tests.
+**Current Test Coverage:** 152/152 passing unit tests (100% pass rate).
+
+---
+
+## 💻 Native Desktop Application (Electron)
+
+DevTools Hub can run as an offline desktop application on macOS, Windows, and Linux:
+
+```bash
+# Launch Electron locally in development
+npm run electron:start
+
+# Package native macOS installer (.dmg, .zip)
+npm run dist:mac
+
+# Package native Windows installer (.exe, portable)
+npm run dist:win
+
+# Package Linux installer (.AppImage, .deb)
+npm run dist:linux
+```
+
+---
+
+## 📱 Progressive Web App (PWA)
+
+DevTools Hub is installable as a standalone PWA on Android, iOS, Chrome, Edge, and Safari with complete offline caching powered by `sw.js` and `manifest.webmanifest`.
 
 ---
 
