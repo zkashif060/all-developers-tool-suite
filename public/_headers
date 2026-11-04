@@ -1,0 +1,23 @@
+# Security and performance headers for Cloudflare Pages
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  X-XSS-Protection: 1; mode=block
+
+# Immutable cache for versioned chunks and stylesheets
+/chunk-*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/styles-*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/main-*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Prevent stale HTML caching so updates deploy immediately
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+

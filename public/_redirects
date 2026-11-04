@@ -1,0 +1,4 @@
+# Cloudflare Pages SPA Fallback Configuration
+# Redirect all non-file routes to /index.html with HTTP status 200 for Angular Router
+/*    /index.html   200
+

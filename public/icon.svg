@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="dthGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="50%" stop-color="#3762EA"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <linearGradient id="dthGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="dthShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1E1B4B" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <!-- Rounded Squircle Base -->
+  <rect x="2" y="2" width="44" height="44" rx="11" fill="url(#dthGrad)" filter="url(#dthShadow)"/>
+  <!-- Subtle Top Specular Glass Shine -->
+  <rect x="3" y="3" width="42" height="20" rx="10" fill="url(#dthGlow)"/>
+  <!-- Inner Border Ring -->
+  <rect x="2.5" y="2.5" width="43" height="43" rx="10.5" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1"/>
+  <!-- Precision Developer Code Glyphs < / > -->
+  <!-- Left Chevron -->
+  <path d="M18 16L11 24L18 32" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right Chevron -->
+  <path d="M30 16L37 24L30 32" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Center Electric Cyan Forward Slash -->
+  <path d="M26.5 14.5L21.5 33.5" stroke="#38BDF8" stroke-width="3.2" stroke-linecap="round"/>
+</svg>

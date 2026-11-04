@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>DevTools Hub — Professional In-Browser Developer Utilities Suite</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DevTools Hub is a privacy-first collection of 12 essential browser-based developer utilities including JSON Formatter, JSON to CSV, Base64, JWT Decoder, UUID Generator, Regex Tester, and SHA-256 that process data 100% locally.">
+  <meta name="keywords" content="developer tools, json formatter, json validator, json to csv, csv to json, base64 encoder, url encoder, jwt decoder, uuid generator, unix timestamp, regex tester, cron builder, sha256 generator, client-side, privacy">
+  <meta name="author" content="DevTools Hub">
+  <meta name="robots" content="index, follow">
+
+  <!-- Theme Color for Browser Header -->
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0B0F19" media="(prefers-color-scheme: dark)">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DevTools Hub — Professional In-Browser Developer Utilities Suite">
+  <meta property="og:description" content="100% Client-Side Developer Utilities Suite: JSON Formatter, JSON to CSV, Base64, JWT, Regex, Cron, UUID, SHA-256 and more. Zero server tracking.">
+  <meta property="og:site_name" content="DevTools Hub">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DevTools Hub — Precision In-Browser Developer Utilities">
+  <meta name="twitter:description" content="12 essential everyday developer tools with zero server-side dependencies and complete data privacy.">
+
+  <!-- High-Precision Brand Favicons (Prioritizing crisp SVG vector + raster fallbacks) -->
+  <link rel="icon" type="image/svg+xml" href="icon.svg?v=2">
+  <link rel="alternate icon" type="image/png" href="icon.png?v=2">
+  <link rel="alternate icon" type="image/x-icon" href="favicon.ico?v=2">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Progressive Web App (PWA) Manifest & Capabilities -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DevTools Hub">
+
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Offline Service Worker Registration for PWA -->
+  <script>
+    if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(function() {});
+      });
+    }
+  </script>
+
+  <!-- Immediate Theme Initializer to prevent flash of wrong theme -->
+  <script>
+    (function() {
+      try {
+        const storedTheme = localStorage.getItem('devtools_theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {
+        // Fallback gracefully if localStorage is unavailable
+      }
+    })();
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-[#0B0F19] dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white">
+  <app-root></app-root>
+</body>
+</html>
