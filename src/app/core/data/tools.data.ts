@@ -52,6 +52,16 @@ export const TOOLS_DATA: ToolMetadata[] = [
     popular: true,
   },
   {
+    id: 'image-base64',
+    name: 'Image to Base64',
+    description: 'Convert images to Base64 data URIs and decode Base64 back to image files with live preview.',
+    category: 'Encoding',
+    icon: 'image',
+    route: '/tools/image-base64',
+    keywords: ['image', 'base64', 'png', 'jpg', 'svg', 'webp', 'data uri', 'css background', 'img tag', 'decode'],
+    popular: true,
+  },
+  {
     id: 'url-encoder',
     name: 'URL Encoder / Decoder',
     description: 'Encode and decode URLs and URI components with query parameter breakdown.',

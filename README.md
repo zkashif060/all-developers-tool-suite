@@ -1,6 +1,6 @@
 # DevTools Hub — Precision In-Browser Developer Utilities Suite
 
-**DevTools Hub** is a modern, responsive, 100% client-side developer utility platform built with Angular 21, TypeScript strict mode, and Tailwind CSS. It provides 12 essential everyday developer tools with zero server-side dependencies, zero telemetry, and complete data privacy.
+**DevTools Hub** is a modern, responsive, 100% client-side developer utility platform built with Angular 21, TypeScript strict mode, and Tailwind CSS. It provides 13 essential everyday developer tools with zero server-side dependencies, zero telemetry, and complete data privacy.
 
 ---
 
@@ -13,7 +13,7 @@ DevTools Hub operates strictly within your local browser sandbox:
 
 ---
 
-## 🛠️ The 12 Developer Utilities
+## 🛠️ The 13 Developer Utilities
 
 ### 1. JSON & Data Tools
 - **JSON Formatter** (`/tools/json-formatter`): Format JSON with 2 or 4 spaces, minify/compact mode, syntax error detection with line numbers, and sample data.
@@ -23,6 +23,7 @@ DevTools Hub operates strictly within your local browser sandbox:
 
 ### 2. Encoding & Decoding
 - **Base64 Encoder / Decoder** (`/tools/base64`): Unicode/UTF-8 safe conversion supporting multilingual text, Urdu, Arabic, Chinese, and emojis. Supports URL-safe mode (`-`, `_`) and optional padding (`=`).
+- **Image to Base64 Converter & Decoder** (`/tools/image-base64`): Bidirectional image encoder and decoder. Convert PNG, JPG, WEBP, SVG, GIF, BMP, and ICO images into Base64 Data URIs, raw strings, HTML `<img>` tags, CSS `background-image`, and JSON with visual preview, dimensions, and size metrics. Paste directly from clipboard or drag & drop, and decode Base64 strings back to downloadable image files.
 - **URL Encoder / Decoder** (`/tools/url-encoder`): RFC 3986 component encoding vs. full URL preserving modes, plus standard form space (`+`) encoding.
 
 ### 3. Security & Tokens

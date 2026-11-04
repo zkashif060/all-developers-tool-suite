@@ -54,6 +54,11 @@ export const routes: Routes = [
         title: 'CSV to JSON Converter — DevTools Hub'
       },
       {
+        path: 'tools/image-base64',
+        loadComponent: () => import('./tools/image-base64/image-base64.component').then(m => m.ImageBase64Component),
+        title: 'Image to Base64 Converter — DevTools Hub'
+      },
+      {
         path: 'tools/base64',
         loadComponent: () => import('./tools/base64/base64.component').then(m => m.Base64Component),
         title: 'Base64 Encoder / Decoder — DevTools Hub'

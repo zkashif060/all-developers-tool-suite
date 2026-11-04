@@ -13,8 +13,8 @@ describe('ToolRegistryService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should register exactly 12 tools', () => {
-    expect(service.tools().length).toBe(12);
+  it('should register exactly 13 tools', () => {
+    expect(service.tools().length).toBe(13);
   });
 
   it('should register exactly 6 categories', () => {
@@ -35,8 +35,8 @@ describe('ToolRegistryService', () => {
 
   it('should filter tools by category', () => {
     const results = service.getToolsByCategory('Encoding');
-    expect(results.length).toBe(2);
-    expect(results.map(t => t.id)).toEqual(['base64', 'url-encoder']);
+    expect(results.length).toBe(3);
+    expect(results.map(t => t.id)).toEqual(['base64', 'image-base64', 'url-encoder']);
   });
 });
 
