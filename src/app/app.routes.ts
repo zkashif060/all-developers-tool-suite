@@ -193,6 +193,26 @@ export const routes: Routes = [
         redirectTo: 'tools/code-formatter',
         pathMatch: 'full'
       },
+      {
+        path: 'tools/json-tree-viewer',
+        loadComponent: () => import('./tools/json-tree-viewer/json-tree-viewer.component').then(m => m.JsonTreeViewerComponent),
+        title: 'JSON Tree Viewer — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/json-tree',
+        redirectTo: 'tools/json-tree-viewer',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/json-viewer',
+        redirectTo: 'tools/json-tree-viewer',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/json-explorer',
+        redirectTo: 'tools/json-tree-viewer',
+        pathMatch: 'full'
+      },
 
       // 404 Not Found Wildcard
       {

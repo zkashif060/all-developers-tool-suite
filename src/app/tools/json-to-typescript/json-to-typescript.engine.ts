@@ -313,3 +313,4 @@ function singularizeAndPascal(key: string): string {
 function renderTypeAlias(name: string, typeVal: string, isExport: boolean): string {
   return `${isExport ? 'export ' : ''}type ${name} = ${typeVal};`;
 }
+

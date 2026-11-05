@@ -185,3 +185,4 @@ function extractYamlError(err: unknown, originalText: string): YamlJsonResult {
     errorColumn
   };
 }
+

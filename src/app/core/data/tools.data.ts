@@ -264,6 +264,27 @@ export const TOOLS_DATA: ToolMetadata[] = [
     ],
     popular: true,
   },
+  {
+    id: 'json-tree-viewer',
+    name: 'JSON Tree Viewer',
+    description: 'Explore, search, filter, and inspect nested JSON hierarchies with interactive collapsible tree nodes and JSONPath extraction.',
+    category: 'JSON & Data',
+    icon: 'list',
+    route: '/tools/json-tree-viewer',
+    keywords: [
+      'json tree',
+      'json tree viewer',
+      'json viewer',
+      'json explorer',
+      'json visualizer',
+      'tree view',
+      'jsonpath',
+      'inspect json',
+      'json hierarchy',
+      'json parser'
+    ],
+    popular: true,
+  },
 ];
 
 export const CATEGORIES_DATA: CategoryInfo[] = [
