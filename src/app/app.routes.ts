@@ -168,6 +168,31 @@ export const routes: Routes = [
         redirectTo: 'tools/code-formatter',
         pathMatch: 'full'
       },
+      {
+        path: 'tools/html-formatter',
+        redirectTo: 'tools/code-formatter',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/css-formatter',
+        redirectTo: 'tools/code-formatter',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/javascript-formatter',
+        redirectTo: 'tools/code-formatter',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/js-formatter',
+        redirectTo: 'tools/code-formatter',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/html-css-javascript-formatter',
+        redirectTo: 'tools/code-formatter',
+        pathMatch: 'full'
+      },
 
       // 404 Not Found Wildcard
       {
