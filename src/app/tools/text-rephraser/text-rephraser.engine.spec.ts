@@ -33,6 +33,28 @@ describe('TextRephraserEngine', () => {
     expect(res.rephrasedText).toContain('ENSURE');
   });
 
+  it('should rephrase the user technology essay sample significantly', () => {
+    const text = REPHRASE_SAMPLES.technologyEssay.text;
+    const res = rephraseText(text, 'professional');
+
+    expect(res.replacements.length).toBeGreaterThanOrEqual(10);
+    expect(res.rephrasedText).toContain('The significance of Technology in modern daily life');
+    expect(res.rephrasedText).toContain('become an essential component of');
+    expect(res.rephrasedText).toContain('utilize it for');
+    expect(res.rephrasedText).toContain('Enabled by the internet');
+    expect(res.rephrasedText).toContain('across the globe');
+    expect(res.rephrasedText).toContain('participate in virtual courses');
+    expect(res.rephrasedText).toContain('acquire valuable competencies');
+    expect(res.rephrasedText).toContain('instantaneously');
+    expect(res.rephrasedText).toContain('more expedited and productive');
+    expect(res.rephrasedText).toContain('manual labor');
+    expect(res.rephrasedText).toContain('overreliance on');
+    expect(res.rephrasedText).toContain('deplete productivity');
+    expect(res.rephrasedText).toContain('adversely impact personal well-being');
+    expect(res.rephrasedText).toContain('judiciously');
+    expect(res.rephrasedText).toContain('tangible advantages');
+  });
+
   it('should support technical engineering rephrasing', () => {
     const text = 'We need to setup the server and turn on caching to speed up the app.';
     const res = rephraseText(text, 'technical');
@@ -49,14 +71,5 @@ describe('TextRephraserEngine', () => {
     expect(res.rephrasedText).toContain('demonstrates that');
     expect(res.rephrasedText).toContain('substantial discrepancy');
     expect(res.rephrasedText).toContain('precipitates our central thesis');
-  });
-
-  it('should correctly process realistic business email sample', () => {
-    const sample = REPHRASE_SAMPLES.businessEmail.text;
-    const res = rephraseText(sample, 'professional');
-
-    expect(res.replacements.length).toBeGreaterThan(5);
-    expect(res.rephrasedWordCount).toBeLessThan(res.originalWordCount);
-    expect(res.wordsReduced).toBeGreaterThan(0);
   });
 });

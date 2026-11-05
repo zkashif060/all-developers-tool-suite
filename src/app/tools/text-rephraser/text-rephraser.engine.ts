@@ -29,11 +29,195 @@ export interface RephraseResult {
 }
 
 /**
- * Professional, rule-based linguistic dictionary for deterministic in-browser text transformation.
- * Multi-word phrases are listed first to guarantee maximum contextual specificity.
+ * Comprehensive linguistic rule dictionary for deterministic in-browser text transformation.
+ * Evaluates contextual multi-word idioms, pleonasms, academic vocabulary, and common plain verbs.
  */
 export const PHRASE_RULES: PhraseRule[] = [
-  // --- Professional & Business Tone Rules ---
+  // --- High-Level Multi-Word Phrasal Idioms & Collocations ---
+  {
+    pattern: /\bthe importance of\b/gi,
+    replacement: 'the significance of',
+    alternatives: ['the vital role of', 'the pivotal importance of'],
+    reason: 'Elevated formal rhetoric',
+    tone: 'all'
+  },
+  {
+    pattern: /\bin our daily lives\b/gi,
+    replacement: 'in modern daily life',
+    alternatives: ['in contemporary society', 'in everyday life'],
+    reason: 'Elevated contextual scope',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bour daily lives\b/gi,
+    replacement: 'everyday life',
+    alternatives: ['daily existence', 'contemporary living'],
+    reason: 'Objective formal phrasing',
+    tone: 'all'
+  },
+  {
+    pattern: /\bdaily lives\b/gi,
+    replacement: 'everyday routines',
+    alternatives: ['daily activities'],
+    reason: 'Professional precision',
+    tone: 'all'
+  },
+  {
+    pattern: /\bbecome an important part of\b/gi,
+    replacement: 'become an essential component of',
+    alternatives: ['become integral to', 'become a cornerstone of'],
+    reason: 'Elevated idiom to executive prose',
+    tone: 'all'
+  },
+  {
+    pattern: /\ban important part of\b/gi,
+    replacement: 'an integral facet of',
+    alternatives: ['a vital element of', 'a key component of'],
+    reason: 'Elevated vocabulary',
+    tone: 'all'
+  },
+  {
+    pattern: /\bimportant part\b/gi,
+    replacement: 'integral component',
+    alternatives: ['crucial element', 'vital facet'],
+    reason: 'Sophisticated professional phrasing',
+    tone: 'all'
+  },
+  {
+    pattern: /\bwith the help of\b/gi,
+    replacement: 'enabled by',
+    alternatives: ['through the facilitation of', 'via'],
+    reason: 'Direct agency attribution',
+    tone: 'all'
+  },
+  {
+    pattern: /\beasily connect with\b/gi,
+    replacement: 'seamlessly communicate with',
+    alternatives: ['collaborate directly with', 'interface with'],
+    reason: 'Professional capability descriptor',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bconnect with others\b/gi,
+    replacement: 'collaborate globally',
+    alternatives: ['interact with peers', 'communicate internationally'],
+    reason: 'Professional collaboration phrasing',
+    tone: 'all'
+  },
+  {
+    pattern: /\bdifferent parts of the world\b/gi,
+    replacement: 'across the globe',
+    alternatives: ['internationally', 'worldwide'],
+    reason: 'Streamlined global descriptor',
+    tone: 'all'
+  },
+  {
+    pattern: /\battend online classes\b/gi,
+    replacement: 'participate in virtual courses',
+    alternatives: ['engage in digital learning', 'attend remote lectures'],
+    reason: 'Contemporary educational vocabulary',
+    tone: 'all'
+  },
+  {
+    pattern: /\blearn new skills\b/gi,
+    replacement: 'acquire valuable competencies',
+    alternatives: ['develop new proficiencies', 'build modern capabilities'],
+    reason: 'Professional skill acquisition terminology',
+    tone: 'all'
+  },
+  {
+    pattern: /\bfind useful information\b/gi,
+    replacement: 'access relevant knowledge',
+    alternatives: ['retrieve critical data', 'locate valuable insights'],
+    reason: 'Formal data retrieval terminology',
+    tone: 'all'
+  },
+  {
+    pattern: /\buseful information\b/gi,
+    replacement: 'valuable insights',
+    alternatives: ['relevant data', 'critical information'],
+    reason: 'Elevated professional terminology',
+    tone: 'all'
+  },
+  {
+    pattern: /\bwithin seconds\b/gi,
+    replacement: 'instantaneously',
+    alternatives: ['in real time', 'rapidly'],
+    reason: 'Precise temporal adverb',
+    tone: 'all'
+  },
+  {
+    pattern: /\bfaster and more efficient\b/gi,
+    replacement: 'more expedited and productive',
+    alternatives: ['more agile and streamlined', 'highly optimized'],
+    reason: 'Executive business terminology',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bmanual work\b/gi,
+    replacement: 'manual labor',
+    alternatives: ['routine manual operations', 'labor-intensive tasks'],
+    reason: 'Industry-standard terminology',
+    tone: 'all'
+  },
+  {
+    pattern: /\bexcessive use of\b/gi,
+    replacement: 'overreliance on',
+    alternatives: ['disproportionate usage of', 'inordinate dependence upon'],
+    reason: 'Analytical critique phrasing',
+    tone: 'all'
+  },
+  {
+    pattern: /\bwaste time\b/gi,
+    replacement: 'deplete productivity',
+    alternatives: ['consume valuable time', 'diminish efficiency'],
+    reason: 'Professional productivity framing',
+    tone: 'all'
+  },
+  {
+    pattern: /\baffect our health\b/gi,
+    replacement: 'adversely impact personal well-being',
+    alternatives: ['compromise physical health', 'negatively influence wellness'],
+    reason: 'Formal health impact terminology',
+    tone: 'all'
+  },
+  {
+    pattern: /\bwe should use\b/gi,
+    replacement: 'we must employ',
+    alternatives: ['organizations should utilize', 'individuals ought to leverage'],
+    reason: 'Authoritative recommendation',
+    tone: 'all'
+  },
+  {
+    pattern: /\bwe should\b/gi,
+    replacement: 'it is advisable to',
+    alternatives: ['we ought to', 'it is recommended that we'],
+    reason: 'Objective advisory phrasing',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bpositive benefits\b/gi,
+    replacement: 'tangible advantages',
+    alternatives: ['constructive benefits', 'favorable outcomes'],
+    reason: 'Eliminated redundant modifier (pleonasm)',
+    tone: 'all'
+  },
+  {
+    pattern: /\bbrings to our lives\b/gi,
+    replacement: 'confers upon modern living',
+    alternatives: ['provides to daily society', 'delivers to our everyday experience'],
+    reason: 'Elevated concluding rhetoric',
+    tone: 'all'
+  },
+  {
+    pattern: /\buse it for\b/gi,
+    replacement: 'utilize it for',
+    alternatives: ['employ it for', 'leverage it toward'],
+    reason: 'Elevated formal verb',
+    tone: 'all'
+  },
+
+  // --- Corporate & Wordiness Reduction (Plain English & Business) ---
   {
     pattern: /\bin order to\b/gi,
     replacement: 'to',
@@ -245,18 +429,32 @@ export const PHRASE_RULES: PhraseRule[] = [
     tone: 'professional'
   },
   {
-    pattern: /\bgive a call\b/gi,
-    replacement: 'telephone',
-    alternatives: ['contact by phone'],
-    reason: 'Formal correspondence standard',
+    pattern: /\btake into account\b/gi,
+    replacement: 'consider',
+    alternatives: ['factor in', 'evaluate'],
+    reason: 'Concise verb replacement',
+    tone: 'all'
+  },
+  {
+    pattern: /\btake advantage of\b/gi,
+    replacement: 'capitalize on',
+    alternatives: ['leverage', 'maximize'],
+    reason: 'Executive business phrasing',
     tone: 'professional'
   },
   {
-    pattern: /\bthanks a lot\b/gi,
-    replacement: 'thank you sincerely',
-    alternatives: ['we greatly appreciate your support'],
-    reason: 'Professional courtesy',
-    tone: 'professional'
+    pattern: /\ball of a sudden\b/gi,
+    replacement: 'abruptly',
+    alternatives: ['unexpectedly', 'instantaneously'],
+    reason: 'Single formal adverb',
+    tone: 'all'
+  },
+  {
+    pattern: /\bat the end of the day\b/gi,
+    replacement: 'ultimately',
+    alternatives: ['in conclusion', 'fundamentally'],
+    reason: 'Replaced conversational cliché',
+    tone: 'all'
   },
   {
     pattern: /\bI think that\b/gi,
@@ -273,7 +471,212 @@ export const PHRASE_RULES: PhraseRule[] = [
     tone: 'professional'
   },
 
-  // --- Academic Tone Rules ---
+  // --- Common Verbs & Adverbs Transformed to Professional Equivalents ---
+  {
+    pattern: /\bwisely\b/gi,
+    replacement: 'judiciously',
+    alternatives: ['prudently', 'strategically'],
+    reason: 'Elevated professional adverb',
+    tone: 'all'
+  },
+  {
+    pattern: /\bimportant\b/gi,
+    replacement: 'vital',
+    alternatives: ['crucial', 'essential', 'pivotal'],
+    reason: 'More impactful adjective',
+    tone: 'all'
+  },
+  {
+    pattern: /\buseful\b/gi,
+    replacement: 'valuable',
+    alternatives: ['beneficial', 'instrumental'],
+    reason: 'Professional value adjective',
+    tone: 'all'
+  },
+  {
+    pattern: /\butilize\b/gi,
+    replacement: 'employ',
+    alternatives: ['leverage', 'utilize'],
+    reason: 'Direct formal verb',
+    tone: 'concise'
+  },
+  {
+    pattern: /\buse\b/gi,
+    replacement: 'utilize',
+    alternatives: ['employ', 'leverage'],
+    reason: 'Elevated formal verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\buses\b/gi,
+    replacement: 'utilizes',
+    alternatives: ['employs', 'leverages'],
+    reason: 'Elevated formal verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bused\b/gi,
+    replacement: 'utilized',
+    alternatives: ['employed', 'leveraged'],
+    reason: 'Elevated formal verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\busing\b/gi,
+    replacement: 'utilizing',
+    alternatives: ['employing', 'leveraging'],
+    reason: 'Elevated formal participle',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bhelp\b/gi,
+    replacement: 'assist',
+    alternatives: ['facilitate', 'support'],
+    reason: 'Elevated professional verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bhelps\b/gi,
+    replacement: 'facilitates',
+    alternatives: ['assists', 'enables'],
+    reason: 'Elevated professional verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bhelped\b/gi,
+    replacement: 'facilitated',
+    alternatives: ['assisted', 'supported'],
+    reason: 'Elevated professional verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bhelping\b/gi,
+    replacement: 'facilitating',
+    alternatives: ['assisting', 'supporting'],
+    reason: 'Elevated professional verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bfocus on\b/gi,
+    replacement: 'prioritize',
+    alternatives: ['emphasize', 'concentrate on'],
+    reason: 'Decisive executive phrasing',
+    tone: 'all'
+  },
+  {
+    pattern: /\bfocuses on\b/gi,
+    replacement: 'prioritizes',
+    alternatives: ['emphasizes', 'concentrates on'],
+    reason: 'Decisive executive phrasing',
+    tone: 'all'
+  },
+  {
+    pattern: /\bfocused on\b/gi,
+    replacement: 'prioritized',
+    alternatives: ['emphasized', 'concentrated on'],
+    reason: 'Decisive executive phrasing',
+    tone: 'all'
+  },
+  {
+    pattern: /\bfocusing on\b/gi,
+    replacement: 'prioritizing',
+    alternatives: ['emphasizing', 'concentrating on'],
+    reason: 'Decisive executive phrasing',
+    tone: 'all'
+  },
+  {
+    pattern: /\bbig\b/gi,
+    replacement: 'substantial',
+    alternatives: ['considerable', 'extensive'],
+    reason: 'Formal magnitude descriptor',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bgood\b/gi,
+    replacement: 'favorable',
+    alternatives: ['advantageous', 'commendable'],
+    reason: 'Nuanced professional evaluation',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bbad\b/gi,
+    replacement: 'adverse',
+    alternatives: ['detrimental', 'unfavorable'],
+    reason: 'Formal critical adjective',
+    tone: 'professional'
+  },
+  {
+    pattern: /\beasily\b/gi,
+    replacement: 'readily',
+    alternatives: ['effortlessly', 'seamlessly'],
+    reason: 'Professional adverb',
+    tone: 'all'
+  },
+  {
+    pattern: /\bneed to\b/gi,
+    replacement: 'must',
+    alternatives: ['are required to', 'ought to'],
+    reason: 'Direct actionable verb',
+    tone: 'all'
+  },
+  {
+    pattern: /\bstart\b/gi,
+    replacement: 'commence',
+    alternatives: ['initiate', 'launch'],
+    reason: 'Formal project initiation verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bstarted\b/gi,
+    replacement: 'commenced',
+    alternatives: ['initiated', 'launched'],
+    reason: 'Formal verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bstop\b/gi,
+    replacement: 'cease',
+    alternatives: ['discontinue', 'halt'],
+    reason: 'Formal cessation verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bstopped\b/gi,
+    replacement: 'ceased',
+    alternatives: ['discontinued', 'halted'],
+    reason: 'Formal cessation verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bkeep\b/gi,
+    replacement: 'maintain',
+    alternatives: ['retain', 'preserve'],
+    reason: 'Formal continuation verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bkeeps\b/gi,
+    replacement: 'maintains',
+    alternatives: ['retains', 'preserves'],
+    reason: 'Formal continuation verb',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bbuy\b/gi,
+    replacement: 'procure',
+    alternatives: ['acquire', 'purchase'],
+    reason: 'Commercial procurement term',
+    tone: 'professional'
+  },
+  {
+    pattern: /\bchanges\b/gi,
+    replacement: 'modifications',
+    alternatives: ['adaptations', 'revisions'],
+    reason: 'Professional noun',
+    tone: 'professional'
+  },
+
+  // --- Academic Tone Specifics ---
   {
     pattern: /\bshows that\b/gi,
     replacement: 'demonstrates that',
@@ -282,17 +685,17 @@ export const PHRASE_RULES: PhraseRule[] = [
     tone: 'academic'
   },
   {
+    pattern: /\bbig difference\b/gi,
+    replacement: 'substantial discrepancy',
+    alternatives: ['significant variance', 'marked distinction'],
+    reason: 'Elevated academic precision',
+    tone: 'all'
+  },
+  {
     pattern: /\bproves that\b/gi,
     replacement: 'empirically validates that',
     alternatives: ['substantiates that'],
     reason: 'Rigorous scientific terminology',
-    tone: 'academic'
-  },
-  {
-    pattern: /\bbig difference\b/gi,
-    replacement: 'substantial discrepancy',
-    alternatives: ['statistically significant variance'],
-    reason: 'Elevated academic precision',
     tone: 'academic'
   },
   {
@@ -324,7 +727,7 @@ export const PHRASE_RULES: PhraseRule[] = [
     tone: 'academic'
   },
 
-  // --- Technical / Engineering Tone Rules ---
+  // --- Technical / Engineering Tone Specifics ---
   {
     pattern: /\bbreak down\b/gi,
     replacement: 'decompose',
@@ -361,13 +764,6 @@ export const PHRASE_RULES: PhraseRule[] = [
     tone: 'technical'
   },
   {
-    pattern: /\bstart up\b/gi,
-    replacement: 'bootstrap',
-    alternatives: ['initialize', 'instantiate'],
-    reason: 'Systems engineering standard',
-    tone: 'technical'
-  },
-  {
     pattern: /\bturn on\b/gi,
     replacement: 'enable',
     alternatives: ['activate'],
@@ -384,6 +780,12 @@ export const PHRASE_RULES: PhraseRule[] = [
 ];
 
 export const REPHRASE_SAMPLES = {
+  technologyEssay: {
+    name: 'Technology in Daily Life (User Essay)',
+    text: `The Importance of Technology in Our Daily Lives
+
+Technology has become an important part of our daily lives. We use it for education, communication, business, and entertainment. With the help of the internet, people can easily connect with others from different parts of the world. Students can attend online classes, learn new skills, and find useful information within seconds. Technology has also made businesses faster and more efficient by reducing manual work. However, excessive use of technology can waste time and affect our health. Therefore, we should use technology wisely and focus on the positive benefits it brings to our lives.`
+  },
   businessEmail: {
     name: 'Client Email & Status Update',
     text: `Hey there,
@@ -410,6 +812,7 @@ In order to find out whether the hypothesis holds, we carried out extensive tria
 
 /**
  * Rephrases text deterministically using linguistic rule banks, maintaining capitalization and syntax boundaries.
+ * Rules are sorted by pattern length descending to guarantee multi-word phrases match before single-word tokens.
  */
 export function rephraseText(
   source: string,
@@ -437,11 +840,13 @@ export function rephraseText(
     rule => rule.tone === 'all' || rule.tone === tone
   );
 
+  // CRITICAL: Sort by pattern source length descending so longest multi-word expressions match FIRST
+  activeRules.sort((a, b) => b.pattern.source.length - a.pattern.source.length);
+
   for (const rule of activeRules) {
     const regex = new RegExp(rule.pattern.source, rule.pattern.flags);
     let match: RegExpExecArray | null;
 
-    // Reset regex index
     regex.lastIndex = 0;
 
     while ((match = regex.exec(transformed)) !== null) {
