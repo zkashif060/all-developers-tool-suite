@@ -17,7 +17,7 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- 13 Precision Developer Utilities -->
+  <!-- 14 Precision Developer Utilities -->
   <url>
     <loc>https://zerotrace-tools.vercel.app/tools/image-base64</loc>
     <changefreq>monthly</changefreq>
@@ -77,6 +77,11 @@
     <loc>https://zerotrace-tools.vercel.app/tools/cron-builder</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zerotrace-tools.vercel.app/tools/text-diff</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://zerotrace-tools.vercel.app/tools/sha256</loc>

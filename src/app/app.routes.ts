@@ -99,6 +99,11 @@ export const routes: Routes = [
         title: 'Cron Expression Builder — ZeroTrace Tools'
       },
       {
+        path: 'tools/text-diff',
+        loadComponent: () => import('./tools/text-diff/text-diff.component').then(m => m.TextDiffComponent),
+        title: 'Text Diff Checker — ZeroTrace Tools'
+      },
+      {
         path: 'tools/sha256',
         loadComponent: () => import('./tools/sha256/sha256.component').then(m => m.Sha256Component),
         title: 'SHA-256 Hash Generator — ZeroTrace Tools'

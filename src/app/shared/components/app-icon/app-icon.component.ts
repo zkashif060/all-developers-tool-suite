@@ -180,9 +180,23 @@ import { Component, computed, input } from '@angular/core';
           <path d="m8 21-4-4 4-4" />
           <path d="M4 17h16" />
         }
+        @case ('arrow-up') {
+          <path d="m5 12 7-7 7 7" />
+          <path d="M12 19V5" />
+        }
         @case ('arrow-down') {
           <path d="M12 5v14" />
           <path d="m19 12-7 7-7-7" />
+        }
+        @case ('git-compare') {
+          <circle cx="18" cy="18" r="3" />
+          <circle cx="6" cy="6" r="3" />
+          <path d="M13 6h3a2 2 0 0 1 2 2v7" />
+          <path d="M11 18H8a2 2 0 0 1-2-2V9" />
+        }
+        @case ('columns') {
+          <rect width="18" height="18" x="3" y="3" rx="2" />
+          <path d="M12 3v18" />
         }
         @case ('list') {
           <line x1="8" x2="21" y1="6" y2="6" />

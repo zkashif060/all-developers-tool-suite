@@ -131,6 +131,16 @@ export const TOOLS_DATA: ToolMetadata[] = [
     keywords: ['cron', 'schedule', 'crontab', 'builder', 'interval', 'timer', 'expression'],
     popular: false,
   },
+  {
+    id: 'text-diff',
+    name: 'Text Diff Checker',
+    description: 'Compare two texts side-by-side or inline with character, word, and line level difference highlights.',
+    category: 'Testing & Development',
+    icon: 'git-compare',
+    route: '/tools/text-diff',
+    keywords: ['diff', 'text compare', 'difference', 'compare', 'merge', 'git diff', 'patch', 'inline', 'split', 'code compare'],
+    popular: true,
+  },
 ];
 
 export const CATEGORIES_DATA: CategoryInfo[] = [
