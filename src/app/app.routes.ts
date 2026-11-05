@@ -213,6 +213,26 @@ export const routes: Routes = [
         redirectTo: 'tools/json-tree-viewer',
         pathMatch: 'full'
       },
+      {
+        path: 'tools/text-rephraser',
+        loadComponent: () => import('./tools/text-rephraser/text-rephraser.component').then(m => m.TextRephraserComponent),
+        title: 'Professional Text Rephraser — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/rephraser',
+        redirectTo: 'tools/text-rephraser',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/paraphraser',
+        redirectTo: 'tools/text-rephraser',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/text-enhancer',
+        redirectTo: 'tools/text-rephraser',
+        pathMatch: 'full'
+      },
 
       // 404 Not Found Wildcard
       {

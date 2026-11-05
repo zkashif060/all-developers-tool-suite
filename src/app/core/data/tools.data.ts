@@ -285,6 +285,30 @@ export const TOOLS_DATA: ToolMetadata[] = [
     ],
     popular: true,
   },
+  {
+    id: 'text-rephraser',
+    name: 'Professional Text Rephraser',
+    description: 'Transform and elevate writing tone (Professional, Concise, Technical, Academic) with 100% in-browser deterministic linguistic rules.',
+    category: 'Testing & Development',
+    icon: 'file-text',
+    route: '/tools/text-rephraser',
+    keywords: [
+      'text rephraser',
+      'rephrase',
+      'rephraser',
+      'paraphrase',
+      'paraphraser',
+      'rewriter',
+      'professional text',
+      'sentence enhancer',
+      'tone changer',
+      'concise writer',
+      'formal text',
+      'proofreader',
+      'vocabulary enhancer'
+    ],
+    popular: true,
+  },
 ];
 
 export const CATEGORIES_DATA: CategoryInfo[] = [

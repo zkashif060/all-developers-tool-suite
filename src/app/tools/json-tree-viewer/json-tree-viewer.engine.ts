@@ -354,3 +354,4 @@ function formatPrimitivePreview(val: unknown, type: JsonNodeType): string {
   if (type === 'number') return String(val);
   return String(val);
 }
+
