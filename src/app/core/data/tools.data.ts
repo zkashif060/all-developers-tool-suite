@@ -133,12 +133,25 @@ export const TOOLS_DATA: ToolMetadata[] = [
   },
   {
     id: 'text-diff',
-    name: 'Text Diff Checker',
+    name: 'Text Difference Checker',
     description: 'Compare two texts side-by-side or inline with character, word, and line level difference highlights.',
     category: 'Testing & Development',
     icon: 'git-compare',
     route: '/tools/text-diff',
-    keywords: ['diff', 'text compare', 'difference', 'compare', 'merge', 'git diff', 'patch', 'inline', 'split', 'code compare'],
+    keywords: [
+      'text difference',
+      'difference',
+      'diff',
+      'text diff',
+      'compare text',
+      'text compare',
+      'difference text compare',
+      'code compare',
+      'git diff',
+      'patch',
+      'inline diff',
+      'split diff'
+    ],
     popular: true,
   },
 ];

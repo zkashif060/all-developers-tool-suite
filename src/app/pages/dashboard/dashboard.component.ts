@@ -27,7 +27,7 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
           </h1>
 
           <p class="text-slate-100 text-sm sm:text-base leading-relaxed opacity-95">
-            A fast, private, browser-based suite of 13 developer utilities. Format, convert, encode, and test without your sensitive data ever leaving your machine.
+            A fast, private, browser-based suite of {{ toolRegistry.tools().length }} developer utilities. Format, convert, encode, and test without your sensitive data ever leaving your machine.
           </p>
 
           <!-- Interactive Search Bar inside Hero -->
@@ -144,7 +144,7 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
               <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100">Popular Tools</h2>
             </div>
             <a routerLink="/tools" class="text-xs font-semibold text-primary-500 hover:text-primary-600">
-              View All 12 Tools &rarr;
+              View All {{ toolRegistry.tools().length }} Tools &rarr;
             </a>
           </div>
 
@@ -164,7 +164,7 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
               All Developer Utilities by Category
             </h2>
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              Select any of the 12 tools to launch its dedicated in-browser workbench.
+              Select any of the {{ toolRegistry.tools().length }} tools to launch its dedicated in-browser workbench.
             </p>
           </div>
 

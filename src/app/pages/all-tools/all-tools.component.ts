@@ -18,7 +18,7 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
             All Developer Utilities
           </h1>
           <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Browse our full catalog of 12 privacy-first in-browser developer tools.
+            Browse our full catalog of {{ toolRegistry.tools().length }} privacy-first in-browser developer tools.
           </p>
         </div>
 
@@ -47,7 +47,7 @@ import { EmptyStateComponent } from '../../shared/components/empty-state/empty-s
             ? 'bg-primary-500 text-white'
             : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'"
         >
-          All Categories (12)
+          All Categories ({{ toolRegistry.tools().length }})
         </button>
 
         @for (cat of toolRegistry.categories(); track cat.slug) {

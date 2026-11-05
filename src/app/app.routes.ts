@@ -101,7 +101,12 @@ export const routes: Routes = [
       {
         path: 'tools/text-diff',
         loadComponent: () => import('./tools/text-diff/text-diff.component').then(m => m.TextDiffComponent),
-        title: 'Text Diff Checker — ZeroTrace Tools'
+        title: 'Text Difference Checker — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/text-difference',
+        redirectTo: 'tools/text-diff',
+        pathMatch: 'full'
       },
       {
         path: 'tools/sha256',

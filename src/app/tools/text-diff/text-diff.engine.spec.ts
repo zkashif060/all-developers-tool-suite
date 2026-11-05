@@ -128,3 +128,4 @@ describe('text-diff engine', () => {
     expect(result.stats.similarityPercentage).toBe(100);
   });
 });
+

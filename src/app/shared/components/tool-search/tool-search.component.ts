@@ -30,14 +30,14 @@ import { AppIconComponent } from '../app-icon/app-icon.component';
               [value]="query()"
               (input)="onQueryChange($event)"
               (keydown)="onKeydown($event)"
-              placeholder="Search all 12 tools by name, description, keyword..."
+              [placeholder]="'Search all ' + toolRegistry.tools().length + ' tools by name, description, keyword...'"
               class="w-full bg-transparent text-slate-900 dark:text-slate-100 placeholder:text-slate-400 border-none outline-none text-base"
               spellcheck="false"
               role="combobox"
               aria-autocomplete="list"
               aria-expanded="true"
               aria-controls="search-results-list"
-              aria-label="Search all 12 tools"
+              [attr.aria-label]="'Search all ' + toolRegistry.tools().length + ' tools'"
             />
             <kbd class="hidden sm:inline-block px-2 py-0.5 text-[11px] font-mono text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
               ESC
@@ -111,7 +111,7 @@ export class ToolSearchComponent {
 
   @ViewChild('searchInput') searchInputElement?: ElementRef<HTMLInputElement>;
 
-  private readonly toolRegistry = inject(ToolRegistryService);
+  public readonly toolRegistry = inject(ToolRegistryService);
   private readonly router = inject(Router);
 
   protected readonly query = signal<string>('');

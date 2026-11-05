@@ -43,7 +43,17 @@ export class ToolRegistryService {
       const catMatch = tool.category.toLowerCase().includes(clean);
       const keywordMatch = tool.keywords.some(k => k.toLowerCase().includes(clean));
 
-      return nameMatch || descMatch || catMatch || keywordMatch;
+      // Tokenized word match (e.g. "text difference" matches if both words appear in metadata)
+      const words = clean.split(/\s+/).filter(w => w.length > 1);
+      const allWordsMatch =
+        words.length > 1 &&
+        words.every(w =>
+          tool.name.toLowerCase().includes(w) ||
+          tool.description.toLowerCase().includes(w) ||
+          tool.keywords.some(k => k.toLowerCase().includes(w))
+        );
+
+      return nameMatch || descMatch || catMatch || keywordMatch || allWordsMatch;
     });
   }
 }
