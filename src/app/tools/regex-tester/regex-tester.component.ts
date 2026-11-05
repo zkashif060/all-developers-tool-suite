@@ -230,6 +230,49 @@ import {
             </div>
           </div>
         </div>
+        <!-- JavaScript RegExp Engine Specifications & Limitations Card -->
+        <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+            <div class="flex items-center gap-2">
+              <app-icon name="terminal" [size]="16" className="text-primary-500" />
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                JavaScript (ECMAScript) RegExp Engine Reference
+              </h3>
+            </div>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 font-semibold border border-emerald-200 dark:border-emerald-800">
+              V8 Engine Native
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600 dark:text-slate-400">
+            <div class="space-y-2">
+              <span class="font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                Supported Modern Features (ES2018+)
+              </span>
+              <ul class="list-disc list-inside space-y-1 font-mono text-[11px] pl-1">
+                <li><code class="text-primary-500 font-bold">(?&lt;name&gt;...)</code> Named capture groups</li>
+                <li><code class="text-primary-500 font-bold">(?&lt;=...)</code> Positive lookbehind</li>
+                <li><code class="text-primary-500 font-bold">(?&lt;!...)</code> Negative lookbehind</li>
+                <li><code class="text-primary-500 font-bold">\\\p&#123;L&#125;</code> Unicode character properties (requires <span class="font-bold">u</span> flag)</li>
+                <li><code class="text-primary-500 font-bold">s</code> DotAll flag (<code class="text-primary-500">.</code> matches newlines)</li>
+              </ul>
+            </div>
+
+            <div class="space-y-2">
+              <span class="font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                Engine Differences & Limitations vs PCRE / Python
+              </span>
+              <ul class="list-disc list-inside space-y-1 text-[11px] pl-1">
+                <li><strong>No Atomic Groups:</strong> Constructs like <code class="font-mono text-amber-600 dark:text-amber-400">(?&gt;...)</code> are not supported in ECMAScript.</li>
+                <li><strong>No Possessive Quantifiers:</strong> <code class="font-mono text-amber-600 dark:text-amber-400">a*+</code> or <code class="font-mono text-amber-600 dark:text-amber-400">a++</code> are invalid in JavaScript.</li>
+                <li><strong>No Recursion:</strong> Recursive patterns like <code class="font-mono text-amber-600 dark:text-amber-400">(?R)</code> are not available.</li>
+                <li><strong>ReDoS Safeguard:</strong> Execution is monitored with a 250ms ceiling and 2,000 matches cap to protect your browser tab.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </app-tool-page-layout>
     }
   `

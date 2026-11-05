@@ -48,7 +48,7 @@ export function buildFlagsString(flags: RegexFlags): string {
 }
 
 /**
- * Safely executes a regular expression against test input with loop guards.
+ * Safely executes a regular expression against test input with loop guards and execution timeouts.
  */
 export function testRegex(
   pattern: string,
@@ -63,6 +63,21 @@ export function testRegex(
       matchCount: 0,
       executionTimeMs: 0,
       hasTruncatedMatches: false
+    };
+  }
+
+  // Input length guards to protect the browser thread
+  if (testString.length > 200000) {
+    return {
+      success: false,
+      error: `Input test string length (${testString.length.toLocaleString()} characters) exceeds the 200,000 character safety threshold to prevent browser freezing.`
+    };
+  }
+
+  if (trimmedPattern.length > 1000) {
+    return {
+      success: false,
+      error: `Regular expression pattern length (${trimmedPattern.length} characters) exceeds the 1,000 character safety threshold.`
     };
   }
 
@@ -81,6 +96,7 @@ export function testRegex(
   const startTime = typeof performance !== 'undefined' ? performance.now() : Date.now();
   const matches: RegexMatchItem[] = [];
   const MAX_MATCH_LIMIT = 2000;
+  const MAX_EXECUTION_TIME_MS = 250; // Terminate if catastrophic backtracking occurs
   let hasTruncatedMatches = false;
 
   try {
@@ -93,6 +109,17 @@ export function testRegex(
         if (iterations > MAX_MATCH_LIMIT) {
           hasTruncatedMatches = true;
           break;
+        }
+
+        // Catastrophic backtracking check every 50 iterations
+        if (iterations % 50 === 0) {
+          const now = typeof performance !== 'undefined' ? performance.now() : Date.now();
+          if (now - startTime > MAX_EXECUTION_TIME_MS) {
+            return {
+              success: false,
+              error: `Execution timed out (${Math.round(now - startTime)}ms). The pattern exhibited excessive backtracking (possible ReDoS). Processing halted safely to prevent browser lockup.`
+            };
+          }
         }
 
         const matchText = match[0];
@@ -200,4 +227,3 @@ export function testRegex(
     };
   }
 }
-

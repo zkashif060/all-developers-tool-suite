@@ -1,5 +1,5 @@
-// DevTools Hub Progressive Web App (PWA) Offline Service Worker
-const CACHE_NAME = 'devtools-hub-v1';
+// ZeroTrace Tools Progressive Web App (PWA) Offline Service Worker
+const CACHE_NAME = 'zerotrace-tools-v1';
 
 const PRECACHE_ASSETS = [
   '/',

@@ -26,11 +26,16 @@ import { DecodedJwtSuccess, decodeJwt } from './jwt-decoder.engine';
   template: `
     @if (tool(); as t) {
       <app-tool-page-layout [tool]="t">
-        <!-- Prominent Security Warning Callout -->
-        <div class="p-3.5 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 text-amber-900 dark:text-amber-300 text-xs flex items-start gap-3">
-          <app-icon name="alert-circle" [size]="18" className="text-amber-500 mt-0.5 flex-shrink-0" />
-          <div class="leading-relaxed">
-            <strong>Security Warning:</strong> Decoding does <u>not</u> verify the token's cryptographic signature or authenticity. Never trust unverified claims for security or authorization decisions. All decoding is processed locally in your browser and never sent over the network.
+        <!-- Prominent Security Advisory Callout: Decoding ≠ Verification -->
+        <div class="p-4 rounded-xl bg-amber-500/10 border-2 border-amber-500/40 text-amber-950 dark:text-amber-200 text-xs flex items-start gap-3 shadow-xs">
+          <app-icon name="alert-circle" [size]="20" className="text-amber-500 mt-0.5 flex-shrink-0" />
+          <div class="space-y-1 leading-relaxed">
+            <div class="font-bold uppercase tracking-wider text-[11px] text-amber-600 dark:text-amber-400">
+              Security Advisory: Decoding ≠ Cryptographic Verification
+            </div>
+            <p>
+              This utility performs <strong>client-side Base64URL parsing only</strong> to inspect the unencrypted header and payload claims. It does <strong>NOT</strong> cryptographically verify the digital signature against your server's secret or public keys. Never authorize users or make security-critical decisions based on unverified decoded claims.
+            </p>
           </div>
         </div>
 
@@ -180,12 +185,19 @@ import { DecodedJwtSuccess, decodeJwt } from './jwt-decoder.engine';
 
             <!-- Signature Output -->
             @if (signatureOutput()) {
-              <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs flex items-center justify-between gap-3 text-xs">
-                <div class="flex items-center gap-2 min-w-0">
-                  <span class="font-semibold text-slate-500 dark:text-slate-400 flex-shrink-0">Signature:</span>
-                  <span class="font-mono text-slate-700 dark:text-slate-300 truncate">{{ signatureOutput() }}</span>
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs flex flex-col gap-2 text-xs">
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="font-semibold text-slate-700 dark:text-slate-300">Digital Signature:</span>
+                    <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                      Unverified (Client-Side Parsing Only)
+                    </span>
+                  </div>
+                  <app-copy-button [text]="signatureOutput()" label="Copy Signature" />
                 </div>
-                <app-copy-button [text]="signatureOutput()" label="Copy Signature" />
+                <div class="font-mono text-slate-700 dark:text-slate-300 break-all p-2 bg-slate-50 dark:bg-slate-800/60 rounded border border-slate-100 dark:border-slate-800">
+                  {{ signatureOutput() }}
+                </div>
               </div>
             }
           </div>
@@ -211,13 +223,13 @@ export class JwtDecoderComponent implements OnInit {
 
   // Realistic presets
   public readonly presetActive =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfMTAwMSIsIm5hbWUiOiJaYWluIEFsaSIsImVtYWlsIjoiemFpbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlzcyI6Imh0dHBzOi8vYXV0aC5kZXZ0b29scy1odWIuY29tIiwiYXVkIjoiZGV2dG9vbHMtaHViLWFwaSIsImlhdCI6MTc0MTA2ODAwMCwiZXhwIjoyMDgwMDAwMDAwfQ.g6E_eUvJ4N2OqJ7yF9m2X_1_mockSignature';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfMTAwMSIsIm5hbWUiOiJaYWluIEFsaSIsImVtYWlsIjoiemFpbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlzcyI6Imh0dHBzOi8vYXV0aC56ZXJvdHJhY2UtdG9vbHMuY29tIiwiYXVkIjoiemVyb3RyYWNlLXRvb2xzLWFwaSIsImlhdCI6MTc0MTA2ODAwMCwiZXhwIjoyMDgwMDAwMDAwfQ.g6E_eUvJ4N2OqJ7yF9m2X_1_mockSignature';
 
   public readonly presetExpired =
     'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfMjAwMiIsIm5hbWUiOiJTYXJhIEtoYW4iLCJlbWFpbCI6InNhcmFAZXhhbXBsZS5jb20iLCJyb2xlIjoiZGV2ZWxvcGVyIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1MTYyNDI2MjJ9.X8Y_mockExpiredSignature';
 
   public readonly presetUnicode =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfMzAwMyIsIm5hbWUiOiLYp9it2YXYryDYrtin2YYiLCJjaXR5Ijoi2YTYp9mH2YjYsSIsIm9yZyI6IkRldlRvb2xzIFRlY2ggTGFicyDwn5mpIiwiaWF0IjoxNzQwMDAwMDAwLCJleHAiOjIxMDAwMDAwMDB9.mockUnicodeSignature';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfMzAwMyIsIm5hbWUiOiLYp9it2YXYryDYrtin2YYiLCJjaXR5Ijoi2YTYp9uB2YjYsSIsIm9yZyI6Ilplcm9UcmFjZSBUZWNoIExhYnMg8J-ZjyIsImlhdCI6MTc0MDAwMDAwMCwiZXhwIjoyMTAwMDAwMDAwfQ.mockUnicodeSignature';
 
   public ngOnInit(): void {
     this.recentToolsService.recordUsage('jwt-decoder');

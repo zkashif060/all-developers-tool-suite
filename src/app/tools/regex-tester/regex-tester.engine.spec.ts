@@ -132,5 +132,21 @@ describe('Regex Tester Engine', () => {
     expect(buildFlagsString({ s: true, u: true })).toBe('su');
     expect(buildFlagsString({})).toBe('');
   });
-});
+  it('should reject test inputs exceeding the 200,000 character safety threshold', () => {
+    const huge = 'a'.repeat(250000);
+    const result = testRegex('a', huge);
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error).toContain('safety threshold to prevent browser freezing');
+    }
+  });
 
+  it('should reject patterns exceeding the 1,000 character safety threshold', () => {
+    const hugePattern = 'a'.repeat(1200);
+    const result = testRegex(hugePattern, 'test');
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error).toContain('1,000 character safety threshold');
+    }
+  });
+});

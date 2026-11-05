@@ -8,7 +8,7 @@ import { ToolInputComponent } from '../../shared/components/tool-input/tool-inpu
 import { ToolOutputComponent } from '../../shared/components/tool-output/tool-output.component';
 import { AppIconComponent } from '../../shared/components/app-icon/app-icon.component';
 import { ErrorMessageComponent } from '../../shared/components/error-message/error-message.component';
-import { csvToJson } from './csv-to-json.engine';
+import { CsvDelimiter, csvToJson } from './csv-to-json.engine';
 
 @Component({
   selector: 'app-csv-to-json',
@@ -27,6 +27,23 @@ import { csvToJson } from './csv-to-json.engine';
         <!-- Control Toolbar -->
         <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs">
           <div class="flex flex-wrap items-center gap-4 text-xs">
+            <!-- Delimiter Selector (Auto vs Manual Override) -->
+            <div class="flex items-center gap-1.5">
+              <span class="font-semibold text-slate-700 dark:text-slate-300">Delimiter:</span>
+              <select
+                [ngModel]="delimiter()"
+                (ngModelChange)="delimiter.set($event)"
+                aria-label="CSV delimiter override"
+                class="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-mono focus:ring-primary-500"
+              >
+                <option value="auto">Auto-Detect</option>
+                <option value=",">Comma (,)</option>
+                <option value=";">Semicolon (;)</option>
+                <option value="&#9;">Tab (\\t - TSV)</option>
+                <option value="|">Pipe (|)</option>
+              </select>
+            </div>
+
             <!-- Header Row Toggle -->
             <label class="flex items-center gap-1.5 cursor-pointer text-slate-700 dark:text-slate-300 font-medium select-none">
               <input
@@ -93,46 +110,70 @@ import { csvToJson } from './csv-to-json.engine';
           </div>
         </div>
 
+        <!-- Delimiter Advice Callout -->
+        <div class="p-3 rounded-xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <app-icon name="info" [size]="14" className="text-primary-500 flex-shrink-0" />
+            <span>
+              <strong>Data Accuracy Tip:</strong> If your dataset contains European decimals or currencies with commas (e.g. <code class="font-mono text-primary-500">12,50 €</code>), manually select <strong>Semicolon (;)</strong> or <strong>Tab (\\t)</strong> to prevent silent column corruption.
+            </span>
+          </div>
+          @if (detectedDelimiter()) {
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+              Active Delimiter: {{ formatDelimiterName(detectedDelimiter()!) }}
+            </span>
+          }
+        </div>
+
         <!-- Warnings Banner -->
         @if (warnings().length > 0) {
           <div class="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 text-amber-800 dark:text-amber-300 text-xs space-y-1">
             <div class="font-bold flex items-center gap-1.5">
               <app-icon name="alert-circle" [size]="15" className="text-amber-500" />
-              <span>Header Sanitation Notices:</span>
+              <span>Sanitization Notices:</span>
             </div>
-            @for (w of warnings(); track $index) {
-              <div class="pl-5 font-mono text-[11px]">&bull; {{ w }}</div>
-            }
+            <ul class="list-disc list-inside space-y-0.5 pl-1">
+              @for (w of warnings(); track $index) {
+                <li>{{ w }}</li>
+              }
+            </ul>
           </div>
         }
 
-        <!-- Error Message Banner -->
         @if (errorMessage()) {
           <app-error-message
-            title="CSV Parse Error"
-            [message]="errorMessage()"
+            title="CSV Parsing Error"
+            [message]="errorMessage()!"
             [line]="errorLine()"
             [dismissible]="true"
             (dismissed)="errorMessage.set(null)"
           />
         }
 
-        <!-- Metrics bar -->
+        <!-- Summary Bar -->
         @if (summary(); as s) {
           <div class="flex items-center justify-between px-4 py-2 rounded-lg bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-600 dark:text-slate-400">
-            <span>Parsed: <strong class="text-slate-900 dark:text-slate-200">{{ s.rows }}</strong> row{{ s.rows === 1 ? '' : 's' }} &middot; <strong class="text-slate-900 dark:text-slate-200">{{ s.columns }}</strong> columns</span>
+            <div>
+              <span>Rows: <strong>{{ s.rows }}</strong></span>
+              <span class="mx-2">&middot;</span>
+              <span>Columns: <strong>{{ s.columns }}</strong></span>
+              @if (detectedDelimiter()) {
+                <span class="mx-2">&middot;</span>
+                <span>Delimiter: <strong>{{ formatDelimiterName(detectedDelimiter()!) }}</strong></span>
+              }
+            </div>
             <span class="text-emerald-600 dark:text-emerald-400 font-semibold">&check; RFC 4180 Compliant</span>
           </div>
         }
 
-        <!-- Dual Pane Input & JSON Output -->
+        <!-- Dual Pane Workspace -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[460px]">
           <app-tool-input
             label="Raw CSV Input"
             [value]="inputContent()"
             (valueChange)="onInputChanged($event)"
             [sampleData]="sampleCsv"
-            acceptedFileTypes=".csv,text/csv,text/plain"
+            acceptedFileTypes=".csv,.tsv,text/csv,text/tab-separated-values,text/plain"
             placeholder="id,name,role,city,active&#10;1,Ali,Architect,&quot;Lahore, PK&quot;,true&#10;2,Sara,Security,&quot;Karachi, PK&quot;,true"
           />
 
@@ -158,6 +199,7 @@ export class CsvToJsonComponent implements OnInit {
 
   protected readonly inputContent = signal<string>('');
   protected readonly outputContent = signal<string>('');
+  protected readonly delimiter = signal<CsvDelimiter>('auto');
   protected readonly hasHeader = signal<boolean>(true);
   protected readonly dynamicTyping = signal<boolean>(true);
   protected readonly indent = signal<2 | 4 | 'minify'>(2);
@@ -166,6 +208,7 @@ export class CsvToJsonComponent implements OnInit {
   protected readonly errorMessage = signal<string | null>(null);
   protected readonly errorLine = signal<number | undefined>(undefined);
   protected readonly summary = signal<{ rows: number; columns: number } | null>(null);
+  protected readonly detectedDelimiter = signal<string | null>(null);
 
   protected readonly sampleCsv = `id,name,role,city,active,salary\n101,Ali Hassan,Lead Architect,"Lahore, Pakistan",true,185000\n102,Sara Khan,Security Engineer,"Karachi, Pakistan",true,195000\n103,Hamza Tariq,DevOps Engineer,"Islamabad, Pakistan",false,160000\n104,Zain Ahmed,Frontend Specialist,"Rawalpindi, Pakistan",true,175000`;
 
@@ -185,6 +228,7 @@ export class CsvToJsonComponent implements OnInit {
       this.outputContent.set('');
       this.warnings.set([]);
       this.summary.set(null);
+      this.detectedDelimiter.set(null);
     }
   }
 
@@ -196,10 +240,12 @@ export class CsvToJsonComponent implements OnInit {
       this.errorLine.set(undefined);
       this.warnings.set([]);
       this.summary.set(null);
+      this.detectedDelimiter.set(null);
       return;
     }
 
     const res = csvToJson(raw, {
+      delimiter: this.delimiter(),
       hasHeader: this.hasHeader(),
       dynamicTyping: this.dynamicTyping(),
       indent: this.indent()
@@ -210,6 +256,7 @@ export class CsvToJsonComponent implements OnInit {
       this.errorMessage.set(null);
       this.errorLine.set(undefined);
       this.warnings.set(res.warnings || []);
+      this.detectedDelimiter.set(res.detectedDelimiter);
       this.summary.set({
         rows: res.rowCount,
         columns: res.columnCount
@@ -219,6 +266,17 @@ export class CsvToJsonComponent implements OnInit {
       this.errorLine.set(res.line);
       this.warnings.set([]);
       this.summary.set(null);
+      this.detectedDelimiter.set(null);
+    }
+  }
+
+  public formatDelimiterName(delim: string): string {
+    switch (delim) {
+      case ',': return 'Comma (,)';
+      case ';': return 'Semicolon (;)';
+      case '\t': return 'Tab (\\t)';
+      case '|': return 'Pipe (|)';
+      default: return `Custom (${delim})`;
     }
   }
 }

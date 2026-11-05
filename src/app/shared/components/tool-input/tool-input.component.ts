@@ -17,7 +17,7 @@ import { ClearButtonComponent } from '../clear-button/clear-button.component';
       (drop)="onDrop($event)"
     >
       <!-- Header Bar -->
-      <div class="flex items-center justify-between px-4 py-2.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40">
+      <div class="flex items-center justify-between px-4 py-2.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 flex-wrap gap-2">
         <div class="flex items-center gap-2">
           <span class="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             {{ label() }}
@@ -30,6 +30,10 @@ import { ClearButtonComponent } from '../clear-button/clear-button.component';
         </div>
 
         <div class="flex items-center gap-2">
+          <span class="hidden sm:inline-block font-mono text-[10px] text-slate-400 dark:text-slate-500 select-none">
+            Ctrl+Enter to Run
+          </span>
+
           @if (sampleData()) {
             <button
               type="button"
@@ -74,6 +78,7 @@ import { ClearButtonComponent } from '../clear-button/clear-button.component';
         <textarea
           [value]="value()"
           (input)="onInputChange($event)"
+          (keydown)="onKeyDown($event)"
           [placeholder]="placeholder()"
           [rows]="rows()"
           [attr.aria-label]="label()"
@@ -94,6 +99,7 @@ export class ToolInputComponent {
 
   public readonly valueChange = output<string>();
   public readonly fileLoaded = output<File>();
+  public readonly execute = output<void>();
 
   protected readonly isDragOver = signal<boolean>(false);
 
@@ -110,6 +116,13 @@ export class ToolInputComponent {
   public onInputChange(event: Event): void {
     const target = event.target as HTMLTextAreaElement;
     this.valueChange.emit(target.value);
+  }
+
+  public onKeyDown(event: KeyboardEvent): void {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+      event.preventDefault();
+      this.execute.emit();
+    }
   }
 
   public loadSample(): void {
@@ -139,29 +152,29 @@ export class ToolInputComponent {
     event.stopPropagation();
     this.isDragOver.set(false);
 
-    if (event.dataTransfer?.files?.length) {
-      this.processFile(event.dataTransfer.files[0]);
+    if (event.dataTransfer && event.dataTransfer.files.length > 0) {
+      const file = event.dataTransfer.files[0];
+      this.readFileContent(file);
     }
   }
 
   public onFileSelected(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    if (target.files?.length) {
-      this.processFile(target.files[0]);
-      target.value = ''; // Reset input
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.readFileContent(file);
     }
   }
 
-  private processFile(file: File): void {
+  private readFileContent(file: File): void {
     this.fileLoaded.emit(file);
     const reader = new FileReader();
     reader.onload = (e) => {
-      const text = e.target?.result;
-      if (typeof text === 'string') {
-        this.valueChange.emit(text);
+      const content = e.target?.result;
+      if (typeof content === 'string') {
+        this.valueChange.emit(content);
       }
     };
     reader.readAsText(file);
   }
 }
-

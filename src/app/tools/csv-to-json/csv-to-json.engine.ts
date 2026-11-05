@@ -1,6 +1,9 @@
 import Papa from 'papaparse';
 
+export type CsvDelimiter = 'auto' | ',' | ';' | '\t' | '|';
+
 export interface CsvToJsonOptions {
+  delimiter?: CsvDelimiter;
   hasHeader: boolean;
   dynamicTyping: boolean;
   indent: 2 | 4 | 'minify';
@@ -11,6 +14,7 @@ export interface CsvToJsonSuccess {
   json: string;
   rowCount: number;
   columnCount: number;
+  detectedDelimiter: string;
   warnings?: string[];
 }
 
@@ -58,6 +62,7 @@ export function sanitizeHeaders(rawHeaders: string[]): { headers: string[]; warn
 export function csvToJson(
   input: string,
   options: CsvToJsonOptions = {
+    delimiter: 'auto',
     hasHeader: true,
     dynamicTyping: true,
     indent: 2
@@ -71,11 +76,17 @@ export function csvToJson(
     };
   }
 
-  // Parse raw matrix first to safely inspect and sanitize headers
-  const parsed = Papa.parse<any[]>(input, {
+  const papaConfig: Papa.ParseConfig = {
     skipEmptyLines: 'greedy',
     dynamicTyping: false
-  });
+  };
+
+  if (options.delimiter && options.delimiter !== 'auto') {
+    papaConfig.delimiter = options.delimiter;
+  }
+
+  // Parse raw matrix first to safely inspect and sanitize headers
+  const parsed = Papa.parse<any[]>(input, papaConfig);
 
   if (parsed.errors && parsed.errors.length > 0) {
     const firstFatal = parsed.errors.find(e => e.type === 'Quotes' || e.code === 'UndetectableDelimiter');
@@ -95,6 +106,8 @@ export function csvToJson(
       error: 'No valid data rows found in the CSV input.'
     };
   }
+
+  const detectedDelimiter = parsed.meta.delimiter || (options.delimiter && options.delimiter !== 'auto' ? options.delimiter : ',');
 
   let finalData: any;
   let columnCount = 0;
@@ -129,56 +142,68 @@ export function csvToJson(
         if (val === undefined || val === null || val === '') {
           obj[headerName] = null;
         } else if (options.dynamicTyping) {
-          // Dynamic conversion for numbers and booleans
-          const trimmedVal = String(val).trim();
-          if (trimmedVal.toLowerCase() === 'true') {
-            obj[headerName] = true;
-          } else if (trimmedVal.toLowerCase() === 'false') {
-            obj[headerName] = false;
-          } else if (!isNaN(Number(trimmedVal)) && trimmedVal !== '') {
-            obj[headerName] = Number(trimmedVal);
-          } else {
-            obj[headerName] = val;
-          }
+          obj[headerName] = parseDynamicType(val);
         } else {
-          obj[headerName] = val;
+          obj[headerName] = String(val);
         }
       }
       jsonObjects.push(obj);
     }
-
     finalData = jsonObjects;
   } else {
     // Array of arrays
     rowCount = dataRows.length;
-    columnCount = dataRows[0]?.length || 0;
+    columnCount = Math.max(...dataRows.map(r => (Array.isArray(r) ? r.length : 0)));
 
-    if (options.dynamicTyping) {
-      finalData = dataRows.map(row =>
-        row.map(cell => {
-          if (cell === undefined || cell === null || cell === '') return null;
-          const trimmedVal = String(cell).trim();
-          if (trimmedVal.toLowerCase() === 'true') return true;
-          if (trimmedVal.toLowerCase() === 'false') return false;
-          if (!isNaN(Number(trimmedVal)) && trimmedVal !== '') return Number(trimmedVal);
-          return cell;
-        })
-      );
-    } else {
-      finalData = dataRows;
-    }
+    finalData = dataRows.map(row => {
+      if (!Array.isArray(row)) return [];
+      return row.map(cell => {
+        if (cell === undefined || cell === null || cell === '') {
+          return null;
+        }
+        return options.dynamicTyping ? parseDynamicType(cell) : String(cell);
+      });
+    });
   }
 
-  const jsonString = options.indent === 'minify'
-    ? JSON.stringify(finalData)
-    : JSON.stringify(finalData, null, options.indent);
+  const indentVal = options.indent === 'minify' ? 0 : options.indent;
+  const jsonString = indentVal === 0 ? JSON.stringify(finalData) : JSON.stringify(finalData, null, indentVal);
 
   return {
     success: true,
     json: jsonString,
     rowCount,
     columnCount,
+    detectedDelimiter,
     warnings: warnings.length > 0 ? warnings : undefined
   };
 }
 
+/**
+ * Infers and parses booleans and numbers with safe bounds.
+ */
+function parseDynamicType(val: any): any {
+  if (typeof val !== 'string') return val;
+  const clean = val.trim();
+
+  // Boolean
+  if (clean.toLowerCase() === 'true') return true;
+  if (clean.toLowerCase() === 'false') return false;
+
+  // Null
+  if (clean.toLowerCase() === 'null') return null;
+
+  // Number validation (prevent parsing phone numbers with leading zeros or empty string)
+  if (clean !== '' && !isNaN(Number(clean))) {
+    // Check if it's a number with a leading zero (like zip code or phone '01234')
+    if (clean.length > 1 && clean.startsWith('0') && !clean.startsWith('0.')) {
+      return clean;
+    }
+    const num = Number(clean);
+    if (Number.isSafeInteger(num) || !isNaN(num)) {
+      return num;
+    }
+  }
+
+  return val;
+}

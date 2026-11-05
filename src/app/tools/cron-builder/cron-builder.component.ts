@@ -232,6 +232,61 @@ import {
             }
           </div>
         </div>
+        <!-- Cron Syntax & Cross-System Compatibility Guide -->
+        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-5">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+            <div class="flex items-center gap-2">
+              <app-icon name="clock" [size]="18" className="text-primary-500" />
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">
+                Cron Syntax & Cross-System Compatibility Guide
+              </h3>
+            </div>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-primary-50 dark:bg-primary-950 text-primary-600 dark:text-primary-400 font-semibold border border-primary-200 dark:border-primary-800">
+              Standard UNIX Vixie Cron (5-Field)
+            </span>
+          </div>
+
+          <!-- Visual Diagram -->
+          <div class="p-4 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs overflow-x-auto select-all leading-relaxed">
+            <pre class="text-[11px] sm:text-xs">
+┌───────────── Minute (0 - 59)
+│ ┌─────────── Hour (0 - 23)
+│ │ ┌───────── Day of Month (1 - 31)
+│ │ │ ┌─────── Month (1 - 12)
+│ │ │ │ ┌───── Day of Week (0 - 7, where both 0 and 7 = Sunday)
+│ │ │ │ │
+* * * * *</pre>
+          </div>
+
+          <!-- Operators Reference Table -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="space-y-2 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <h4 class="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-primary-500"></span>
+                Supported Operators (UNIX Standard)
+              </h4>
+              <ul class="space-y-1.5 text-slate-600 dark:text-slate-400 font-mono text-[11px]">
+                <li><code class="text-primary-500 font-bold">*</code> &mdash; Matches every possible value for this field.</li>
+                <li><code class="text-primary-500 font-bold">,</code> &mdash; Value list separator (e.g. <code class="text-slate-800 dark:text-slate-200">1,15,30</code>).</li>
+                <li><code class="text-primary-500 font-bold">-</code> &mdash; Value range inclusive (e.g. <code class="text-slate-800 dark:text-slate-200">1-5</code> Monday to Friday).</li>
+                <li><code class="text-primary-500 font-bold">/</code> &mdash; Step/interval rate (e.g. <code class="text-slate-800 dark:text-slate-200">*/15</code> every 15 minutes).</li>
+              </ul>
+            </div>
+
+            <!-- Dialect Variations -->
+            <div class="space-y-2 p-4 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40">
+              <h4 class="font-bold text-amber-900 dark:text-amber-300 flex items-center gap-1.5">
+                <app-icon name="alert-circle" [size]="14" className="text-amber-500" />
+                Scheduler Engine Variations to Watch Out For
+              </h4>
+              <ul class="space-y-1.5 text-[11px] text-slate-600 dark:text-slate-400">
+                <li><strong>Linux crontab & GitHub Actions:</strong> Use standard 5-field syntax (supported 100% here).</li>
+                <li><strong>Quartz & Spring Boot:</strong> Expect 6 or 7 fields (starting with Seconds <code class="font-mono text-primary-500">0-59</code>) and require <code class="font-mono text-primary-500">?</code> instead of <code class="font-mono text-primary-500">*</code> for Day-of-Month or Day-of-Week.</li>
+                <li><strong>AWS EventBridge / CloudWatch:</strong> Uses 6 fields (<code class="font-mono text-primary-500">cron(min hrs dom mon dow yr)</code>) and also requires <code class="font-mono text-primary-500">?</code> wildcard.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </app-tool-page-layout>
     }
   `

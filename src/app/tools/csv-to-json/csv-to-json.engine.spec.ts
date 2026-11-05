@@ -116,5 +116,41 @@ describe('CSV to JSON Engine', () => {
       ]);
     }
   });
-});
+  it('should support manual delimiter override for semicolon-separated data', () => {
+    const input = 'name;price;stock\nCoffee;4,50;100\nTea;2,75;250';
+    const result = csvToJson(input, { delimiter: ';', hasHeader: true, dynamicTyping: false, indent: 2 });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.detectedDelimiter).toBe(';');
+      const parsed = JSON.parse(result.json);
+      expect(parsed).toEqual([
+        { name: 'Coffee', price: '4,50', stock: '100' },
+        { name: 'Tea', price: '2,75', stock: '250' }
+      ]);
+    }
+  });
 
+  it('should support manual delimiter override for tab-separated data (TSV)', () => {
+    const input = 'id\tusername\trole\n1\tzain\tadmin\n2\tsarah\tdeveloper';
+    const result = csvToJson(input, { delimiter: '\t', hasHeader: true, dynamicTyping: true, indent: 2 });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.detectedDelimiter).toBe('\t');
+      const parsed = JSON.parse(result.json);
+      expect(parsed[0].username).toBe('zain');
+      expect(parsed[1].role).toBe('developer');
+    }
+  });
+
+  it('should support manual delimiter override for pipe-separated data', () => {
+    const input = 'sku|item|active\nSKU-100|Keyboard|true\nSKU-200|Mouse|false';
+    const result = csvToJson(input, { delimiter: '|', hasHeader: true, dynamicTyping: true, indent: 2 });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.detectedDelimiter).toBe('|');
+      const parsed = JSON.parse(result.json);
+      expect(parsed[0].active).toBe(true);
+      expect(parsed[1].active).toBe(false);
+    }
+  });
+});

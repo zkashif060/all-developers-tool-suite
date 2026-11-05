@@ -1,6 +1,7 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FavoritesService } from '../../../core/services/favorites.service';
+import { SeoService } from '../../../core/services/seo.service';
 import { ToolMetadata } from '../../../core/models/tool.model';
 import { AppIconComponent } from '../app-icon/app-icon.component';
 
@@ -11,7 +12,7 @@ import { AppIconComponent } from '../app-icon/app-icon.component';
   template: `
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
       <!-- Breadcrumb Navigation -->
-      <nav class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+      <nav class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 overflow-x-auto whitespace-nowrap py-1">
         <a routerLink="/dashboard" class="hover:text-primary-500 transition-colors">Dashboard</a>
         <app-icon name="chevron-right" [size]="12" />
         <a routerLink="/tools" class="hover:text-primary-500 transition-colors">Tools</a>
@@ -28,7 +29,7 @@ import { AppIconComponent } from '../app-icon/app-icon.component';
             <app-icon [name]="tool().icon" [size]="24" />
           </div>
           <div>
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
               <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
                 {{ tool().name }}
               </h1>
@@ -46,7 +47,7 @@ import { AppIconComponent } from '../app-icon/app-icon.component';
           <button
             type="button"
             (click)="toggleFavorite()"
-            class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg border transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg border transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 min-h-[38px]"
             [class]="isFavorite()
               ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800'
               : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'"
@@ -74,6 +75,16 @@ import { AppIconComponent } from '../app-icon/app-icon.component';
 export class ToolPageLayoutComponent {
   public readonly tool = input.required<ToolMetadata>();
   private readonly favoritesService = inject(FavoritesService);
+  private readonly seoService = inject(SeoService);
+
+  constructor() {
+    effect(() => {
+      const t = this.tool();
+      if (t) {
+        this.seoService.updateToolSeo(t);
+      }
+    });
+  }
 
   public isFavorite(): boolean {
     return this.favoritesService.isFavorite(this.tool().id);
@@ -83,4 +94,3 @@ export class ToolPageLayoutComponent {
     this.favoritesService.toggleFavorite(this.tool().id);
   }
 }
-
