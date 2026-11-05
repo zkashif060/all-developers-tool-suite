@@ -113,6 +113,61 @@ export const routes: Routes = [
         loadComponent: () => import('./tools/sha256/sha256.component').then(m => m.Sha256Component),
         title: 'SHA-256 Hash Generator — ZeroTrace Tools'
       },
+      {
+        path: 'tools/api-tester',
+        loadComponent: () => import('./tools/api-tester/api-tester.component').then(m => m.ApiTesterComponent),
+        title: 'API Tester / REST Client — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/rest-client',
+        redirectTo: 'tools/api-tester',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/sql-formatter',
+        loadComponent: () => import('./tools/sql-formatter/sql-formatter.component').then(m => m.SqlFormatterComponent),
+        title: 'SQL Formatter — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/sql',
+        redirectTo: 'tools/sql-formatter',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/json-to-typescript',
+        loadComponent: () => import('./tools/json-to-typescript/json-to-typescript.component').then(m => m.JsonToTypescriptComponent),
+        title: 'JSON to TypeScript — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/json-to-ts',
+        redirectTo: 'tools/json-to-typescript',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/yaml-json-converter',
+        loadComponent: () => import('./tools/yaml-json-converter/yaml-json-converter.component').then(m => m.YamlJsonConverterComponent),
+        title: 'YAML to JSON / JSON to YAML — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/yaml-to-json',
+        redirectTo: 'tools/yaml-json-converter',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/json-to-yaml',
+        redirectTo: 'tools/yaml-json-converter',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/code-formatter',
+        loadComponent: () => import('./tools/code-formatter/code-formatter.component').then(m => m.CodeFormatterComponent),
+        title: 'HTML / CSS / JavaScript Formatter — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/html-css-js-formatter',
+        redirectTo: 'tools/code-formatter',
+        pathMatch: 'full'
+      },
 
       // 404 Not Found Wildcard
       {

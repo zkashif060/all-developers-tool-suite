@@ -29,7 +29,10 @@
               "src/styles.css"
             ],
             "allowedCommonJsDependencies": [
-              "papaparse"
+              "papaparse",
+              "js-beautify",
+              "nearley",
+              "sql-formatter"
             ]
           },
           "configurations": {

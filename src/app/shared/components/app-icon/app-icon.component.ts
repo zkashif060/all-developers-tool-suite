@@ -198,6 +198,33 @@ import { Component, computed, input } from '@angular/core';
           <rect width="18" height="18" x="3" y="3" rx="2" />
           <path d="M12 3v18" />
         }
+        @case ('send') {
+          <path d="m22 2-7 20-4-9-9-4Z" />
+          <path d="M22 2 11 13" />
+        }
+        @case ('file-code') {
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+          <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+          <path d="m10 13-2 2 2 2" />
+          <path d="m14 17 2-2-2-2" />
+        }
+        @case ('shuffle') {
+          <path d="m18 14 4 4-4 4" />
+          <path d="m18 2 4 4-4 4" />
+          <path d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22" />
+          <path d="M2 6h1.973a4 4 0 0 1 3.3 1.7l5.454 8.6a4 4 0 0 0 3.3 1.7H22" />
+        }
+        @case ('plus') {
+          <path d="M5 12h14" />
+          <path d="M12 5v14" />
+        }
+        @case ('minus') {
+          <path d="M5 12h14" />
+        }
+        @case ('rotate-cw') {
+          <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+          <path d="M21 3v5h-5" />
+        }
         @case ('list') {
           <line x1="8" x2="21" y1="6" y2="6" />
           <line x1="8" x2="21" y1="12" y2="12" />
