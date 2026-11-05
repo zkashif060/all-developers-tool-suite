@@ -3,11 +3,11 @@ import { encodeBase64, decodeBase64 } from './base64.engine';
 
 describe('Base64 Engine', () => {
   it('should encode and decode plain English strings', () => {
-    const text = 'Hello, World! DevTools Hub is awesome.';
+    const text = 'Hello, World! ZeroTrace Tools is awesome.';
     const encResult = encodeBase64(text);
     expect(encResult.success).toBe(true);
     if (encResult.success) {
-      expect(encResult.output).toBe('SGVsbG8sIFdvcmxkISBEZXZUb29scyBIdWIgaXMgYXdlc29tZS4=');
+      expect(encResult.output).toBe('SGVsbG8sIFdvcmxkISBaZXJvVHJhY2UgVG9vbHMgaXMgYXdlc29tZS4=');
       const decResult = decodeBase64(encResult.output);
       expect(decResult.success).toBe(true);
       if (decResult.success) {
@@ -105,7 +105,7 @@ describe('Base64 Engine', () => {
   });
 
   it('should process large text blocks efficiently without call stack overflow', () => {
-    const largeText = 'DevTools Hub Suite '.repeat(3000); // ~57,000 chars
+    const largeText = 'ZeroTrace Tools Suite '.repeat(3000); // ~57,000 chars
     const encResult = encodeBase64(largeText);
     expect(encResult.success).toBe(true);
     if (encResult.success) {

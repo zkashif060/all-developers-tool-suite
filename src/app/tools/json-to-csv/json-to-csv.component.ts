@@ -389,7 +389,7 @@ export class JsonToCsvComponent implements OnInit {
   public readonly presetVariations = `[
   {
     "sku": "TSHIRT-001",
-    "product_name": "DevTools Hub Developer T-Shirt",
+    "product_name": "ZeroTrace Developer T-Shirt",
     "company": "TechSolutions Pakistan",
     "base_price": 2500,
     "category": "Apparel",

@@ -297,7 +297,7 @@ export class RegexTesterComponent implements OnInit {
     } else if (presetKey === 'emoji') {
       this.pattern.set('\\p{Emoji}');
       this.flagU.set(true);
-      this.testString.set('DevTools Hub is fast 🚀, reliable ✨, and modern 💻 🇵🇰!');
+      this.testString.set('ZeroTrace Tools is fast ⚡, private 🛡️, and modern 💻 🇵🇰!');
     }
     this.errorMessage.set(null);
   }

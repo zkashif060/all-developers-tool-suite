@@ -3,11 +3,11 @@ import { encodeUrl, decodeUrl } from './url-encoder.engine';
 
 describe('URL Encoder Engine', () => {
   it('should encode and decode normal text and spaces', () => {
-    const text = 'Hello DevTools Hub';
+    const text = 'Hello ZeroTrace Tools';
     const encResult = encodeUrl(text);
     expect(encResult.success).toBe(true);
     if (encResult.success) {
-      expect(encResult.output).toBe('Hello%20DevTools%20Hub');
+      expect(encResult.output).toBe('Hello%20ZeroTrace%20Tools');
       const decResult = decodeUrl(encResult.output);
       expect(decResult.success).toBe(true);
       if (decResult.success) {

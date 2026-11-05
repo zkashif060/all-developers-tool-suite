@@ -40,7 +40,7 @@ import { ToolSearchComponent } from '../../shared/components/tool-search/tool-se
         <!-- Footer -->
         <footer class="border-t border-slate-200 dark:border-slate-800 py-6 px-4 sm:px-6 text-center text-xs text-slate-500 dark:text-slate-500">
           <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p>&copy; 2026 DevTools Hub &middot; Precision In-Browser Developer Utilities Suite.</p>
+            <p>&copy; 2026 ZeroTrace Tools &middot; 100% In-Browser Developer Utilities Suite.</p>
             <p class="font-mono text-[11px] text-slate-400 dark:text-slate-600">All data processing executes strictly inside your browser sandbox.</p>
           </div>
         </footer>

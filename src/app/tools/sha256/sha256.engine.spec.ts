@@ -72,7 +72,7 @@ describe('SHA-256 Engine', () => {
   });
 
   it('should compute deterministic SHA-256 digests for emojis', async () => {
-    const emojiText = 'DevTools Hub 🚀 ✨ 💻 🇵🇰';
+    const emojiText = 'ZeroTrace Tools 🛡️ ✨ 💻 🇵🇰';
     const result = await computeSha256(emojiText);
     expect(result.success).toBe(true);
     if (result.success) {
@@ -82,7 +82,7 @@ describe('SHA-256 Engine', () => {
   });
 
   it('should compute SHA-256 for large inputs without error', async () => {
-    const large = 'Antigravity DevTools Hub '.repeat(2000); // ~50,000 characters
+    const large = 'ZeroTrace Tools Suite '.repeat(2000); // ~50,000 characters
     const result = await computeSha256(large);
     expect(result.success).toBe(true);
     if (result.success) {

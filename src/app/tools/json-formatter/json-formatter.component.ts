@@ -143,7 +143,7 @@ export class JsonFormatterComponent implements OnInit {
   protected readonly errorDetails = signal<{ error: string; line?: number; column?: number } | null>(null);
   protected readonly metrics = signal<{ byteSize: number; originalByteSize: number; lineCount: number } | null>(null);
 
-  protected readonly sampleJson = `{\n  "name": "DevTools Hub",\n  "version": "1.0.0",\n  "description": "In-browser developer utilities suite",\n  "private": true,\n  "features": [\n    "100% Client-Side",\n    "Zero Server Data Transmission",\n    "Web Crypto & High Precision"\n  ],\n  "metrics": {\n    "toolsCount": 12,\n    "offlineReady": true\n  }\n}`;
+  protected readonly sampleJson = `{\n  "name": "ZeroTrace Tools",\n  "version": "1.0.0",\n  "description": "In-browser developer utilities suite",\n  "private": true,\n  "features": [\n    "100% Client-Side",\n    "Zero Server Data Transmission",\n    "Web Crypto & High Precision"\n  ],\n  "metrics": {\n    "toolsCount": 13,\n    "offlineReady": true\n  }\n}`;
 
   public ngOnInit(): void {
     this.recentToolsService.recordUsage('json-formatter');

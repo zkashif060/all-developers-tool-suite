@@ -3,15 +3,15 @@ import { testRegex, buildFlagsString } from './regex-tester.engine';
 
 describe('Regex Tester Engine', () => {
   it('should find basic matches in a test string', () => {
-    const pattern = 'DevTools';
-    const text = 'Welcome to DevTools Hub suite.';
+    const pattern = 'ZeroTrace';
+    const text = 'Welcome to ZeroTrace Tools suite.';
     const result = testRegex(pattern, text, { g: true });
     expect(result.success).toBe(true);
     if (result.success) {
       expect(result.matchCount).toBe(1);
-      expect(result.matches[0].match).toBe('DevTools');
+      expect(result.matches[0].match).toBe('ZeroTrace');
       expect(result.matches[0].index).toBe(11);
-      expect(result.matches[0].endIndex).toBe(19);
+      expect(result.matches[0].endIndex).toBe(20);
     }
   });
 

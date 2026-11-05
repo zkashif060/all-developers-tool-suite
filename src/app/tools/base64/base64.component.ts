@@ -163,7 +163,7 @@ export class Base64Component implements OnInit {
     outputBytes: number;
   } | null>(null);
 
-  protected readonly sampleData = signal<string>('Hello DevTools Hub! 🚀 Built with Angular & Tailwind.');
+  protected readonly sampleData = signal<string>('Hello ZeroTrace Tools! 🚀 Built with Angular & Tailwind.');
 
   public ngOnInit(): void {
     this.recentToolsService.recordUsage('base64');
@@ -173,7 +173,7 @@ export class Base64Component implements OnInit {
     this.mode.set(m);
     this.errorMessage.set(null);
     if (m === 'encode') {
-      this.sampleData.set('DevTools Hub 🚀\nسلام پاکستان! 🇵🇰\nUnicode & Multi-byte Base64.');
+      this.sampleData.set('ZeroTrace Tools 🛡️\nسلام پاکستان! 🇵🇰\nUnicode & Multi-byte Base64.');
     } else {
       this.sampleData.set('RGV2VG9vbHMgSHViIPCfmoAK2LPZhNin2YUg2b7Yp9qp2LPYqtin2YYhIPCfh7Xwn4ewClVuaWNvZGUgJiBNdWx0aS1ieXRlIEJhc2U2NC4=');
     }

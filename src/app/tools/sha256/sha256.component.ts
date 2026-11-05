@@ -169,7 +169,7 @@ export class Sha256Component implements OnInit {
 
   public readonly presetFox = 'The quick brown fox jumps over the lazy dog.';
   public readonly presetAbc = 'abc';
-  public readonly presetUnicode = 'سلام پاکستان! 🇵🇰 DevTools Hub 🚀 ✨';
+  public readonly presetUnicode = 'سلام پاکستان! 🇵🇰 ZeroTrace Tools 🛡️ ✨';
 
   public ngOnInit(): void {
     this.recentToolsService.recordUsage('sha256');

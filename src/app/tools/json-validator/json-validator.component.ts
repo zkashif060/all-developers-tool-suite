@@ -141,7 +141,7 @@ export class JsonValidatorComponent implements OnInit {
   protected readonly metadata = signal<JsonMetadata | null>(null);
   protected readonly errorDetails = signal<{ error: string; line?: number; column?: number } | null>(null);
 
-  protected readonly sampleJson = `{\n  "service": "DevTools Hub",\n  "version": 2.0,\n  "operational": true,\n  "endpoints": [\n    {\n      "id": "json-validator",\n      "active": true\n    }\n  ],\n  "settings": {\n    "cache": null,\n    "retries": 3\n  }\n}`;
+  protected readonly sampleJson = `{\n  "service": "ZeroTrace Tools",\n  "version": 2.0,\n  "operational": true,\n  "endpoints": [\n    {\n      "id": "json-validator",\n      "active": true\n    }\n  ],\n  "settings": {\n    "cache": null,\n    "retries": 3\n  }\n}`;
 
   public ngOnInit(): void {
     this.recentToolsService.recordUsage('json-validator');
@@ -157,7 +157,7 @@ export class JsonValidatorComponent implements OnInit {
   }
 
   public loadInvalidSample(): void {
-    const broken = `{\n  "name": "DevTools Hub",\n  "missingQuoteKey: "invalid value",\n  "trailingComma": true,\n}`;
+    const broken = `{\n  "name": "ZeroTrace Tools",\n  "missingQuoteKey: "invalid value",\n  "trailingComma": true,\n}`;
     this.inputContent.set(broken);
     this.validationStatus.set('idle');
     this.metadata.set(null);
