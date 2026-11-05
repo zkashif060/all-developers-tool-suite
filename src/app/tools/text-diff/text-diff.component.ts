@@ -381,17 +381,29 @@ import {
                     <!-- Left Side (Original) -->
                     <div
                       class="flex border-r border-slate-200 dark:border-slate-800 overflow-hidden min-h-[22px]"
-                      [class.bg-rose-50/60]="row.left.type === 'deleted'"
-                      [class.dark:bg-rose-950/20]="row.left.type === 'deleted'"
-                      [class.bg-slate-50/40]="row.left.type === 'empty'"
-                      [class.dark:bg-slate-900/60]="row.left.type === 'empty'"
+                      [class.bg-rose-500/12]="row.left.type === 'deleted'"
+                      [class.dark:bg-rose-500/20]="row.left.type === 'deleted'"
+                      [class.border-l-2]="row.left.type === 'deleted'"
+                      [class.border-l-rose-500]="row.left.type === 'deleted'"
+                      [class.bg-slate-100/60]="row.left.type === 'empty'"
+                      [class.dark:bg-slate-900/80]="row.left.type === 'empty'"
                     >
                       @if (showLineNumbers()) {
-                        <div class="w-10 sm:w-12 px-2 py-0.5 text-right font-mono text-[11px] text-slate-400 dark:text-slate-600 select-none bg-slate-50/50 dark:bg-slate-800/30 border-r border-slate-100 dark:border-slate-800 flex-shrink-0">
+                        <div
+                          class="w-10 sm:w-12 px-2 py-0.5 text-right font-mono text-[11px] select-none border-r border-slate-100 dark:border-slate-800 flex-shrink-0"
+                          [class.text-rose-700]="row.left.type === 'deleted'"
+                          [class.dark:text-rose-400]="row.left.type === 'deleted'"
+                          [class.bg-rose-500/15]="row.left.type === 'deleted'"
+                          [class.dark:bg-rose-950/50]="row.left.type === 'deleted'"
+                          [class.text-slate-400]="row.left.type !== 'deleted'"
+                          [class.dark:text-slate-600]="row.left.type !== 'deleted'"
+                          [class.bg-slate-50/50]="row.left.type !== 'deleted'"
+                          [class.dark:bg-slate-800/30]="row.left.type !== 'deleted'"
+                        >
                           {{ row.left.lineNumber || '' }}
                         </div>
                       }
-                      <div class="w-5 py-0.5 text-center font-bold select-none text-rose-500 flex-shrink-0">
+                      <div class="w-5 py-0.5 text-center font-bold select-none text-rose-600 dark:text-rose-400 flex-shrink-0">
                         {{ row.left.type === 'deleted' ? '-' : '' }}
                       </div>
                       <div class="px-2 py-0.5 flex-1 whitespace-pre-wrap break-all text-slate-800 dark:text-slate-200">
@@ -404,8 +416,12 @@ import {
                               [class.dark:text-rose-100]="p.type === 'deleted'"
                               [class.rounded-xs]="p.type === 'deleted'"
                               [class.font-semibold]="p.type === 'deleted'"
+                              [class.line-through]="p.type === 'deleted'"
+                              [class.decoration-rose-500/40]="p.type === 'deleted'"
                             >{{ p.text }}</span>
                           }
+                        } @else if (row.left.type === 'deleted') {
+                          <span class="text-rose-900 dark:text-rose-200 font-medium bg-rose-500/15 dark:bg-rose-500/25 px-1 py-0.5 rounded-xs line-through decoration-rose-500/40">{{ row.left.text }}</span>
                         } @else {
                           {{ row.left.text }}
                         }
@@ -415,17 +431,29 @@ import {
                     <!-- Right Side (Modified) -->
                     <div
                       class="flex overflow-hidden min-h-[22px]"
-                      [class.bg-emerald-50/60]="row.right.type === 'added'"
-                      [class.dark:bg-emerald-950/20]="row.right.type === 'added'"
-                      [class.bg-slate-50/40]="row.right.type === 'empty'"
-                      [class.dark:bg-slate-900/60]="row.right.type === 'empty'"
+                      [class.bg-emerald-500/12]="row.right.type === 'added'"
+                      [class.dark:bg-emerald-500/20]="row.right.type === 'added'"
+                      [class.border-l-2]="row.right.type === 'added'"
+                      [class.border-l-emerald-500]="row.right.type === 'added'"
+                      [class.bg-slate-100/60]="row.right.type === 'empty'"
+                      [class.dark:bg-slate-900/80]="row.right.type === 'empty'"
                     >
                       @if (showLineNumbers()) {
-                        <div class="w-10 sm:w-12 px-2 py-0.5 text-right font-mono text-[11px] text-slate-400 dark:text-slate-600 select-none bg-slate-50/50 dark:bg-slate-800/30 border-r border-slate-100 dark:border-slate-800 flex-shrink-0">
+                        <div
+                          class="w-10 sm:w-12 px-2 py-0.5 text-right font-mono text-[11px] select-none border-r border-slate-100 dark:border-slate-800 flex-shrink-0"
+                          [class.text-emerald-700]="row.right.type === 'added'"
+                          [class.dark:text-emerald-400]="row.right.type === 'added'"
+                          [class.bg-emerald-500/15]="row.right.type === 'added'"
+                          [class.dark:bg-emerald-950/50]="row.right.type === 'added'"
+                          [class.text-slate-400]="row.right.type !== 'added'"
+                          [class.dark:text-slate-600]="row.right.type !== 'added'"
+                          [class.bg-slate-50/50]="row.right.type !== 'added'"
+                          [class.dark:bg-slate-800/30]="row.right.type !== 'added'"
+                        >
                           {{ row.right.lineNumber || '' }}
                         </div>
                       }
-                      <div class="w-5 py-0.5 text-center font-bold select-none text-emerald-500 flex-shrink-0">
+                      <div class="w-5 py-0.5 text-center font-bold select-none text-emerald-600 dark:text-emerald-400 flex-shrink-0">
                         {{ row.right.type === 'added' ? '+' : '' }}
                       </div>
                       <div class="px-2 py-0.5 flex-1 whitespace-pre-wrap break-all text-slate-800 dark:text-slate-200">
@@ -440,6 +468,8 @@ import {
                               [class.font-semibold]="p.type === 'added'"
                             >{{ p.text }}</span>
                           }
+                        } @else if (row.right.type === 'added') {
+                          <span class="text-emerald-900 dark:text-emerald-200 font-medium bg-emerald-500/15 dark:bg-emerald-500/25 px-1 py-0.5 rounded-xs">{{ row.right.text }}</span>
                         } @else {
                           {{ row.right.text }}
                         }
@@ -464,17 +494,36 @@ import {
                 @for (line of res.unifiedLines; track line.id; let idx = $index) {
                   <div
                     [id]="'unified-row-' + idx"
-                    [class.bg-rose-50/60]="line.type === 'deleted'"
-                    [class.dark:bg-rose-950/20]="line.type === 'deleted'"
-                    [class.bg-emerald-50/60]="line.type === 'added'"
-                    [class.dark:bg-emerald-950/20]="line.type === 'added'"
+                    [class.bg-rose-500/12]="line.type === 'deleted'"
+                    [class.dark:bg-rose-500/20]="line.type === 'deleted'"
+                    [class.border-l-2]="line.type !== 'unchanged'"
+                    [class.border-l-rose-500]="line.type === 'deleted'"
+                    [class.bg-emerald-500/12]="line.type === 'added'"
+                    [class.dark:bg-emerald-500/20]="line.type === 'added'"
+                    [class.border-l-emerald-500]="line.type === 'added'"
                     class="flex border-b border-slate-100/70 dark:border-slate-800/40 hover:bg-slate-50/40 dark:hover:bg-slate-800/30 transition-colors min-h-[22px]"
                   >
                     @if (showLineNumbers()) {
-                      <div class="w-10 sm:w-12 px-2 py-0.5 text-right font-mono text-[11px] text-slate-400 select-none bg-slate-50/50 dark:bg-slate-800/30 border-r border-slate-100 dark:border-slate-800 flex-shrink-0">
+                      <div
+                        class="w-10 sm:w-12 px-2 py-0.5 text-right font-mono text-[11px] select-none border-r border-slate-100 dark:border-slate-800 flex-shrink-0"
+                        [class.text-rose-700]="line.type === 'deleted'"
+                        [class.dark:text-rose-400]="line.type === 'deleted'"
+                        [class.bg-rose-500/15]="line.type === 'deleted'"
+                        [class.text-slate-400]="line.type !== 'deleted'"
+                        [class.bg-slate-50/50]="line.type !== 'deleted'"
+                        [class.dark:bg-slate-800/30]="line.type !== 'deleted'"
+                      >
                         {{ line.oldLineNumber || '' }}
                       </div>
-                      <div class="w-10 sm:w-12 px-2 py-0.5 text-right font-mono text-[11px] text-slate-400 select-none bg-slate-50/50 dark:bg-slate-800/30 border-r border-slate-100 dark:border-slate-800 flex-shrink-0">
+                      <div
+                        class="w-10 sm:w-12 px-2 py-0.5 text-right font-mono text-[11px] select-none border-r border-slate-100 dark:border-slate-800 flex-shrink-0"
+                        [class.text-emerald-700]="line.type === 'added'"
+                        [class.dark:text-emerald-400]="line.type === 'added'"
+                        [class.bg-emerald-500/15]="line.type === 'added'"
+                        [class.text-slate-400]="line.type !== 'added'"
+                        [class.bg-slate-50/50]="line.type !== 'added'"
+                        [class.dark:bg-slate-800/30]="line.type !== 'added'"
+                      >
                         {{ line.newLineNumber || '' }}
                       </div>
                     }
@@ -482,8 +531,10 @@ import {
                     <!-- Marker Column -->
                     <div
                       class="w-6 py-0.5 text-center font-bold select-none flex-shrink-0"
-                      [class.text-rose-500]="line.type === 'deleted'"
-                      [class.text-emerald-500]="line.type === 'added'"
+                      [class.text-rose-600]="line.type === 'deleted'"
+                      [class.dark:text-rose-400]="line.type === 'deleted'"
+                      [class.text-emerald-600]="line.type === 'added'"
+                      [class.dark:text-emerald-400]="line.type === 'added'"
                       [class.text-slate-300]="line.type === 'unchanged'"
                     >
                       {{ line.type === 'deleted' ? '-' : line.type === 'added' ? '+' : ' ' }}
@@ -504,8 +555,13 @@ import {
                             [class.dark:text-emerald-100]="p.type === 'added'"
                             [class.rounded-xs]="p.type !== 'unchanged'"
                             [class.font-semibold]="p.type !== 'unchanged'"
+                            [class.line-through]="p.type === 'deleted'"
                           >{{ p.text }}</span>
                         }
+                      } @else if (line.type === 'added') {
+                        <span class="text-emerald-900 dark:text-emerald-200 font-medium bg-emerald-500/15 dark:bg-emerald-500/25 px-1 py-0.5 rounded-xs">{{ line.text }}</span>
+                      } @else if (line.type === 'deleted') {
+                        <span class="text-rose-900 dark:text-rose-200 font-medium bg-rose-500/15 dark:bg-rose-500/25 px-1 py-0.5 rounded-xs line-through decoration-rose-500/40">{{ line.text }}</span>
                       } @else {
                         {{ line.text }}
                       }
