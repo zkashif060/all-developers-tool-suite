@@ -63,7 +63,20 @@ export class AppLayoutComponent {
 
   @HostListener('window:keydown', ['$event'])
   public onKeyDown(event: KeyboardEvent): void {
-    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+    if (event.key === 'Escape' || event.key === 'Esc') {
+      if (this.searchModalOpen()) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.searchModalOpen.set(false);
+        return;
+      }
+      if (this.mobileNavOpen()) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.mobileNavOpen.set(false);
+        return;
+      }
+    } else if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
       event.preventDefault();
       this.searchModalOpen.update(v => !v);
     } else if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'b') {

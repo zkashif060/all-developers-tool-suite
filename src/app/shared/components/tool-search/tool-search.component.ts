@@ -13,6 +13,8 @@ import { AppIconComponent } from '../app-icon/app-icon.component';
       <div
         class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-900/50 dark:bg-black/70 backdrop-blur-sm animate-fadeIn"
         (click)="closeOnBackdrop($event)"
+        (keydown.escape)="closed.emit()"
+        tabindex="-1"
         role="dialog"
         aria-modal="true"
         aria-label="Tool Search Palette"
@@ -20,6 +22,7 @@ import { AppIconComponent } from '../app-icon/app-icon.component';
         <div
           class="relative w-full max-w-xl rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-scaleUp"
           (click)="$event.stopPropagation()"
+          (keydown.escape)="closed.emit()"
         >
           <!-- Search Header Input -->
           <div class="flex items-center px-4 py-3.5 border-b border-slate-200 dark:border-slate-800">
@@ -30,6 +33,7 @@ import { AppIconComponent } from '../app-icon/app-icon.component';
               [value]="query()"
               (input)="onQueryChange($event)"
               (keydown)="onKeydown($event)"
+              (keydown.escape)="closed.emit()"
               [placeholder]="'Search all ' + toolRegistry.tools().length + ' tools by name, description, keyword...'"
               class="w-full bg-transparent text-slate-900 dark:text-slate-100 placeholder:text-slate-400 border-none outline-none text-base"
               spellcheck="false"
@@ -39,9 +43,26 @@ import { AppIconComponent } from '../app-icon/app-icon.component';
               aria-controls="search-results-list"
               [attr.aria-label]="'Search all ' + toolRegistry.tools().length + ' tools'"
             />
-            <kbd class="hidden sm:inline-block px-2 py-0.5 text-[11px] font-mono text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
-              ESC
-            </kbd>
+            <div class="flex items-center gap-1.5 flex-shrink-0">
+              <button
+                type="button"
+                (click)="closed.emit()"
+                class="hidden sm:inline-flex items-center px-2 py-0.5 text-[11px] font-mono text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer select-none"
+                title="Press Escape or click to close"
+                aria-label="Close search (Escape)"
+              >
+                ESC
+              </button>
+              <button
+                type="button"
+                (click)="closed.emit()"
+                class="sm:hidden p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                aria-label="Close search"
+                title="Close"
+              >
+                <app-icon name="x" [size]="18" />
+              </button>
+            </div>
           </div>
 
           <!-- Results List -->
@@ -125,20 +146,28 @@ export class ToolSearchComponent {
         this.query.set('');
         this.filteredTools.set(this.toolRegistry.tools());
         this.selectedIndex.set(0);
+        queueMicrotask(() => {
+          this.searchInputElement?.nativeElement.focus();
+        });
         setTimeout(() => {
           this.searchInputElement?.nativeElement.focus();
-        }, 50);
+        }, 30);
       }
     });
   }
 
   @HostListener('window:keydown', ['$event'])
   public handleGlobalShortcut(event: KeyboardEvent): void {
+    if (this.isOpen() && (event.key === 'Escape' || event.key === 'Esc')) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.closed.emit();
+      return;
+    }
     if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
       event.preventDefault();
-      // If parent controls isOpen, this component emits or toggles
-      if (!this.isOpen()) {
-        // Will be triggered by parent or local state
+      if (this.isOpen()) {
+        this.closed.emit();
       }
     }
   }
@@ -147,9 +176,12 @@ export class ToolSearchComponent {
     this.query.set('');
     this.filteredTools.set(this.toolRegistry.tools());
     this.selectedIndex.set(0);
+    queueMicrotask(() => {
+      this.searchInputElement?.nativeElement.focus();
+    });
     setTimeout(() => {
       this.searchInputElement?.nativeElement.focus();
-    }, 50);
+    }, 30);
   }
 
   public onQueryChange(event: Event): void {
@@ -161,8 +193,9 @@ export class ToolSearchComponent {
 
   public onKeydown(event: KeyboardEvent): void {
     const list = this.filteredTools();
-    if (event.key === 'Escape') {
+    if (event.key === 'Escape' || event.key === 'Esc') {
       event.preventDefault();
+      event.stopPropagation();
       this.closed.emit();
     } else if (event.key === 'ArrowDown') {
       event.preventDefault();

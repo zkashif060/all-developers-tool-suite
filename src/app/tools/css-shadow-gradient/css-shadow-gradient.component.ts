@@ -703,3 +703,4 @@ export class CssShadowGradientComponent implements OnInit {
     this.gradientConfig.set(JSON.parse(JSON.stringify(preset.config)));
   }
 }
+

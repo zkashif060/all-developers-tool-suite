@@ -98,3 +98,4 @@ describe('ColorConverterEngine', () => {
     expect(shades[8].percent).toBe(90);
   });
 });
+

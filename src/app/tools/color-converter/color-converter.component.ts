@@ -556,3 +556,4 @@ export class ColorConverterComponent implements OnInit {
     this.bgColor.set(currentFg);
   }
 }
+
