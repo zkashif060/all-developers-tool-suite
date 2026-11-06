@@ -213,6 +213,56 @@ export const routes: Routes = [
         redirectTo: 'tools/json-tree-viewer',
         pathMatch: 'full'
       },
+      {
+        path: 'tools/color-converter',
+        loadComponent: () => import('./tools/color-converter/color-converter.component').then(m => m.ColorConverterComponent),
+        title: 'Color Converter & WCAG Contrast Checker — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/contrast-checker',
+        redirectTo: 'tools/color-converter',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/colors',
+        redirectTo: 'tools/color-converter',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/css-shadow-gradient',
+        loadComponent: () => import('./tools/css-shadow-gradient/css-shadow-gradient.component').then(m => m.CssShadowGradientComponent),
+        title: 'CSS Box Shadow & Gradient Builder — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/box-shadow',
+        redirectTo: 'tools/css-shadow-gradient',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/gradient-builder',
+        redirectTo: 'tools/css-shadow-gradient',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/shadow-generator',
+        redirectTo: 'tools/css-shadow-gradient',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/glassmorphism',
+        loadComponent: () => import('./tools/glassmorphism/glassmorphism.component').then(m => m.GlassmorphismComponent),
+        title: 'Glassmorphism Generator — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/glassmorphism-generator',
+        redirectTo: 'tools/glassmorphism',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/glass',
+        redirectTo: 'tools/glassmorphism',
+        pathMatch: 'full'
+      },
       // 404 Not Found Wildcard
       {
         path: '**',

@@ -4,7 +4,8 @@ export type ToolCategory =
   | 'Security & Tokens'
   | 'Generators'
   | 'Date & Time'
-  | 'Testing & Development';
+  | 'Testing & Development'
+  | 'CSS & Design';
 
 export interface ToolMetadata {
   id: string;

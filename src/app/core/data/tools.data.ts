@@ -285,6 +285,73 @@ export const TOOLS_DATA: ToolMetadata[] = [
     ],
     popular: true,
   },
+  {
+    id: 'color-converter',
+    name: 'Color Converter & Contrast Checker',
+    description: 'Convert between HEX, RGB, HSL, modern OKLCH, and CMYK, with real-time WCAG 2.1 AA/AAA contrast checking and harmonies.',
+    category: 'CSS & Design',
+    icon: 'palette',
+    route: '/tools/color-converter',
+    keywords: [
+      'color converter',
+      'contrast checker',
+      'wcag',
+      'hex to rgb',
+      'rgb to hex',
+      'hsl',
+      'oklch',
+      'cmyk',
+      'color picker',
+      'accessible colors',
+      'contrast ratio',
+      'color palette',
+      'color harmonies'
+    ],
+    popular: true,
+  },
+  {
+    id: 'css-shadow-gradient',
+    name: 'CSS Box Shadow & Gradient Builder',
+    description: 'Design multi-layered realistic depth shadows and modern linear/radial/conic gradients with OKLCH color interpolation.',
+    category: 'CSS & Design',
+    icon: 'layers',
+    route: '/tools/css-shadow-gradient',
+    keywords: [
+      'box shadow',
+      'gradient',
+      'css gradient',
+      'shadow generator',
+      'gradient generator',
+      'linear gradient',
+      'radial gradient',
+      'conic gradient',
+      'oklch gradient',
+      'multi layer shadow',
+      'css generator'
+    ],
+    popular: true,
+  },
+  {
+    id: 'glassmorphism',
+    name: 'Glassmorphism Generator',
+    description: 'Generate modern frosted-glass UI effects with live backdrop blur, specular inner highlights, and instant CSS/Tailwind export.',
+    category: 'CSS & Design',
+    icon: 'box',
+    route: '/tools/glassmorphism',
+    keywords: [
+      'glassmorphism',
+      'glass morphism',
+      'frosted glass',
+      'backdrop-filter',
+      'blur',
+      'acrylic',
+      'translucent',
+      'glass card',
+      'glass css',
+      'glass generator'
+    ],
+    popular: true,
+  },
 ];
 
 export const CATEGORIES_DATA: CategoryInfo[] = [
@@ -323,6 +390,12 @@ export const CATEGORIES_DATA: CategoryInfo[] = [
     slug: 'testing-development',
     description: 'Test regular expressions and craft cron schedule specifications.',
     icon: 'terminal',
+  },
+  {
+    name: 'CSS & Design',
+    slug: 'css-design',
+    description: 'Convert colors, test WCAG contrast, craft realistic box shadows, gradients, and glassmorphism.',
+    icon: 'palette',
   },
 ];
 
