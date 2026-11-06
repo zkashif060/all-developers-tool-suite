@@ -105,3 +105,4 @@ describe('ToolSearchComponent', () => {
     expect(options.length).toBeGreaterThan(0);
   });
 });
+

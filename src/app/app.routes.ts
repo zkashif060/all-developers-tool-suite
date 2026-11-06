@@ -263,6 +263,31 @@ export const routes: Routes = [
         redirectTo: 'tools/glassmorphism',
         pathMatch: 'full'
       },
+      {
+        path: 'tools/flexbox-grid',
+        loadComponent: () => import('./tools/flexbox-grid/flexbox-grid.component').then(m => m.FlexboxGridComponent),
+        title: 'CSS Flexbox & Grid Visual Builder — ZeroTrace Tools'
+      },
+      {
+        path: 'tools/flexbox',
+        redirectTo: 'tools/flexbox-grid',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/css-grid',
+        redirectTo: 'tools/flexbox-grid',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/grid',
+        redirectTo: 'tools/flexbox-grid',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tools/flexbox-builder',
+        redirectTo: 'tools/flexbox-grid',
+        pathMatch: 'full'
+      },
       // 404 Not Found Wildcard
       {
         path: '**',

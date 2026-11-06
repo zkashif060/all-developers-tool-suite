@@ -352,6 +352,31 @@ export const TOOLS_DATA: ToolMetadata[] = [
     ],
     popular: true,
   },
+  {
+    id: 'flexbox-grid',
+    name: 'CSS Flexbox & Grid Builder',
+    description: 'Interactive visual playground for crafting flexible 1D Flexbox and 2D Grid layouts with instant CSS & Tailwind code generation.',
+    category: 'CSS & Design',
+    icon: 'layout',
+    route: '/tools/flexbox-grid',
+    keywords: [
+      'flexbox',
+      'css grid',
+      'grid generator',
+      'flexbox builder',
+      'css layout',
+      'flex-direction',
+      'justify-content',
+      'align-items',
+      'grid-template-columns',
+      'subgrid',
+      'auto-fit',
+      'bento grid',
+      'tailwind grid',
+      'tailwind flex'
+    ],
+    popular: true,
+  },
 ];
 
 export const CATEGORIES_DATA: CategoryInfo[] = [

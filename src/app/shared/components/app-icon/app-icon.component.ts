@@ -253,6 +253,18 @@ import { Component, computed, input } from '@angular/core';
           <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
           <line x1="12" y1="22.08" x2="12" y2="12" />
         }
+        @case ('layout') {
+          <rect width="18" height="18" x="3" y="3" rx="2" />
+          <path d="M3 9h18" />
+          <path d="M9 21V9" />
+        }
+        @case ('grid') {
+          <rect width="18" height="18" x="3" y="3" rx="2" />
+          <path d="M3 9h18" />
+          <path d="M3 15h18" />
+          <path d="M9 3v18" />
+          <path d="M15 3v18" />
+        }
         @default {
           <circle cx="12" cy="12" r="10" />
           <line x1="12" x2="12" y1="16" y2="12" />

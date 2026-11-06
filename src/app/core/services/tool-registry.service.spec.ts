@@ -13,8 +13,8 @@ describe('ToolRegistryService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should register exactly 23 tools', () => {
-    expect(service.tools().length).toBe(23);
+  it('should register exactly 24 tools', () => {
+    expect(service.tools().length).toBe(24);
   });
 
   it('should register exactly 7 categories', () => {
