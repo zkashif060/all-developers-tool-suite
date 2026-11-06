@@ -113,4 +113,26 @@ describe('TextRephraserEngine', () => {
     expect(res.rephrasedText).toContain('substantial discrepancy');
     expect(res.rephrasedText).toContain('precipitates our central thesis');
   });
+
+  it('should naturally elevate easy and simplistic words without sounding like an AI', () => {
+    const text = REPHRASE_SAMPLES.casualText.text;
+    const res = rephraseText(text, 'natural');
+
+    expect(res.easyWordsElevatedCount).toBeGreaterThanOrEqual(5);
+    expect(res.sentences.every(s => s.isRephrased)).toBe(true);
+
+    // Verify natural human phrasing
+    expect(res.rephrasedText).toContain('simple and straightforward');
+    expect(res.rephrasedText).toContain('slip up noticeably');
+    expect(res.rephrasedText).toContain('tackle demanding challenges');
+    expect(res.rephrasedText).toContain('solid support');
+    expect(res.rephrasedText).toContain('Numerous challenges');
+    expect(res.rephrasedText).toContain('uncover valuable insights');
+
+    // Verify it doesn't contain AI robotic clichés
+    expect(res.rephrasedText).not.toContain('delve');
+    expect(res.rephrasedText).not.toContain('utilize');
+    expect(res.rephrasedText).not.toContain('tapestry');
+    expect(res.rephrasedText).not.toContain('adversely impact');
+  });
 });

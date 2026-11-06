@@ -42,6 +42,13 @@ import {
               </button>
               <button
                 type="button"
+                (click)="loadSample('casualText')"
+                class="px-2.5 py-1 text-xs font-medium rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-emerald-600 dark:text-emerald-400 font-semibold transition-colors"
+              >
+                Everyday Easy Words
+              </button>
+              <button
+                type="button"
                 (click)="loadSample('businessEmail')"
                 class="px-2.5 py-1 text-xs font-medium rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors"
               >
@@ -151,13 +158,19 @@ import {
 
             <!-- Metrics -->
             @if (result(); as res) {
-              <div class="flex flex-wrap items-center gap-4 text-slate-500 dark:text-slate-400">
+              <div class="flex flex-wrap items-center gap-3 text-slate-500 dark:text-slate-400">
                 <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 font-semibold border border-emerald-200 dark:border-emerald-800">
                   <app-icon name="check" [size]="12" />
                   {{ res.sentencesRephrased }} of {{ res.totalSentences }} Sentences Rephrased ({{ res.rephrasePercentage }}%)
                 </span>
+                @if (res.easyWordsElevatedCount > 0) {
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-sky-50 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300 font-semibold border border-sky-200 dark:border-sky-800">
+                    <app-icon name="sparkles" [size]="12" />
+                    {{ res.easyWordsElevatedCount }} Easy Words Upgraded
+                  </span>
+                }
                 <span>Words: <strong class="font-mono text-slate-700 dark:text-slate-300">{{ res.originalWordCount }} → {{ res.rephrasedWordCount }}</strong></span>
-                <span>Enhanced Phrases: <strong class="font-mono text-emerald-600 dark:text-emerald-400 font-bold">{{ res.replacements.length }}</strong></span>
+                <span>Replacements: <strong class="font-mono text-emerald-600 dark:text-emerald-400 font-bold">{{ res.replacements.length }}</strong></span>
                 @if (res.wordsReduced > 0) {
                   <span>Saved: <strong class="font-mono text-emerald-600 dark:text-emerald-400 font-bold">-{{ res.wordsReduced }} words</strong></span>
                 }
@@ -185,11 +198,11 @@ import {
               ></textarea>
             </div>
 
-            <!-- Right Pane: Rephrased Professional Output -->
+            <!-- Right Pane: Rephrased Output -->
             <div class="flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs overflow-hidden">
               <div class="flex items-center justify-between px-4 py-2.5 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300">
                 <span class="flex items-center gap-2">
-                  <app-icon name="sparkles" [size]="14" class="text-primary" />
+                  <app-icon name="sparkles" [size]="14" class="text-emerald-500" />
                   REPHRASED OUTPUT ({{ tone().toUpperCase() }})
                 </span>
                 <div class="flex items-center gap-2">
@@ -317,7 +330,14 @@ import {
                       <span class="text-slate-400">→</span>
                       <strong class="text-emerald-600 dark:text-emerald-400 font-bold">{{ rep.replacement }}</strong>
                     </div>
-                    <span class="text-[10px] text-slate-400 italic">{{ rep.reason }}</span>
+                    <div class="flex items-center justify-between">
+                      <span class="text-[10px] text-slate-400 italic">{{ rep.reason }}</span>
+                      @if (rep.isEasyWord) {
+                        <span class="px-1.5 py-0.2 rounded text-[9px] font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                          Easy Word
+                        </span>
+                      }
+                    </div>
                   </div>
                 }
               </div>
@@ -372,10 +392,10 @@ export class TextRephraserComponent implements OnInit {
     this.manualResult.set(updated);
   }
 
-  public loadSample(key: 'technologyEssay' | 'businessEmail' | 'technicalSpec' | 'academicReport'): void {
+  public loadSample(key: 'technologyEssay' | 'casualText' | 'businessEmail' | 'technicalSpec' | 'academicReport'): void {
     this.manualResult.set(null);
     this.inputText.set(REPHRASE_SAMPLES[key].text);
-    if (key === 'technologyEssay') this.tone.set('natural');
+    if (key === 'technologyEssay' || key === 'casualText') this.tone.set('natural');
     if (key === 'businessEmail') this.tone.set('professional');
     if (key === 'technicalSpec') this.tone.set('technical');
     if (key === 'academicReport') this.tone.set('academic');

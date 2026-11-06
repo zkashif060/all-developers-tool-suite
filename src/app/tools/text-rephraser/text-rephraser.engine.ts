@@ -6,6 +6,7 @@ export interface PhraseRule {
   alternatives?: string[];
   reason: string;
   tone: RephraseTone | 'all';
+  isEasyWord?: boolean;
 }
 
 export interface ReplacementItem {
@@ -16,6 +17,7 @@ export interface ReplacementItem {
   startIndex: number;
   endIndex: number;
   reason: string;
+  isEasyWord?: boolean;
 }
 
 export interface SentenceItem {
@@ -39,6 +41,7 @@ export interface RephraseResult {
   totalSentences: number;
   sentencesRephrased: number;
   rephrasePercentage: number;
+  easyWordsElevatedCount: number;
   replacements: ReplacementItem[];
   readingTimeSeconds: number;
   wordsReduced: number;
@@ -519,9 +522,495 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
 
 /**
  * Universal phrase replacement dictionary.
+ * Includes comprehensive multi-word phrases, easy-word elevation rules,
+ * corporate wordiness reductions, and tone-specific vocabulary.
  */
 export const PHRASE_RULES: PhraseRule[] = [
+  // =========================================================================
+  // --- Academic & Scholarly Tone Enhancements (Priority for Academic) ---
+  // =========================================================================
+  {
+    pattern: /\bbig difference\b/gi,
+    replacement: 'substantial discrepancy',
+    alternatives: ['marked divergence', 'significant variation'],
+    reason: 'Formal comparative terminology',
+    tone: 'academic'
+  },
+  {
+    pattern: /\bshows that\b/gi,
+    replacement: 'demonstrates that',
+    alternatives: ['indicates that', 'illustrates that'],
+    reason: 'Academic evidential framing',
+    tone: 'academic'
+  },
+  {
+    pattern: /\bproves that\b/gi,
+    replacement: 'substantiates that',
+    alternatives: ['corroborates that', 'validates that'],
+    reason: 'Scholarly precision in argumentation',
+    tone: 'academic'
+  },
+  {
+    pattern: /\bmain idea\b/gi,
+    replacement: 'central thesis',
+    alternatives: ['core premise', 'primary argument'],
+    reason: 'Scholarly analytical vocabulary',
+    tone: 'academic'
+  },
+  {
+    pattern: /\bleads to\b/gi,
+    replacement: 'precipitates',
+    alternatives: ['engenders', 'results in'],
+    reason: 'Formal academic causality',
+    tone: 'academic'
+  },
+
+  // =========================================================================
+  // --- Easy-Word Multi-Word Phrasal Idioms & Collocations (Universal) ---
+  // =========================================================================
+  {
+    pattern: /\bvery easy\b/gi,
+    replacement: 'simple and straightforward',
+    alternatives: ['effortless', 'breeze to navigate'],
+    reason: 'Elevated simplistic phrasing to natural human expression',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\beasy way to\b/gi,
+    replacement: 'straightforward approach to',
+    alternatives: ['smooth way to', 'convenient method to'],
+    reason: 'Elevated easy collocation',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\beasy way\b/gi,
+    replacement: 'practical approach',
+    alternatives: ['straightforward method', 'convenient route'],
+    reason: 'Elevated easy collocation',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\beasy to\b/gi,
+    replacement: 'simple to',
+    alternatives: ['effortless to', 'seamless to'],
+    reason: 'Natural human adjective',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bmake a big mistake\b/gi,
+    replacement: 'slip up noticeably',
+    alternatives: ['make a critical error', 'miscalculate'],
+    reason: 'Elevated colloquial mistake idiom',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bmake a mistake\b/gi,
+    replacement: 'make an error',
+    alternatives: ['slip up', 'miscalculate'],
+    reason: 'Elevated easy verb phrase',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bdo hard things\b/gi,
+    replacement: 'tackle demanding challenges',
+    alternatives: ['take on complex goals', 'navigate tough obstacles'],
+    reason: 'Elevated elementary vocabulary to engaging human phrasing',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bhard work\b/gi,
+    replacement: 'diligent effort',
+    alternatives: ['dedicated work', 'focused energy'],
+    reason: 'Elevated colloquial work idiom',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bhard to\b/gi,
+    replacement: 'challenging to',
+    alternatives: ['demanding to', 'tough to'],
+    reason: 'Natural human descriptor',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bpeople want to get\b/gi,
+    replacement: 'individuals seek to find',
+    alternatives: ['people aim to receive', 'users look to obtain'],
+    reason: 'Elevated elementary verb sequence',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bpeople want to\b/gi,
+    replacement: 'individuals aim to',
+    alternatives: ['people strive to', 'users seek to'],
+    reason: 'Natural human intentionality',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bwant to get\b/gi,
+    replacement: 'seek to obtain',
+    alternatives: ['aim to gain', 'look to acquire'],
+    reason: 'Elevated easy verb sequence',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bwant to\b/gi,
+    replacement: 'aim to',
+    alternatives: ['seek to', 'strive to', 'hope to'],
+    reason: 'Active human phrasing',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bneed to\b/gi,
+    replacement: 'ought to',
+    alternatives: ['have to', 'must', 'require'],
+    reason: 'Natural human obligation modal',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bneed help\b/gi,
+    replacement: 'require assistance',
+    alternatives: ['seek guidance', 'welcome support'],
+    reason: 'Professional help idiom',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgood help\b/gi,
+    replacement: 'solid support',
+    alternatives: ['dependable guidance', 'valuable assistance'],
+    reason: 'Elevated elementary phrase',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgood results\b/gi,
+    replacement: 'strong outcomes',
+    alternatives: ['solid progress', 'meaningful achievements'],
+    reason: 'Natural human achievement phrasing',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgood way to\b/gi,
+    replacement: 'practical way to',
+    alternatives: ['effective method to', 'valuable approach to'],
+    reason: 'Natural human approach phrasing',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgood way\b/gi,
+    replacement: 'effective approach',
+    alternatives: ['solid method', 'sound strategy'],
+    reason: 'Natural human strategy phrasing',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgood at\b/gi,
+    replacement: 'skilled in',
+    alternatives: ['adept at', 'proficient with'],
+    reason: 'Elevated skill descriptor',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgood for\b/gi,
+    replacement: 'beneficial for',
+    alternatives: ['great for', 'valuable to'],
+    reason: 'Natural human utility descriptor',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgood idea\b/gi,
+    replacement: 'promising approach',
+    alternatives: ['constructive thought', 'sound idea'],
+    reason: 'Elevated idea descriptor',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgood ideas\b/gi,
+    replacement: 'constructive ideas',
+    alternatives: ['valuable insights', 'fresh perspectives'],
+    reason: 'Elevated ideas descriptor',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bmake changes fast\b/gi,
+    replacement: 'adapt swiftly',
+    alternatives: ['pivot rapidly', 'adjust quickly'],
+    reason: 'Elevated fast change idiom',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bmake changes\b/gi,
+    replacement: 'implement adjustments',
+    alternatives: ['make revisions', 'adapt routines'],
+    reason: 'Elevated change verb phrase',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bmake things happen\b/gi,
+    replacement: 'drive real progress',
+    alternatives: ['bring ideas to life', 'produce concrete results'],
+    reason: 'Dynamic human agency idiom',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bget things done\b/gi,
+    replacement: 'accomplish tasks efficiently',
+    alternatives: ['achieve solid progress', 'stay productive'],
+    reason: 'Elevated productivity idiom',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bmake sure\b/gi,
+    replacement: 'ensure',
+    alternatives: ['verify', 'confirm'],
+    reason: 'Professional executive vocabulary',
+    tone: 'all'
+  },
+  {
+    pattern: /\ba lot of problems\b/gi,
+    replacement: 'numerous challenges',
+    alternatives: ['frequent hurdles', 'widespread bottlenecks'],
+    reason: 'Elevated quantifier and noun',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\ba lot of things\b/gi,
+    replacement: 'many factors',
+    alternatives: ['various elements', 'numerous aspects'],
+    reason: 'Elevated vague elementary nouns',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\ba lot of people\b/gi,
+    replacement: 'many individuals',
+    alternatives: ['widespread audiences', 'countless people'],
+    reason: 'Elevated people quantifier',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\ba lot of time\b/gi,
+    replacement: 'considerable time',
+    alternatives: ['hours on end', 'substantial time'],
+    reason: 'Elevated time quantifier',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\ba lot of\b/gi,
+    replacement: 'plenty of',
+    alternatives: ['numerous', 'a wide range of'],
+    reason: 'Natural conversational quantifier',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\blots of\b/gi,
+    replacement: 'an abundance of',
+    alternatives: ['plenty of', 'numerous'],
+    reason: 'Natural human quantifier',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bneed simple ways\b/gi,
+    replacement: 'call for direct avenues',
+    alternatives: ['require straightforward solutions', 'benefit from clear approaches'],
+    reason: 'Elevated simple solution idiom',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bsimple ways\b/gi,
+    replacement: 'direct approaches',
+    alternatives: ['straightforward methods', 'accessible avenues'],
+    reason: 'Elevated simple method phrase',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bsimple way\b/gi,
+    replacement: 'straightforward method',
+    alternatives: ['direct avenue', 'uncomplicated approach'],
+    reason: 'Elevated simple method phrase',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bfind good ideas\b/gi,
+    replacement: 'uncover valuable insights',
+    alternatives: ['discover fresh ideas', 'generate sound concepts'],
+    reason: 'Elevated discovery phrase',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bbig problem\b/gi,
+    replacement: 'major challenge',
+    alternatives: ['pressing hurdle', 'serious obstacle'],
+    reason: 'Elevated problem phrase',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bbig problems\b/gi,
+    replacement: 'major challenges',
+    alternatives: ['pressing hurdles', 'serious obstacles'],
+    reason: 'Elevated problems phrase',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bbig difference\b/gi,
+    replacement: 'substantial difference',
+    alternatives: ['marked difference', 'noticeable gap'],
+    reason: 'Elevated difference phrase',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bbig impact\b/gi,
+    replacement: 'meaningful impact',
+    alternatives: ['profound influence', 'lasting mark'],
+    reason: 'Elevated impact phrase',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bwork with\b/gi,
+    replacement: 'collaborate with',
+    alternatives: ['team up with', 'partner with'],
+    reason: 'Natural teamwork verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bhelp each other\b/gi,
+    replacement: 'support one another',
+    alternatives: ['collaborate closely', 'lend a hand to peers'],
+    reason: 'Natural mutual assistance phrase',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bdo our best\b/gi,
+    replacement: 'give our best effort',
+    alternatives: ['put forward our finest work', 'strive for excellence'],
+    reason: 'Natural human effort idiom',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\btalk about\b/gi,
+    replacement: 'discuss',
+    alternatives: ['explore', 'touch upon'],
+    reason: 'Elevated conversation verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\btalk to\b/gi,
+    replacement: 'speak with',
+    alternatives: ['consult', 'reach out to'],
+    reason: 'Natural human conversation verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bcome up with\b/gi,
+    replacement: 'formulate',
+    alternatives: ['devise', 'develop'],
+    reason: 'Elevated creation phrasal verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bfigure out\b/gi,
+    replacement: 'determine',
+    alternatives: ['unravel', 'work out'],
+    reason: 'Natural problem-solving phrasal verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\blook at\b/gi,
+    replacement: 'examine',
+    alternatives: ['review', 'consider'],
+    reason: 'Natural observation phrasal verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\blook for\b/gi,
+    replacement: 'seek out',
+    alternatives: ['search for', 'track down'],
+    reason: 'Natural search phrasal verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bpoint out\b/gi,
+    replacement: 'highlight',
+    alternatives: ['note', 'emphasize'],
+    reason: 'Natural focus phrasal verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bturn into\b/gi,
+    replacement: 'evolve into',
+    alternatives: ['transform into', 'become'],
+    reason: 'Natural transformation phrasal verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bcut down on\b/gi,
+    replacement: 'reduce',
+    alternatives: ['curb', 'trim'],
+    reason: 'Natural reduction phrasal verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\beveryone is happy\b/gi,
+    replacement: 'everyone remains satisfied',
+    alternatives: ['everyone is fulfilled', 'all parties are content'],
+    reason: 'Elevated human satisfaction idiom',
+    tone: 'all',
+    isEasyWord: true
+  },
+
+  // =========================================================================
   // --- High-Level Multi-Word Phrasal Idioms & Collocations ---
+  // =========================================================================
   {
     pattern: /\bthe importance of\b/gi,
     replacement: 'the significance of',
@@ -705,7 +1194,9 @@ export const PHRASE_RULES: PhraseRule[] = [
     tone: 'all'
   },
 
+  // =========================================================================
   // --- Corporate & Wordiness Reduction (Plain English & Business) ---
+  // =========================================================================
   {
     pattern: /\bin order to\b/gi,
     replacement: 'to',
@@ -747,13 +1238,6 @@ export const PHRASE_RULES: PhraseRule[] = [
     alternatives: ['is able to', 'possesses the capacity to'],
     reason: 'Replaced wordy circumlocution with active modal',
     tone: 'all'
-  },
-  {
-    pattern: /\bmake sure\b/gi,
-    replacement: 'ensure',
-    alternatives: ['verify', 'confirm'],
-    reason: 'Professional executive vocabulary',
-    tone: 'professional'
   },
   {
     pattern: /\bget in touch with\b/gi,
@@ -798,13 +1282,6 @@ export const PHRASE_RULES: PhraseRule[] = [
     tone: 'all'
   },
   {
-    pattern: /\ba lot of\b/gi,
-    replacement: 'numerous',
-    alternatives: ['substantial', 'multiple'],
-    reason: 'Replaced colloquial quantifier with formal descriptor',
-    tone: 'all'
-  },
-  {
     pattern: /\bprior to\b/gi,
     replacement: 'before',
     alternatives: ['preceding', 'ahead of'],
@@ -818,15 +1295,502 @@ export const PHRASE_RULES: PhraseRule[] = [
     reason: 'Direct temporal connector',
     tone: 'all'
   },
+
+  // =========================================================================
+  // --- Single Easy Words Elevation (Universal Natural Human Replacements) ---
+  // =========================================================================
   {
-    pattern: /\bbig difference\b/gi,
-    replacement: 'substantial discrepancy',
-    alternatives: ['marked divergence', 'significant variation'],
-    reason: 'Formal comparative terminology',
-    tone: 'academic'
+    pattern: /\beasy\b/gi,
+    replacement: 'straightforward',
+    alternatives: ['effortless', 'manageable'],
+    reason: 'Elevated common adjective to natural human vocabulary',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bhard\b/gi,
+    replacement: 'demanding',
+    alternatives: ['challenging', 'tough'],
+    reason: 'Elevated common adjective',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgood\b/gi,
+    replacement: 'effective',
+    alternatives: ['solid', 'valuable', 'beneficial'],
+    reason: 'Elevated common adjective to descriptive descriptor',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bbad\b/gi,
+    replacement: 'harmful',
+    alternatives: ['flawed', 'unfavorable'],
+    reason: 'Elevated common negative descriptor',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bbig\b/gi,
+    replacement: 'substantial',
+    alternatives: ['major', 'sizeable'],
+    reason: 'Elevated size descriptor',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bsmall\b/gi,
+    replacement: 'modest',
+    alternatives: ['minor', 'compact'],
+    reason: 'Elevated size descriptor',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bfast\b/gi,
+    replacement: 'rapid',
+    alternatives: ['swift', 'quick'],
+    reason: 'Elevated speed descriptor',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bslow\b/gi,
+    replacement: 'gradual',
+    alternatives: ['delayed'],
+    reason: 'Elevated speed descriptor',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bhelp\b/gi,
+    replacement: 'assist',
+    alternatives: ['support', 'empower'],
+    reason: 'Elevated action verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bhelps\b/gi,
+    replacement: 'assists',
+    alternatives: ['supports', 'empowers'],
+    reason: 'Elevated action verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bhelping\b/gi,
+    replacement: 'assisting',
+    alternatives: ['supporting', 'empowering'],
+    reason: 'Elevated action verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bhelped\b/gi,
+    replacement: 'assisted',
+    alternatives: ['supported', 'empowered'],
+    reason: 'Elevated action verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bmake\b/gi,
+    replacement: 'create',
+    alternatives: ['produce', 'craft'],
+    reason: 'Elevated generative verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bmakes\b/gi,
+    replacement: 'creates',
+    alternatives: ['produces', 'fosters'],
+    reason: 'Elevated generative verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bmaking\b/gi,
+    replacement: 'creating',
+    alternatives: ['producing', 'crafting'],
+    reason: 'Elevated generative verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bget\b/gi,
+    replacement: 'gain',
+    alternatives: ['obtain', 'receive'],
+    reason: 'Elevated acquisition verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgets\b/gi,
+    replacement: 'gains',
+    alternatives: ['obtains', 'picks up'],
+    reason: 'Elevated acquisition verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgetting\b/gi,
+    replacement: 'gaining',
+    alternatives: ['acquiring', 'gathering'],
+    reason: 'Elevated acquisition verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgive\b/gi,
+    replacement: 'provide',
+    alternatives: ['offer', 'deliver'],
+    reason: 'Elevated transmission verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgives\b/gi,
+    replacement: 'provides',
+    alternatives: ['offers', 'delivers'],
+    reason: 'Elevated transmission verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgiving\b/gi,
+    replacement: 'providing',
+    alternatives: ['offering', 'delivering'],
+    reason: 'Elevated transmission verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bgave\b/gi,
+    replacement: 'provided',
+    alternatives: ['offered', 'delivered'],
+    reason: 'Elevated transmission verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bshow\b/gi,
+    replacement: 'highlight',
+    alternatives: ['reveal', 'demonstrate'],
+    reason: 'Elevated evidential verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bshows\b/gi,
+    replacement: 'highlights',
+    alternatives: ['reveals', 'demonstrates'],
+    reason: 'Elevated evidential verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bshowing\b/gi,
+    replacement: 'highlighting',
+    alternatives: ['revealing', 'demonstrating'],
+    reason: 'Elevated evidential verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bshowed\b/gi,
+    replacement: 'highlighted',
+    alternatives: ['revealed', 'demonstrated'],
+    reason: 'Elevated evidential verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bneed\b/gi,
+    replacement: 'require',
+    alternatives: ['call for', 'demand'],
+    reason: 'Elevated requirement verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bneeds\b/gi,
+    replacement: 'requires',
+    alternatives: ['calls for', 'demands'],
+    reason: 'Elevated requirement verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bneeded\b/gi,
+    replacement: 'required',
+    alternatives: ['called for'],
+    reason: 'Elevated requirement verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bwant\b/gi,
+    replacement: 'seek',
+    alternatives: ['aim', 'strive'],
+    reason: 'Elevated desire verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bwants\b/gi,
+    replacement: 'seeks',
+    alternatives: ['aims', 'strives'],
+    reason: 'Elevated desire verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bwanted\b/gi,
+    replacement: 'sought',
+    alternatives: ['aimed', 'intended'],
+    reason: 'Elevated desire verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\btry\b/gi,
+    replacement: 'strive',
+    alternatives: ['attempt', 'work'],
+    reason: 'Elevated effort verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\btries\b/gi,
+    replacement: 'strives',
+    alternatives: ['attempts'],
+    reason: 'Elevated effort verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\btrying\b/gi,
+    replacement: 'striving',
+    alternatives: ['working'],
+    reason: 'Elevated effort verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\btried\b/gi,
+    replacement: 'attempted',
+    alternatives: ['strove'],
+    reason: 'Elevated effort verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bstart\b/gi,
+    replacement: 'begin',
+    alternatives: ['launch', 'kick off'],
+    reason: 'Elevated initiation verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bstarts\b/gi,
+    replacement: 'begins',
+    alternatives: ['launches'],
+    reason: 'Elevated initiation verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bstarted\b/gi,
+    replacement: 'began',
+    alternatives: ['launched'],
+    reason: 'Elevated initiation verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bstop\b/gi,
+    replacement: 'halt',
+    alternatives: ['pause', 'curb'],
+    reason: 'Elevated cessation verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bstops\b/gi,
+    replacement: 'halts',
+    alternatives: ['pauses', 'curbs'],
+    reason: 'Elevated cessation verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bstopped\b/gi,
+    replacement: 'halted',
+    alternatives: ['paused'],
+    reason: 'Elevated cessation verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bchange\b/gi,
+    replacement: 'transform',
+    alternatives: ['reshape', 'shift'],
+    reason: 'Elevated alteration verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bchanges\b/gi,
+    replacement: 'transforms',
+    alternatives: ['reshapes', 'shifts'],
+    reason: 'Elevated alteration verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bchanging\b/gi,
+    replacement: 'transforming',
+    alternatives: ['evolving'],
+    reason: 'Elevated alteration verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bchanged\b/gi,
+    replacement: 'transformed',
+    alternatives: ['evolved'],
+    reason: 'Elevated alteration verb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bvery\b/gi,
+    replacement: 'deeply',
+    alternatives: ['highly', 'remarkably', 'especially'],
+    reason: 'Elevated intensity adverb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\breally\b/gi,
+    replacement: 'genuinely',
+    alternatives: ['truly', 'decidedly'],
+    reason: 'Elevated authenticity adverb',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bsimple\b/gi,
+    replacement: 'straightforward',
+    alternatives: ['uncomplicated', 'direct'],
+    reason: 'Elevated clarity adjective',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bclear\b/gi,
+    replacement: 'evident',
+    alternatives: ['apparent', 'well-defined'],
+    reason: 'Elevated lucidity adjective',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bthing\b/gi,
+    replacement: 'aspect',
+    alternatives: ['factor', 'element'],
+    reason: 'Elevated vague noun',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bthings\b/gi,
+    replacement: 'aspects',
+    alternatives: ['factors', 'elements'],
+    reason: 'Elevated vague plural noun',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bway\b/gi,
+    replacement: 'approach',
+    alternatives: ['method', 'avenue'],
+    reason: 'Elevated methodology noun',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bways\b/gi,
+    replacement: 'approaches',
+    alternatives: ['methods', 'avenues'],
+    reason: 'Elevated methodology plural noun',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bproblem\b/gi,
+    replacement: 'challenge',
+    alternatives: ['hurdle', 'obstacle'],
+    reason: 'Elevated challenge noun',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bproblems\b/gi,
+    replacement: 'challenges',
+    alternatives: ['hurdles', 'obstacles'],
+    reason: 'Elevated challenges plural noun',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bjob\b/gi,
+    replacement: 'role',
+    alternatives: ['career', 'profession'],
+    reason: 'Elevated occupation noun',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bjobs\b/gi,
+    replacement: 'roles',
+    alternatives: ['careers', 'professions'],
+    reason: 'Elevated occupations plural noun',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bidea\b/gi,
+    replacement: 'concept',
+    alternatives: ['insight', 'notion'],
+    reason: 'Elevated thought noun',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bideas\b/gi,
+    replacement: 'concepts',
+    alternatives: ['insights', 'notions'],
+    reason: 'Elevated thoughts plural noun',
+    tone: 'all',
+    isEasyWord: true
+  },
+  {
+    pattern: /\bhappy\b/gi,
+    replacement: 'satisfied',
+    alternatives: ['fulfilled', 'content'],
+    reason: 'Elevated emotion adjective',
+    tone: 'all',
+    isEasyWord: true
   },
 
+  // =========================================================================
   // --- Technical & Engineering Tone Enhancements ---
+  // =========================================================================
   {
     pattern: /\bsetup\b/gi,
     replacement: 'configure',
@@ -861,36 +1825,6 @@ export const PHRASE_RULES: PhraseRule[] = [
     alternatives: ['remediate the issue', 'patch the vulnerability'],
     reason: 'Formal software defect tracking terminology',
     tone: 'technical'
-  },
-
-  // --- Academic & Scholarly Prose Enhancements ---
-  {
-    pattern: /\bshows that\b/gi,
-    replacement: 'demonstrates that',
-    alternatives: ['indicates that', 'illustrates that'],
-    reason: 'Academic evidential framing',
-    tone: 'academic'
-  },
-  {
-    pattern: /\bproves that\b/gi,
-    replacement: 'substantiates that',
-    alternatives: ['corroborates that', 'validates that'],
-    reason: 'Scholarly precision in argumentation',
-    tone: 'academic'
-  },
-  {
-    pattern: /\bmain idea\b/gi,
-    replacement: 'central thesis',
-    alternatives: ['core premise', 'primary argument'],
-    reason: 'Scholarly analytical vocabulary',
-    tone: 'academic'
-  },
-  {
-    pattern: /\bleads to\b/gi,
-    replacement: 'precipitates',
-    alternatives: ['engenders', 'results in'],
-    reason: 'Formal academic causality',
-    tone: 'academic'
   }
 ];
 
@@ -900,6 +1834,10 @@ export const REPHRASE_SAMPLES = {
     text: `The Importance of Technology in Our Daily Lives
 
 Technology has become an important part of our daily lives. We use it for education, communication, business, and entertainment. With the help of the internet, people can easily connect with others from different parts of the world. Students can attend online classes, learn new skills, and find useful information within seconds. Technology has also made businesses faster and more efficient by reducing manual work. However, excessive use of technology can waste time and affect our health. Therefore, we should use technology wisely and focus on the positive benefits it brings to our lives.`
+  },
+  casualText: {
+    name: 'Everyday Casual Text (Easy Words)',
+    text: `It is very easy to make a big mistake when you try to do hard things. People want to get good help so they can make changes fast. A lot of problems need simple ways to find good ideas. Working with others is a good way to get things done and make sure everyone is happy.`
   },
   businessEmail: {
     name: 'Client Email & Status Update',
@@ -963,7 +1901,7 @@ export function splitSentencesWithSuffix(src: string): { original: string; suffi
 
 /**
  * Rephrases a single sentence using syntactic patterns, clause restructuring,
- * phrase dictionary rules, and anti-AI humanization.
+ * non-overlapping interval replacements, and anti-AI humanization.
  */
 function rephraseSingleSentence(
   rawSentence: string,
@@ -1074,7 +2012,7 @@ function rephraseSingleSentence(
     };
   }
 
-  // 3. Apply phrase rules to sentence
+  // 3. Apply phrase rules to sentence using non-overlapping interval scheduling
   let transformed = applyPhraseRulesToText(trimmed, activeRules);
 
   // 4. Anti-AI Scrubber for natural/professional tones to avoid synthetic buzzwords
@@ -1103,14 +2041,71 @@ function rephraseSingleSentence(
 }
 
 /**
- * Applies phrase replacement rules in descending length order.
+ * Applies phrase replacement rules using mathematical non-overlapping interval scheduling.
+ * Guarantees that longer multi-word phrases match before single words and that
+ * newly inserted replacements are NEVER re-matched or corrupted by subsequent rules.
  */
 function applyPhraseRulesToText(text: string, rules: PhraseRule[]): string {
-  let result = text;
+  // 1. Collect all candidate matches with their original indices
+  const candidates: {
+    start: number;
+    end: number;
+    original: string;
+    rule: PhraseRule;
+    length: number;
+  }[] = [];
+
   for (const rule of rules) {
     const regex = new RegExp(rule.pattern.source, rule.pattern.flags);
-    result = result.replace(regex, (match) => matchCapitalization(match, rule.replacement));
+    let match: RegExpExecArray | null;
+    regex.lastIndex = 0;
+
+    while ((match = regex.exec(text)) !== null) {
+      candidates.push({
+        start: match.index,
+        end: match.index + match[0].length,
+        original: match[0],
+        rule,
+        length: match[0].length
+      });
+      regex.lastIndex = match.index + match[0].length;
+    }
   }
+
+  // 2. Sort candidates by length descending, then by tone-specificity precedence
+  candidates.sort((a, b) => {
+    if (b.length !== a.length) return b.length - a.length;
+    const aTonePref = a.rule.tone !== 'all' ? 1 : 0;
+    const bTonePref = b.rule.tone !== 'all' ? 1 : 0;
+    if (bTonePref !== aTonePref) return bTonePref - aTonePref;
+    return a.start - b.start;
+  });
+
+  // 3. Select non-overlapping intervals (longest and tone-specific first)
+  const selected: typeof candidates = [];
+  for (const cand of candidates) {
+    const overlaps = selected.some(s => cand.start < s.end && cand.end > s.start);
+    if (!overlaps) {
+      selected.push(cand);
+    }
+  }
+
+  // 4. Sort selected intervals by start index descending to splice from right to left
+  selected.sort((a, b) => b.start - a.start);
+
+  // 5. Splice replacements into text
+  let result = text;
+  for (const item of selected) {
+    const repl = matchCapitalization(item.original, item.rule.replacement);
+    result = result.slice(0, item.start) + repl + result.slice(item.end);
+  }
+
+  // 6. Indefinite article smoothing (e.g. "a effective" -> "an effective")
+  result = result.replace(/\ba ([aeiouAEIOU][a-z]+)\b/g, (m, word) => {
+    if (/^(user|unique|useful|universal|uniform)/i.test(word)) return `a ${word}`;
+    return `an ${word}`;
+  });
+
   return result;
 }
 
@@ -1135,7 +2130,13 @@ function scrubSyntheticBuzzwords(text: string, tone: RephraseTone): string {
     [/\btangible advantages\b/gi, tone === 'natural' ? 'real benefits' : 'genuine benefits'],
     [/\ba wide variety of\b/gi, 'various'],
     [/\bin order to\b/gi, 'to'],
-    [/\bdelve into\b/gi, 'examine']
+    [/\bdelve into\b/gi, 'examine'],
+    [/\ba tapestry of\b/gi, 'a rich mix of'],
+    [/\btestament to\b/gi, 'clear evidence of'],
+    [/\bbeacon of\b/gi, 'symbol of'],
+    [/\bplethora of\b/gi, 'wealth of'],
+    [/\bin today's fast-paced world\b/gi, 'in modern life'],
+    [/\bit is important to note that\b/gi, 'notably']
   ];
 
   for (const [pattern, repl] of antiAiMap) {
@@ -1219,6 +2220,7 @@ export function rephraseText(
       totalSentences: 0,
       sentencesRephrased: 0,
       rephrasePercentage: 0,
+      easyWordsElevatedCount: 0,
       replacements: [],
       readingTimeSeconds: 0,
       wordsReduced: 0,
@@ -1233,9 +2235,6 @@ export function rephraseText(
   const activeRules = PHRASE_RULES.filter(
     rule => rule.tone === 'all' || rule.tone === tone
   );
-
-  // Sort by pattern source length descending
-  activeRules.sort((a, b) => b.pattern.source.length - a.pattern.source.length);
 
   const sentences: SentenceItem[] = [];
   const replacements: ReplacementItem[] = [];
@@ -1261,29 +2260,62 @@ export function rephraseText(
   // Assemble full rephrased text with preserved paragraph breaks and suffixes
   const rephrasedText = sentences.map(s => s.rephrased + s.suffix).join('');
 
-  // Track phrase-level replacements for detailed inspector table
+  // Collect non-overlapping interval replacements for the inspector table
+  const allCandidates: {
+    start: number;
+    end: number;
+    original: string;
+    rule: PhraseRule;
+    length: number;
+  }[] = [];
+
   for (const rule of activeRules) {
     const regex = new RegExp(rule.pattern.source, rule.pattern.flags);
     let match: RegExpExecArray | null;
     regex.lastIndex = 0;
 
     while ((match = regex.exec(source)) !== null) {
-      const matchText = match[0];
-      const matchIndex = match.index;
-      const replacementText = matchCapitalization(matchText, rule.replacement);
-
-      replacements.push({
-        id: `rep-${++replId}`,
-        original: matchText,
-        replacement: replacementText,
-        alternatives: (rule.alternatives || []).map(alt => matchCapitalization(matchText, alt)),
-        startIndex: matchIndex,
-        endIndex: matchIndex + matchText.length,
-        reason: rule.reason
+      allCandidates.push({
+        start: match.index,
+        end: match.index + match[0].length,
+        original: match[0],
+        rule,
+        length: match[0].length
       });
-
-      regex.lastIndex = matchIndex + matchText.length;
+      regex.lastIndex = match.index + match[0].length;
     }
+  }
+
+  allCandidates.sort((a, b) => {
+    if (b.length !== a.length) return b.length - a.length;
+    const aTonePref = a.rule.tone !== 'all' ? 1 : 0;
+    const bTonePref = b.rule.tone !== 'all' ? 1 : 0;
+    if (bTonePref !== aTonePref) return bTonePref - aTonePref;
+    return a.start - b.start;
+  });
+
+  const selectedMatches: typeof allCandidates = [];
+  for (const cand of allCandidates) {
+    const overlaps = selectedMatches.some(s => cand.start < s.end && cand.end > s.start);
+    if (!overlaps) {
+      selectedMatches.push(cand);
+    }
+  }
+
+  selectedMatches.sort((a, b) => a.start - b.start);
+
+  for (const item of selectedMatches) {
+    const replacementText = matchCapitalization(item.original, item.rule.replacement);
+    replacements.push({
+      id: `rep-${++replId}`,
+      original: item.original,
+      replacement: replacementText,
+      alternatives: (item.rule.alternatives || []).map(alt => matchCapitalization(item.original, alt)),
+      startIndex: item.start,
+      endIndex: item.end,
+      reason: item.rule.reason,
+      isEasyWord: Boolean(item.rule.isEasyWord)
+    });
   }
 
   const rephrasedWords = countWords(rephrasedText);
@@ -1294,6 +2326,8 @@ export function rephraseText(
     ? Math.round((sentencesRephrasedCount / sentences.length) * 100)
     : 0;
 
+  const easyWordsElevatedCount = replacements.filter(r => r.isEasyWord).length;
+
   return {
     rephrasedText,
     originalText: source,
@@ -1303,6 +2337,7 @@ export function rephraseText(
     totalSentences: sentences.length,
     sentencesRephrased: sentencesRephrasedCount,
     rephrasePercentage,
+    easyWordsElevatedCount,
     replacements,
     readingTimeSeconds,
     wordsReduced,
@@ -1365,7 +2400,7 @@ function matchCapitalization(original: string, replacement: string): string {
     return replacement.toUpperCase();
   }
 
-  // Title case / Sentence case: "In order to" -> "To"
+  // Title case / Sentence case: "In order to" -> "To" / "People" -> "Individuals"
   if (original[0] === original[0].toUpperCase()) {
     return replacement.charAt(0).toUpperCase() + replacement.slice(1);
   }
