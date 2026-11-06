@@ -71,10 +71,10 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'How Technology Shapes Our Daily Life',
+            primary: 'How Tech Shapes the Way We Live Every Day',
             alternatives: [
-              'Why We Rely on Technology Every Day',
-              'How We Use Technology in Daily Life',
+              'What Modern Tech Does to Our Daily Habits',
+              'Living in a Screen-Filled World',
               'Why Technology Matters in Everyday Life'
             ],
             strategy: 'Simple Conversational Title'
@@ -129,13 +129,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'Most of us rely on technology every single day.',
+            primary: 'It is pretty much impossible to get through an ordinary day now without touching a phone or staring at a screen.',
             alternatives: [
-              'Technology is now a big part of how we live our lives.',
-              'It is hard to imagine a normal day without our devices.',
-              'Technology is part of almost everything we do today.'
+              'Almost all of us reach for a device within minutes of opening our eyes each morning.',
+              'Technology has worked its way into nearly everything we do from morning until night.',
+              'Our daily routines are tied up with digital devices whether we realize it or not.'
             ],
-            strategy: 'Simple Direct Human Statement'
+            strategy: 'Vivid Human Observation'
           };
         case 'concise':
           return {
@@ -187,13 +187,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'We use our phones and computers to study, talk to friends, run businesses, and have fun.',
+            primary: 'We grab our devices the second we wake up to check texts, do school assignments, knock out our jobs, or just unwind with a video.',
             alternatives: [
-              'We use it for school, work, keeping in touch with people, and relaxing.',
-              'It helps us learn, do our jobs, chat with others, and pass the time.',
-              'From studying and working to chatting and relaxing, we use digital tools for all of it.'
+              'We use phones and laptops to do homework, chat with friends, earn a living, and pass the time.',
+              'From catching up on group chats and studying to running businesses and watching clips, tech is in the middle of it all.',
+              'It handles our schoolwork, keeps us in touch with family, powers our jobs, and gives us something fun to do.'
             ],
-            strategy: 'Concrete Everyday Human Actions'
+            strategy: 'Authentic Everyday Activity Sequence'
           };
         case 'concise':
           return {
@@ -245,13 +245,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'The internet lets anyone talk to family and friends across the world without any trouble.',
+            primary: 'Thanks to the web, shooting a message to someone living halfway across the planet feels just like talking to a friend down the street.',
             alternatives: [
-              'Thanks to the internet, we can reach people on the other side of the world in seconds.',
-              'Online tools make it simple to stay in touch with anyone, no matter where they live.',
-              'It takes only a few clicks to reach people living anywhere in the world.'
+              'Online tools make it effortless to jump on a call with someone on the other side of the globe in seconds.',
+              'You can stay in close touch with friends and relatives anywhere in the world with just a couple of taps.',
+              'The internet shrunk the world so much that talking across oceans takes less than a second.'
             ],
-            strategy: 'Conversational Global Connectivity'
+            strategy: 'Colloquial Global Connection Metaphor'
           };
         case 'concise':
           return {
@@ -303,13 +303,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'Students can take classes from home, pick up new skills, and look up facts in just a few seconds.',
+            primary: 'Students don’t even have to leave their bedrooms to sit through lectures, pick up coding, or look up answers in a couple of clicks.',
             alternatives: [
+              'Anyone can jump into an online workshop, teach themselves a valuable trade, and pull up answers in seconds flat.',
               'Learners can join remote classes, pick up practical skills, and look up information in seconds.',
-              'Anyone can learn new things, take online lessons, and find what they need right away.',
-              'Students can take online classes, pick up practical skills, and look up answers in seconds.'
+              'You can learn almost anything from home today without spending a dime or leaving your desk.'
             ],
-            strategy: 'Simple Human Educational Phrasing'
+            strategy: 'Concrete Human Learning Examples'
           };
         case 'concise':
           return {
@@ -361,13 +361,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'It also helps companies get work done a lot quicker with fewer hands-on chores.',
+            primary: 'Companies run a whole lot smoother today because computers take care of all the repetitive paperwork and boring chores.',
             alternatives: [
-              'Businesses can run much faster today because machines handle the repetitive work.',
-              'Companies save a lot of time by cutting out boring, repetitive hand tasks.',
-              'Offices and shops run much faster now that computers handle most of the paperwork.'
+              'Businesses save countless hours each week by letting software handle the tedious manual drudgery.',
+              'Offices and shops move ten times faster now that automated tools handle repetitive data entry.',
+              'Work gets done much faster when software handles the routine tasks that used to eat up whole afternoons.'
             ],
-            strategy: 'Direct Plain-English Business Impact'
+            strategy: 'Relatable Workplace Idiom'
           };
         case 'concise':
           return {
@@ -419,13 +419,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'Still, spending too much time staring at screens can eat away our day and hurt our health.',
+            primary: 'On the other hand, zoning out in front of a screen for five hours straight eats up your day, drains your energy, and wrecks your sleep.',
             alternatives: [
-              'At the same time, being glued to screens all day wastes time and makes us feel tired.',
-              'Too much screen time can easily eat up your day and lead to health problems.',
-              'Sitting in front of a screen for hours wastes valuable time and hurts our physical health.'
+              'Still, getting sucked into mindless scrolling drains hours of your day and leaves your eyes burning.',
+              'Too much screen time can quietly hijack your day and take a real toll on your physical health.',
+              'Being glued to devices all day burns out your focus and messes with your body over time.'
             ],
-            strategy: 'Everyday Idiomatic Screen-Time Warning'
+            strategy: 'Vivid Idiomatic Screen Fatigue Warning'
           };
         case 'concise':
           return {
@@ -477,13 +477,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'That is why it helps to use technology in a smart way, so we get the good parts without the bad.',
+            primary: 'That is why you have to set some boundaries—put technology to work for the things that really matter without letting it run your whole life.',
             alternatives: [
-              'So we should use our devices thoughtfully and make sure they help us rather than hurt us.',
-              'The best approach is to use technology in moderation and focus on what truly helps us.',
-              'Because of this, we should use our devices in moderation and enjoy the benefits they bring.'
+              'The smartest move is to use digital tools when they help, but know when to put the phone down and step away.',
+              'So the key is balance: make technology serve your goals rather than letting it control your attention.',
+              'Because of that, we ought to use tech with intention and keep our focus on what genuinely helps us live better.'
             ],
-            strategy: 'Conversational Balanced Takeaway'
+            strategy: 'Pragmatic Human Boundary Conclusion'
           };
         case 'concise':
           return {
@@ -535,13 +535,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'Why Hard Work Matters in Life',
+            primary: 'Why You Need Real Effort to Get Anywhere in Life',
             alternatives: [
-              'Why Putting in Hard Work Matters',
-              'How Hard Work Shapes Our Lives',
-              'The Real Value of Hard Work'
+              'What Hard Work Actually Means in Everyday Life',
+              'Why Nothing Works Without Real Effort',
+              'Hard Work and What It Really Takes'
             ],
-            strategy: 'Simple Conversational Title'
+            strategy: 'Human Grounded Title'
           };
         case 'concise':
           return {
@@ -591,13 +591,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'Putting in real effort is one of the main keys to success.',
+            primary: 'Success rarely happens by pure accident.',
             alternatives: [
-              'Working hard is one of the biggest factors in succeeding.',
-              'Hard work is at the heart of almost every success story.',
-              'There is no doubt that working hard is essential for success.'
+              'Nobody ever got anywhere worth going by just sitting around waiting for luck.',
+              'Real success never comes down to just getting lucky.',
+              'If you want to achieve anything real, you have to put in honest sweat.'
             ],
-            strategy: 'Simple Human Action Statement'
+            strategy: 'High-Burstiness Conversational Hook'
           };
         case 'concise':
           return {
@@ -647,13 +647,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'Every person who succeeds has dealt with tough challenges before reaching their goals.',
+            primary: 'If you take a close look at anyone who made something of their life, they had to grind through years of messy failures that nobody talks about.',
             alternatives: [
-              'Anyone who reaches their goals has had to work through hardships along the way.',
-              'Success never comes without running into hurdles and setbacks first.',
-              'Every successful person had to push past difficulties before making it.'
+              'Anyone you look up to today spent years running into dead ends before things started working out.',
+              'Success never comes clean—people who make it had to battle through plenty of rough patches first.',
+              'Every single person who ever reached a big goal had to swallow setbacks along the way.'
             ],
-            strategy: 'Conversational Human Experience'
+            strategy: 'Authentic Human Narrative'
           };
         case 'concise':
           return {
@@ -703,13 +703,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'You cannot achieve anything worthwhile without patience, dedication, and steady effort.',
+            primary: 'You just won’t build anything that lasts unless you show up and do the work on the days you want to quit.',
             alternatives: [
-              'Real success takes steady effort, patience, and true dedication.',
-              'Without patience and daily effort, reaching big goals is impossible.',
-              'It takes patience, focus, and ongoing effort to accomplish anything meaningful.'
+              'Without patience and refusing to give up, big dreams stay nothing more than wishful thinking.',
+              'Nothing worthwhile gets built overnight; it takes sticking with the grind day after day.',
+              'You cannot get far in life without patience, thick skin, and steady follow-through.'
             ],
-            strategy: 'Direct Natural Human Cadence'
+            strategy: 'Direct Plainspoken Principle'
           };
         case 'concise':
           return {
@@ -759,13 +759,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'Students have to study hard to earn good grades, and professionals must sharpen their skills to grow their careers.',
+            primary: 'Kids in school have to pull late nights with their books to bring home passing marks, just like anyone with a job has to keep picking up new tools so they don’t fall behind.',
             alternatives: [
-              'Students need hard work to do well in school, while working adults have to keep learning to move ahead.',
-              'Whether it is students studying for good grades or professionals building careers, hard work is required.',
-              'To get good grades, students must put in the work, just as professionals must hone their skills to move up.'
+              'Students have to grind through study sessions to earn good marks, and adults on the job have to keep learning if they want to move up.',
+              'Whether it is a student staying up late to ace an exam or a worker learning new software to keep their edge, effort is non-negotiable.',
+              'Good grades take serious study time, just like a solid career takes constantly picking up new skills.'
             ],
-            strategy: 'Simple Human Parallel Construction'
+            strategy: 'Grounded Real-Life Human Examples'
           };
         case 'concise':
           return {
@@ -815,13 +815,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'Sometimes people fail even when they give it their all, but failure should never keep them from trying again.',
+            primary: 'Plenty of folks pour their whole heart into a project and still fall flat on their face. It stings, but throwing in the towel right then and there solves nothing.',
             alternatives: [
-              'You can try your hardest and still fail, but that should never stop you from getting back up.',
-              'Even when people put in their best effort, things can go wrong, but we should never stop trying.',
-              'Failing despite our best effort happens, but it should never stop us from taking another shot.'
+              'You can give something everything you have and still mess up, but walking away on the spot never fixed a thing.',
+              'Even when people put in their best work, things can still go sideways. The secret is never letting a bad break stop you from having another go.',
+              'Falling short hurts when you gave it your all, but quitting won’t get you where you want to go.'
             ],
-            strategy: 'Conversational Resilience Idiom'
+            strategy: 'Punchy Conversational Resilience'
           };
         case 'concise':
           return {
@@ -871,13 +871,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'Instead, it should teach valuable lessons and make us even stronger.',
+            primary: 'A bad loss just shows you where you messed up so you can fix it and come back sharper tomorrow.',
             alternatives: [
-              'Instead, mistakes should teach us what works and build our strength.',
-              'Instead, setbacks should be treated as learning moments that make us stronger.',
-              'Rather than giving up, we should learn from failure and come back stronger.'
+              'Mistakes teach you what doesn’t work, which only makes you wiser the next time you step up.',
+              'Instead of letting failure break you, treat it as honest feedback that sharpens your game.',
+              'Getting knocked down is how you learn what to avoid so you hit back harder on the next try.'
             ],
-            strategy: 'Direct Natural Takeaway'
+            strategy: 'Colloquial Growth Mindset'
           };
         case 'concise':
           return {
@@ -927,13 +927,13 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
         case 'simple':
         case 'natural':
           return {
-            primary: 'Hard work not only helps us reach our dreams, but it also builds confidence, discipline, and a positive outlook on life.',
+            primary: 'Grinding it out does a lot more than help you hit your goals—it gives you real backbone, teaches you to trust yourself, and keeps your chin up through the hard stuff.',
             alternatives: [
-              'Putting in the work helps us reach our goals while building self-control and confidence.',
-              'Working hard does more than help us achieve dreams—it shapes our character and confidence.',
-              'Hard work leads to our dreams, but it also teaches us discipline and gives us a positive attitude.'
+              'Working hard gets you what you want, but more importantly, it makes you someone who doesn’t fold under pressure.',
+              'Putting in the sweat pays off with results, but it also gives you genuine self-respect and the grit to handle whatever life throws at you.',
+              'Doing the work leads to your dreams, while shaping your character, self-control, and outlook along the way.'
             ],
-            strategy: 'Balanced Simple Human Conclusion'
+            strategy: 'Idiomatic Human Resolution'
           };
         case 'concise':
           return {

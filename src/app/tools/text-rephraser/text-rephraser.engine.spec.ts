@@ -60,14 +60,14 @@ describe('TextRephraserEngine', () => {
     expect(res.sentences.every(s => s.isRephrased)).toBe(true);
 
     // Simple & Human Anti-AI assertions
-    expect(res.rephrasedText).toContain('How Technology Shapes Our Daily Life');
-    expect(res.rephrasedText).toContain('Most of us rely on technology every single day.');
-    expect(res.rephrasedText).toContain('phones and computers to study, talk to friends, run businesses, and have fun');
-    expect(res.rephrasedText).toContain('The internet lets anyone talk to family and friends across the world without any trouble.');
-    expect(res.rephrasedText).toContain('Students can take classes from home, pick up new skills, and look up facts in just a few seconds.');
-    expect(res.rephrasedText).toContain('get work done a lot quicker with fewer hands-on chores');
-    expect(res.rephrasedText).toContain('staring at screens can eat away our day and hurt our health');
-    expect(res.rephrasedText).toContain('use technology in a smart way, so we get the good parts without the bad');
+    expect(res.rephrasedText).toContain('How Tech Shapes the Way We Live Every Day');
+    expect(res.rephrasedText).toContain('impossible to get through an ordinary day now without touching a phone');
+    expect(res.rephrasedText).toContain('check texts, do school assignments, knock out our jobs, or just unwind with a video');
+    expect(res.rephrasedText).toContain('shooting a message to someone living halfway across the planet feels just like talking to a friend down the street');
+    expect(res.rephrasedText).toContain('Students don’t even have to leave their bedrooms to sit through lectures');
+    expect(res.rephrasedText).toContain('take care of all the repetitive paperwork and boring chores');
+    expect(res.rephrasedText).toContain('zoning out in front of a screen for five hours straight eats up your day, drains your energy, and wrecks your sleep');
+    expect(res.rephrasedText).toContain('set some boundaries—put technology to work for the things that really matter without letting it run your whole life');
 
     // Asserts zero synthetic AI detector triggers
     expect(res.rephrasedText).not.toContain('woven into');
@@ -134,14 +134,14 @@ describe('TextRephraserEngine', () => {
     expect(res.sentences.every(s => s.isRephrased)).toBe(true);
 
     // Simple & Human phrasing assertions
-    expect(res.rephrasedText).toContain('Why Hard Work Matters in Life');
-    expect(res.rephrasedText).toContain('Putting in real effort is one of the main keys to success.');
-    expect(res.rephrasedText).toContain('Every person who succeeds has dealt with tough challenges before reaching their goals.');
-    expect(res.rephrasedText).toContain('You cannot achieve anything worthwhile without patience, dedication, and steady effort.');
-    expect(res.rephrasedText).toContain('Students have to study hard to earn good grades, and professionals must sharpen their skills to grow their careers.');
-    expect(res.rephrasedText).toContain('Sometimes people fail even when they give it their all, but failure should never keep them from trying again.');
-    expect(res.rephrasedText).toContain('Instead, it should teach valuable lessons and make us even stronger.');
-    expect(res.rephrasedText).toContain('Hard work not only helps us reach our dreams, but it also builds confidence, discipline, and a positive outlook on life.');
+    expect(res.rephrasedText).toContain('Why You Need Real Effort to Get Anywhere in Life');
+    expect(res.rephrasedText).toContain('Success rarely happens by pure accident.');
+    expect(res.rephrasedText).toContain('grind through years of messy failures that nobody talks about');
+    expect(res.rephrasedText).toContain('You just won’t build anything that lasts unless you show up and do the work on the days you want to quit.');
+    expect(res.rephrasedText).toContain('pull late nights with their books to bring home passing marks');
+    expect(res.rephrasedText).toContain('fall flat on their face. It stings, but throwing in the towel right then and there solves nothing');
+    expect(res.rephrasedText).toContain('shows you where you messed up so you can fix it and come back sharper tomorrow');
+    expect(res.rephrasedText).toContain('Grinding it out does a lot more than help you hit your goals—it gives you real backbone, teaches you to trust yourself, and keeps your chin up through the hard stuff.');
 
     // Asserts zero tough vocabulary words or AI detector triggers
     expect(res.rephrasedText).not.toContain('Diligent effort');
@@ -153,6 +153,8 @@ describe('TextRephraserEngine', () => {
     expect(res.rephrasedText).not.toContain('create them stronger');
     expect(res.rephrasedText).not.toContain('assists us');
     expect(res.rephrasedText).not.toContain('The significance of');
+    expect(res.rephrasedText).not.toContain('keys to success');
+    expect(res.rephrasedText).not.toContain('patience, dedication, and continuous effort');
   });
 
   it('should naturally elevate easy and simplistic words when professional tone is selected', () => {
