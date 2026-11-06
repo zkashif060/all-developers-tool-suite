@@ -85,18 +85,18 @@ import {
             <div class="flex flex-wrap items-center gap-1 p-0.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800">
               <button
                 type="button"
-                (click)="selectTone('natural')"
+                (click)="selectTone('simple')"
                 class="px-3 py-1.5 rounded-md font-semibold transition-colors flex items-center gap-1.5"
-                [class.bg-white]="tone() === 'natural'"
-                [class.dark:bg-slate-900]="tone() === 'natural'"
-                [class.text-emerald-600]="tone() === 'natural'"
-                [class.dark:text-emerald-400]="tone() === 'natural'"
-                [class.shadow-xs]="tone() === 'natural'"
-                [class.text-slate-600]="tone() !== 'natural'"
-                [class.dark:text-slate-400]="tone() !== 'natural'"
+                [class.bg-white]="tone() === 'simple' || tone() === 'natural'"
+                [class.dark:bg-slate-900]="tone() === 'simple' || tone() === 'natural'"
+                [class.text-emerald-600]="tone() === 'simple' || tone() === 'natural'"
+                [class.dark:text-emerald-400]="tone() === 'simple' || tone() === 'natural'"
+                [class.shadow-xs]="tone() === 'simple' || tone() === 'natural'"
+                [class.text-slate-600]="tone() !== 'simple' && tone() !== 'natural'"
+                [class.dark:text-slate-400]="tone() !== 'simple' && tone() !== 'natural'"
               >
                 <app-icon name="user-check" [size]="13" />
-                Human & Natural
+                Simple & Human (Anti-AI)
               </button>
               <button
                 type="button"
@@ -357,7 +357,7 @@ export class TextRephraserComponent implements OnInit {
   );
 
   public readonly inputText = signal<string>(REPHRASE_SAMPLES['technologyEssay'].text);
-  public readonly tone = signal<RephraseTone>('natural');
+  public readonly tone = signal<RephraseTone>('simple');
 
   // Holds manual swaps made in Sentence Studio
   public readonly manualResult = signal<RephraseResult | null>(null);
@@ -395,7 +395,7 @@ export class TextRephraserComponent implements OnInit {
   public loadSample(key: 'technologyEssay' | 'casualText' | 'businessEmail' | 'technicalSpec' | 'academicReport'): void {
     this.manualResult.set(null);
     this.inputText.set(REPHRASE_SAMPLES[key].text);
-    if (key === 'technologyEssay' || key === 'casualText') this.tone.set('natural');
+    if (key === 'technologyEssay' || key === 'casualText') this.tone.set('simple');
     if (key === 'businessEmail') this.tone.set('professional');
     if (key === 'technicalSpec') this.tone.set('technical');
     if (key === 'academicReport') this.tone.set('academic');

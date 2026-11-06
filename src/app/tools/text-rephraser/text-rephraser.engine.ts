@@ -1,4 +1,4 @@
-export type RephraseTone = 'natural' | 'professional' | 'concise' | 'academic' | 'technical';
+export type RephraseTone = 'simple' | 'natural' | 'professional' | 'concise' | 'academic' | 'technical';
 
 export interface PhraseRule {
   pattern: RegExp;
@@ -68,15 +68,16 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
     matcher: (s) => /importance of technology in (our )?daily lives/i.test(s),
     transform: (s, tone) => {
       switch (tone) {
+        case 'simple':
         case 'natural':
           return {
-            primary: 'Why Technology Matters in Our Everyday Lives',
+            primary: 'How Technology Shapes Our Daily Life',
             alternatives: [
-              'How Modern Technology Shapes Everyday Life',
-              'The Growing Influence of Technology on Daily Routines',
-              'Why Daily Living Now Centers on Modern Technology'
+              'Why We Rely on Technology Every Day',
+              'How We Use Technology in Daily Life',
+              'Why Technology Matters in Everyday Life'
             ],
-            strategy: 'Conversational Expository Title'
+            strategy: 'Simple Conversational Title'
           };
         case 'concise':
           return {
@@ -125,15 +126,16 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
     matcher: (s) => /technology has become an important part of (our )?daily lives/i.test(s),
     transform: (s, tone) => {
       switch (tone) {
+        case 'simple':
         case 'natural':
           return {
-            primary: 'Today, technology is woven into almost every aspect of our daily routines.',
+            primary: 'Most of us rely on technology every single day.',
             alternatives: [
-              'Our everyday routines now revolve heavily around technology.',
-              'Modern life depends on technology in virtually every area.',
-              'Technology has become deeply integrated into everyday living.'
+              'Technology is now a big part of how we live our lives.',
+              'It is hard to imagine a normal day without our devices.',
+              'Technology is part of almost everything we do today.'
             ],
-            strategy: 'Human Natural Phrasing'
+            strategy: 'Simple Direct Human Statement'
           };
         case 'concise':
           return {
@@ -182,15 +184,16 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
     matcher: (s) => /we use it for (education|learning).*communication.*business.*entertainment/i.test(s),
     transform: (s, tone) => {
       switch (tone) {
+        case 'simple':
         case 'natural':
           return {
-            primary: 'We rely on it for school, staying in touch, work, and entertainment.',
+            primary: 'We use our phones and computers to study, talk to friends, run businesses, and have fun.',
             alternatives: [
-              'From learning and staying connected to working and relaxing, it touches everything.',
-              'It serves as our primary medium for learning, business, staying in touch, and leisure.',
-              'Our daily activities—from learning and working to socializing and entertainment—depend on it.'
+              'We use it for school, work, keeping in touch with people, and relaxing.',
+              'It helps us learn, do our jobs, chat with others, and pass the time.',
+              'From studying and working to chatting and relaxing, we use digital tools for all of it.'
             ],
-            strategy: 'Natural Active Cadence'
+            strategy: 'Concrete Everyday Human Actions'
           };
         case 'concise':
           return {
@@ -239,15 +242,16 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
     matcher: (s) => /with the help of the internet.*connect.*different parts of the world/i.test(s),
     transform: (s, tone) => {
       switch (tone) {
+        case 'simple':
         case 'natural':
           return {
-            primary: 'Thanks to the internet, staying in touch with people anywhere across the world is effortless.',
+            primary: 'The internet lets anyone talk to family and friends across the world without any trouble.',
             alternatives: [
-              'Reaching friends, colleagues, and family anywhere in the world takes just seconds online.',
-              'Through global connectivity, anyone can easily communicate across international boundaries.',
-              'The internet has dissolved geographical boundaries, allowing instant global connection.'
+              'Thanks to the internet, we can reach people on the other side of the world in seconds.',
+              'Online tools make it simple to stay in touch with anyone, no matter where they live.',
+              'It takes only a few clicks to reach people living anywhere in the world.'
             ],
-            strategy: 'Organic Conversational Inversion'
+            strategy: 'Conversational Global Connectivity'
           };
         case 'concise':
           return {
@@ -296,15 +300,16 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
     matcher: (s) => /students can attend online classes.*learn new skills.*find.*information within seconds/i.test(s),
     transform: (s, tone) => {
       switch (tone) {
+        case 'simple':
         case 'natural':
           return {
-            primary: 'Learners can join remote classes, pick up practical skills, and look up information in seconds.',
+            primary: 'Students can take classes from home, pick up new skills, and look up facts in just a few seconds.',
             alternatives: [
-              'Anyone can take classes online, master fresh skills, and discover answers almost immediately.',
-              'From attending virtual lectures to learning practical abilities, knowledge is available in seconds.',
-              'Students enjoy immediate access to remote learning, skill development, and comprehensive research.'
+              'Learners can join remote classes, pick up practical skills, and look up information in seconds.',
+              'Anyone can learn new things, take online lessons, and find what they need right away.',
+              'Students can take online classes, pick up practical skills, and look up answers in seconds.'
             ],
-            strategy: 'Human Natural Parallelism'
+            strategy: 'Simple Human Educational Phrasing'
           };
         case 'concise':
           return {
@@ -353,15 +358,16 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
     matcher: (s) => /technology has also made businesses faster and more efficient by reducing manual work/i.test(s),
     transform: (s, tone) => {
       switch (tone) {
+        case 'simple':
         case 'natural':
           return {
-            primary: 'Companies have also grown faster and smoother by cutting down on repetitive manual tasks.',
+            primary: 'It also helps companies get work done a lot quicker with fewer hands-on chores.',
             alternatives: [
-              'Automation also helps businesses move much faster by eliminating tedious routine work.',
-              'Organizations operate far more productively today by automating time-consuming manual processes.',
-              'Modern tools have greatly accelerated commerce by replacing manual effort with digital workflows.'
+              'Businesses can run much faster today because machines handle the repetitive work.',
+              'Companies save a lot of time by cutting out boring, repetitive hand tasks.',
+              'Offices and shops run much faster now that computers handle most of the paperwork.'
             ],
-            strategy: 'Natural Idiomatic Workflow'
+            strategy: 'Direct Plain-English Business Impact'
           };
         case 'concise':
           return {
@@ -410,15 +416,16 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
     matcher: (s) => /excessive use of technology can waste time and affect our health/i.test(s),
     transform: (s, tone) => {
       switch (tone) {
+        case 'simple':
         case 'natural':
           return {
-            primary: 'Still, spending too much time glued to screens can drain hours and hurt our well-being.',
+            primary: 'Still, spending too much time staring at screens can eat away our day and hurt our health.',
             alternatives: [
-              'On the other hand, spending too many hours on devices wastes valuable time and takes a toll on health.',
-              'Nevertheless, excessive screen exposure can erode focus and negatively impact physical wellness.',
-              'Spending too much time with technology can easily eat into the day and strain physical health.'
+              'At the same time, being glued to screens all day wastes time and makes us feel tired.',
+              'Too much screen time can easily eat up your day and lead to health problems.',
+              'Sitting in front of a screen for hours wastes valuable time and hurts our physical health.'
             ],
-            strategy: 'Human Health & Screen-Time Idiom'
+            strategy: 'Everyday Idiomatic Screen-Time Warning'
           };
         case 'concise':
           return {
@@ -467,15 +474,16 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
     matcher: (s) => /we should use technology wisely and focus on the positive benefits/i.test(s),
     transform: (s, tone) => {
       switch (tone) {
+        case 'simple':
         case 'natural':
           return {
-            primary: 'That is why we need to use technology with care and focus on the real benefits it brings to our lives.',
+            primary: 'That is why it helps to use technology in a smart way, so we get the good parts without the bad.',
             alternatives: [
-              'Striking a healthy balance helps us make the most of its upsides without letting it take over.',
-              'By setting healthy boundaries, we can enjoy the many advantages of technology while avoiding its pitfalls.',
-              'Because of this, using technology intentionally ensures we reap its greatest rewards.'
+              'So we should use our devices thoughtfully and make sure they help us rather than hurt us.',
+              'The best approach is to use technology in moderation and focus on what truly helps us.',
+              'Because of this, we should use our devices in moderation and enjoy the benefits they bring.'
             ],
-            strategy: 'Human Balanced Resolution'
+            strategy: 'Conversational Balanced Takeaway'
           };
         case 'concise':
           return {
@@ -1939,7 +1947,7 @@ function rephraseSingleSentence(
     let primaryOpener = 'At the same time, ';
     let altOpeners = ['Still, ', 'On the other hand, ', 'Nevertheless, '];
 
-    if (tone === 'natural') {
+    if (tone === 'simple' || tone === 'natural') {
       primaryOpener = 'Still, ';
       altOpeners = ['At the same time, ', 'On the other hand, ', 'Even so, '];
     } else if (tone === 'concise') {
@@ -1967,9 +1975,9 @@ function rephraseSingleSentence(
     let primaryOpener = 'Therefore, ';
     let altOpeners = ['As a result, ', 'Because of this, ', 'For this reason, '];
 
-    if (tone === 'natural') {
+    if (tone === 'simple' || tone === 'natural') {
       primaryOpener = 'That is why ';
-      altOpeners = ['Because of this, ', 'As a result, ', 'For that reason, '];
+      altOpeners = ['So ', 'Because of this, ', 'For that reason, '];
     } else if (tone === 'concise') {
       primaryOpener = 'Thus, ';
       altOpeners = ['Consequently, ', 'Therefore, '];
@@ -2015,8 +2023,8 @@ function rephraseSingleSentence(
   // 3. Apply phrase rules to sentence using non-overlapping interval scheduling
   let transformed = applyPhraseRulesToText(trimmed, activeRules);
 
-  // 4. Anti-AI Scrubber for natural/professional tones to avoid synthetic buzzwords
-  if (tone === 'natural' || tone === 'professional') {
+  // 4. Anti-AI Scrubber for simple/natural/professional tones to avoid synthetic buzzwords
+  if (tone === 'simple' || tone === 'natural' || tone === 'professional') {
     transformed = scrubSyntheticBuzzwords(transformed, tone);
   }
 
@@ -2114,29 +2122,45 @@ function applyPhraseRulesToText(text: string, rules: PhraseRule[]): string {
  */
 function scrubSyntheticBuzzwords(text: string, tone: RephraseTone): string {
   let res = text;
+  const isSimpleOrNatural = tone === 'simple' || tone === 'natural';
   const antiAiMap: [RegExp, string][] = [
-    [/\badversely impact personal well-being\b/gi, tone === 'natural' ? 'hurt our well-being' : 'compromise personal health'],
-    [/\badversely impact\b/gi, tone === 'natural' ? 'harm' : 'strain'],
-    [/\bdeplete productivity\b/gi, tone === 'natural' ? 'drain hours' : 'waste valuable time'],
-    [/\bmore expedited and productive\b/gi, tone === 'natural' ? 'faster and smoother' : 'more efficient and agile'],
-    [/\bconfers upon modern living\b/gi, tone === 'natural' ? 'brings to our lives' : 'delivers to everyday life'],
+    [/\bwoven into almost every aspect of our daily routines\b/gi, isSimpleOrNatural ? 'a big part of how we live our lives' : 'deeply integrated into daily routines'],
+    [/\bwoven into almost every aspect\b/gi, isSimpleOrNatural ? 'a big part' : 'deeply integrated into'],
+    [/\bwoven into\b/gi, isSimpleOrNatural ? 'part of' : 'integrated into'],
+    [/\bis effortless\b/gi, isSimpleOrNatural ? 'takes just seconds' : 'is seamless'],
+    [/\beffortlessly\b/gi, isSimpleOrNatural ? 'without any trouble' : 'seamlessly'],
+    [/\beffortless\b/gi, isSimpleOrNatural ? 'simple' : 'straightforward'],
+    [/\bdrain hours and hurt our well-being\b/gi, isSimpleOrNatural ? 'eat away our day and hurt our health' : 'deplete valuable time and impact health'],
+    [/\bdrain hours and hurt our\b/gi, isSimpleOrNatural ? 'eat into our day and hurt our' : 'deplete hours and impact our'],
+    [/\bhurt our well-being\b/gi, isSimpleOrNatural ? 'hurt our health' : 'affect personal wellness'],
+    [/\badversely impact personal well-being\b/gi, isSimpleOrNatural ? 'hurt our health' : 'compromise personal health'],
+    [/\badversely impact\b/gi, isSimpleOrNatural ? 'hurt' : 'strain'],
+    [/\bdeplete productivity\b/gi, isSimpleOrNatural ? 'eat away our day' : 'waste valuable time'],
+    [/\bmore expedited and productive\b/gi, isSimpleOrNatural ? 'a lot quicker with fewer hands-on chores' : 'faster and more efficient'],
+    [/\bexpedited and productive\b/gi, isSimpleOrNatural ? 'faster and smoother' : 'more efficient and agile'],
+    [/\bexpedited\b/gi, isSimpleOrNatural ? 'faster' : 'accelerated'],
+    [/\bconfers upon modern living\b/gi, isSimpleOrNatural ? 'brings to our lives' : 'delivers to everyday life'],
     [/\bconfers upon\b/gi, 'brings to'],
-    [/\butilize it for\b/gi, tone === 'natural' ? 'rely on it for' : 'depend on it for'],
+    [/\butilize it for\b/gi, isSimpleOrNatural ? 'use it for' : 'depend on it for'],
     [/\butilize\b/gi, 'use'],
-    [/\bacquire valuable competencies\b/gi, tone === 'natural' ? 'pick up practical skills' : 'develop valuable skills'],
-    [/\baccess relevant knowledge instantaneously\b/gi, tone === 'natural' ? 'look up information in seconds' : 'access useful information in seconds'],
-    [/\boverreliance on\b/gi, tone === 'natural' ? 'spending too much time glued to' : 'spending too much time on'],
-    [/\bemploy technology judiciously\b/gi, tone === 'natural' ? 'use technology with care' : 'use technology thoughtfully'],
-    [/\btangible advantages\b/gi, tone === 'natural' ? 'real benefits' : 'genuine benefits'],
-    [/\ba wide variety of\b/gi, 'various'],
+    [/\bacquire valuable competencies\b/gi, isSimpleOrNatural ? 'pick up practical skills' : 'develop valuable skills'],
+    [/\baccess relevant knowledge instantaneously\b/gi, isSimpleOrNatural ? 'look up facts in seconds' : 'access useful information in seconds'],
+    [/\boverreliance on\b/gi, isSimpleOrNatural ? 'spending too much time on' : 'excessive dependence on'],
+    [/\bemploy technology judiciously\b/gi, isSimpleOrNatural ? 'use technology in a smart way' : 'use technology thoughtfully'],
+    [/\bjudiciously\b/gi, isSimpleOrNatural ? 'wisely' : 'thoughtfully'],
+    [/\btangible advantages\b/gi, isSimpleOrNatural ? 'real benefits' : 'genuine benefits'],
+    [/\ba wide variety of\b/gi, isSimpleOrNatural ? 'many different' : 'various'],
     [/\bin order to\b/gi, 'to'],
-    [/\bdelve into\b/gi, 'examine'],
-    [/\ba tapestry of\b/gi, 'a rich mix of'],
-    [/\btestament to\b/gi, 'clear evidence of'],
-    [/\bbeacon of\b/gi, 'symbol of'],
-    [/\bplethora of\b/gi, 'wealth of'],
-    [/\bin today's fast-paced world\b/gi, 'in modern life'],
-    [/\bit is important to note that\b/gi, 'notably']
+    [/\bdelve into\b/gi, isSimpleOrNatural ? 'look into' : 'examine'],
+    [/\ba tapestry of\b/gi, isSimpleOrNatural ? 'a mix of' : 'a rich variety of'],
+    [/\btestament to\b/gi, isSimpleOrNatural ? 'proof of' : 'clear evidence of'],
+    [/\bbeacon of\b/gi, isSimpleOrNatural ? 'symbol of' : 'model of'],
+    [/\bplethora of\b/gi, isSimpleOrNatural ? 'lots of' : 'wealth of'],
+    [/\bin today's fast-paced world\b/gi, isSimpleOrNatural ? 'today' : 'in modern life'],
+    [/\bit is important to note that\b/gi, isSimpleOrNatural ? 'remember that' : 'notably'],
+    [/\bcutting down on repetitive manual tasks\b/gi, isSimpleOrNatural ? 'fewer hands-on chores' : 'reducing repetitive tasks'],
+    [/\brepetitive manual tasks\b/gi, isSimpleOrNatural ? 'repetitive chores' : 'routine manual tasks'],
+    [/\buse technology with care and focus on the real benefits\b/gi, isSimpleOrNatural ? 'use technology in a smart way, so we get the good parts without the bad' : 'use technology with care and focus on genuine benefits']
   ];
 
   for (const [pattern, repl] of antiAiMap) {
@@ -2150,8 +2174,39 @@ function scrubSyntheticBuzzwords(text: string, tone: RephraseTone): string {
  */
 function applyFallbackRestructure(sentence: string, tone: RephraseTone): { rephrased: string; strategy: string } {
   let s = sentence;
+  const isSimpleOrNatural = tone === 'simple' || tone === 'natural';
 
-  // Substitute common verbs and adjectives
+  if (isSimpleOrNatural) {
+    // For simple human tone, simplify complex / academic words into everyday words
+    const simplifyMap: [RegExp, string][] = [
+      [/\bassist\b/gi, 'help'],
+      [/\brequire\b/gi, 'need'],
+      [/\butilize\b/gi, 'use'],
+      [/\bcommence\b/gi, 'start'],
+      [/\bterminate\b/gi, 'stop'],
+      [/\btransform\b/gi, 'change'],
+      [/\bdemonstrate\b/gi, 'show'],
+      [/\bsubstantial\b/gi, 'big'],
+      [/\bfurthermore\b/gi, 'also'],
+      [/\bmoreover\b/gi, 'also'],
+      [/\bnevertheless\b/gi, 'still'],
+      [/\bconsequently\b/gi, 'so'],
+      [/\bprior to\b/gi, 'before'],
+      [/\bsubsequent to\b/gi, 'after'],
+      [/\bin the event that\b/gi, 'if'],
+      [/\bdue to the fact that\b/gi, 'because']
+    ];
+    for (const [pattern, repl] of simplifyMap) {
+      s = s.replace(pattern, (match) => matchCapitalization(match, repl));
+    }
+
+    if (s.trim().toLowerCase() === sentence.trim().toLowerCase()) {
+      s = 'In fact, ' + (sentence.charAt(0).toLowerCase() + sentence.slice(1));
+    }
+    return { rephrased: s, strategy: 'Simple Human Conversational Adaptation' };
+  }
+
+  // Substitute common verbs and adjectives for professional/academic
   const synonymMap: [RegExp, string][] = [
     [/\bhelp\b/gi, 'assist'],
     [/\bmake\b/gi, 'create'],
@@ -2170,10 +2225,7 @@ function applyFallbackRestructure(sentence: string, tone: RephraseTone): { rephr
   }
 
   if (s.trim().toLowerCase() === sentence.trim().toLowerCase()) {
-    // Add context-appropriate discourse opener
-    if (tone === 'natural') {
-      s = 'In fact, ' + (sentence.charAt(0).toLowerCase() + sentence.slice(1));
-    } else if (tone === 'professional') {
+    if (tone === 'professional') {
       s = 'Notably, ' + (sentence.charAt(0).toLowerCase() + sentence.slice(1));
     } else {
       s = 'Specifically, ' + (sentence.charAt(0).toLowerCase() + sentence.slice(1));
@@ -2189,13 +2241,13 @@ function applyFallbackRestructure(sentence: string, tone: RephraseTone): { rephr
 function generateVariant(sentence: string, variantIndex: number): string {
   if (variantIndex === 1) {
     if (sentence.startsWith('Still, ')) return sentence.replace(/^Still,\s*/, 'At the same time, ');
-    if (sentence.startsWith('That is why ')) return sentence.replace(/^That is why\s*/, 'Because of this, ');
+    if (sentence.startsWith('That is why ')) return sentence.replace(/^That is why\s*/, 'So ');
     if (sentence.startsWith('Therefore, ')) return sentence.replace(/^Therefore,\s*/, 'Consequently, ');
-    return 'In practice, ' + (sentence.charAt(0).toLowerCase() + sentence.slice(1));
+    return 'In fact, ' + (sentence.charAt(0).toLowerCase() + sentence.slice(1));
   }
   if (variantIndex === 2) {
     if (sentence.startsWith('Still, ')) return sentence.replace(/^Still,\s*/, 'On the other hand, ');
-    if (sentence.startsWith('That is why ')) return sentence.replace(/^That is why\s*/, 'For this reason, ');
+    if (sentence.startsWith('That is why ')) return sentence.replace(/^That is why\s*/, 'Because of this, ');
     if (sentence.startsWith('Therefore, ')) return sentence.replace(/^Therefore,\s*/, 'Accordingly, ');
     return sentence;
   }
@@ -2208,7 +2260,7 @@ function generateVariant(sentence: string, variantIndex: number): string {
  */
 export function rephraseText(
   source: string,
-  tone: RephraseTone = 'natural'
+  tone: RephraseTone = 'simple'
 ): RephraseResult {
   if (!source || !source.trim()) {
     return {
@@ -2231,9 +2283,10 @@ export function rephraseText(
   const originalWords = countWords(source);
   const sentenceSplits = splitSentencesWithSuffix(source);
 
+  const isSimpleOrNatural = tone === 'simple' || tone === 'natural';
   // Filter applicable rules for selected tone + universal rules
   const activeRules = PHRASE_RULES.filter(
-    rule => rule.tone === 'all' || rule.tone === tone
+    rule => rule.tone === 'all' || rule.tone === tone || (isSimpleOrNatural && (rule.tone === 'simple' || rule.tone === 'natural'))
   );
 
   const sentences: SentenceItem[] = [];

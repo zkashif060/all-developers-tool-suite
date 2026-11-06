@@ -49,9 +49,9 @@ describe('TextRephraserEngine', () => {
     expect(res.rephrasedText).toContain('ENSURE');
   });
 
-  it('should rephrase 100% of sentences in the user technology essay', () => {
+  it('should rephrase 100% of sentences in the user technology essay with simple human words', () => {
     const text = REPHRASE_SAMPLES.technologyEssay.text;
-    const res = rephraseText(text, 'natural');
+    const res = rephraseText(text, 'simple');
 
     expect(res.sentences.length).toBe(8);
     expect(res.totalSentences).toBe(8);
@@ -59,12 +59,21 @@ describe('TextRephraserEngine', () => {
     expect(res.rephrasePercentage).toBe(100);
     expect(res.sentences.every(s => s.isRephrased)).toBe(true);
 
-    // Natural human tone assertions
-    expect(res.rephrasedText).toContain('Why Technology Matters in Our Everyday Lives');
-    expect(res.rephrasedText).toContain('woven into almost every aspect');
-    expect(res.rephrasedText).toContain('Thanks to the internet');
-    expect(res.rephrasedText).toContain('glued to screens can drain hours and hurt our well-being');
-    expect(res.rephrasedText).toContain('use technology with care and focus on the real benefits');
+    // Simple & Human Anti-AI assertions
+    expect(res.rephrasedText).toContain('How Technology Shapes Our Daily Life');
+    expect(res.rephrasedText).toContain('Most of us rely on technology every single day.');
+    expect(res.rephrasedText).toContain('phones and computers to study, talk to friends, run businesses, and have fun');
+    expect(res.rephrasedText).toContain('The internet lets anyone talk to family and friends across the world without any trouble.');
+    expect(res.rephrasedText).toContain('Students can take classes from home, pick up new skills, and look up facts in just a few seconds.');
+    expect(res.rephrasedText).toContain('get work done a lot quicker with fewer hands-on chores');
+    expect(res.rephrasedText).toContain('staring at screens can eat away our day and hurt our health');
+    expect(res.rephrasedText).toContain('use technology in a smart way, so we get the good parts without the bad');
+
+    // Asserts zero synthetic AI detector triggers
+    expect(res.rephrasedText).not.toContain('woven into');
+    expect(res.rephrasedText).not.toContain('effortless');
+    expect(res.rephrasedText).not.toContain('drain hours and hurt our well-being');
+    expect(res.rephrasedText).not.toContain('adversely impact');
 
     // Every sentence must provide multiple alternative rephrasings
     expect(res.sentences.every(s => s.alternatives.length >= 2)).toBe(true);
