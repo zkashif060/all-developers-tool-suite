@@ -35,6 +35,13 @@ import {
               <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Samples:</span>
               <button
                 type="button"
+                (click)="loadSample('hardWorkEssay')"
+                class="px-2.5 py-1 text-xs font-medium rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-emerald-600 dark:text-emerald-400 font-semibold transition-colors"
+              >
+                Hard Work Essay
+              </button>
+              <button
+                type="button"
                 (click)="loadSample('technologyEssay')"
                 class="px-2.5 py-1 text-xs font-medium rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors"
               >
@@ -392,10 +399,10 @@ export class TextRephraserComponent implements OnInit {
     this.manualResult.set(updated);
   }
 
-  public loadSample(key: 'technologyEssay' | 'casualText' | 'businessEmail' | 'technicalSpec' | 'academicReport'): void {
+  public loadSample(key: 'hardWorkEssay' | 'technologyEssay' | 'casualText' | 'businessEmail' | 'technicalSpec' | 'academicReport'): void {
     this.manualResult.set(null);
     this.inputText.set(REPHRASE_SAMPLES[key].text);
-    if (key === 'technologyEssay' || key === 'casualText') this.tone.set('simple');
+    if (key === 'hardWorkEssay' || key === 'technologyEssay' || key === 'casualText') this.tone.set('simple');
     if (key === 'businessEmail') this.tone.set('professional');
     if (key === 'technicalSpec') this.tone.set('technical');
     if (key === 'academicReport') this.tone.set('academic');

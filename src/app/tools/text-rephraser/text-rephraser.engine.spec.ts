@@ -123,14 +123,46 @@ describe('TextRephraserEngine', () => {
     expect(res.rephrasedText).toContain('precipitates our central thesis');
   });
 
-  it('should naturally elevate easy and simplistic words without sounding like an AI', () => {
+  it('should rephrase 100% of sentences in the hard work essay with simple human words and zero AI triggers', () => {
+    const text = REPHRASE_SAMPLES.hardWorkEssay.text;
+    const res = rephraseText(text, 'simple');
+
+    expect(res.sentences.length).toBe(8);
+    expect(res.totalSentences).toBe(8);
+    expect(res.sentencesRephrased).toBe(8);
+    expect(res.rephrasePercentage).toBe(100);
+    expect(res.sentences.every(s => s.isRephrased)).toBe(true);
+
+    // Simple & Human phrasing assertions
+    expect(res.rephrasedText).toContain('Why Hard Work Matters in Life');
+    expect(res.rephrasedText).toContain('Putting in real effort is one of the main keys to success.');
+    expect(res.rephrasedText).toContain('Every person who succeeds has dealt with tough challenges before reaching their goals.');
+    expect(res.rephrasedText).toContain('You cannot achieve anything worthwhile without patience, dedication, and steady effort.');
+    expect(res.rephrasedText).toContain('Students have to study hard to earn good grades, and professionals must sharpen their skills to grow their careers.');
+    expect(res.rephrasedText).toContain('Sometimes people fail even when they give it their all, but failure should never keep them from trying again.');
+    expect(res.rephrasedText).toContain('Instead, it should teach valuable lessons and make us even stronger.');
+    expect(res.rephrasedText).toContain('Hard work not only helps us reach our dreams, but it also builds confidence, discipline, and a positive outlook on life.');
+
+    // Asserts zero tough vocabulary words or AI detector triggers
+    expect(res.rephrasedText).not.toContain('Diligent effort');
+    expect(res.rephrasedText).not.toContain('diligent effort');
+    expect(res.rephrasedText).not.toContain('challenging to');
+    expect(res.rephrasedText).not.toContain('effective grades');
+    expect(res.rephrasedText).not.toContain('providing their best');
+    expect(res.rephrasedText).not.toContain('halt them from striving');
+    expect(res.rephrasedText).not.toContain('create them stronger');
+    expect(res.rephrasedText).not.toContain('assists us');
+    expect(res.rephrasedText).not.toContain('The significance of');
+  });
+
+  it('should naturally elevate easy and simplistic words when professional tone is selected', () => {
     const text = REPHRASE_SAMPLES.casualText.text;
-    const res = rephraseText(text, 'natural');
+    const res = rephraseText(text, 'professional');
 
     expect(res.easyWordsElevatedCount).toBeGreaterThanOrEqual(5);
     expect(res.sentences.every(s => s.isRephrased)).toBe(true);
 
-    // Verify natural human phrasing
+    // Verify professional phrasing
     expect(res.rephrasedText).toContain('simple and straightforward');
     expect(res.rephrasedText).toContain('slip up noticeably');
     expect(res.rephrasedText).toContain('tackle demanding challenges');

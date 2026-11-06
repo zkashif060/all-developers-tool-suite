@@ -525,6 +525,454 @@ const SENTENCE_KNOWLEDGE_BANK: SentenceKnowledgeRule[] = [
           };
       }
     }
+  },
+
+  // 9. Hard Work in Life Title / Heading
+  {
+    matcher: (s) => /importance of hard work/i.test(s),
+    transform: (s, tone) => {
+      switch (tone) {
+        case 'simple':
+        case 'natural':
+          return {
+            primary: 'Why Hard Work Matters in Life',
+            alternatives: [
+              'Why Putting in Hard Work Matters',
+              'How Hard Work Shapes Our Lives',
+              'The Real Value of Hard Work'
+            ],
+            strategy: 'Simple Conversational Title'
+          };
+        case 'concise':
+          return {
+            primary: 'The Value of Hard Work',
+            alternatives: [
+              'Why Hard Work Drives Success',
+              'The Power of Sustained Effort'
+            ],
+            strategy: 'Direct Concise Title'
+          };
+        case 'academic':
+          return {
+            primary: 'The Teleological and Psychological Function of Diligence in Human Attainment',
+            alternatives: [
+              'An Empirical Analysis of Sustained Effort in Achievement',
+              'The Foundational Role of Diligence Across Human Endeavors'
+            ],
+            strategy: 'Scholarly Expository Title'
+          };
+        case 'technical':
+          return {
+            primary: 'Impact of Sustained Operational Input on Performance Outcomes',
+            alternatives: [
+              'Systemic Value of Iterative Effort and Execution Capacity'
+            ],
+            strategy: 'Performance Metrics Header'
+          };
+        case 'professional':
+        default:
+          return {
+            primary: 'The Critical Value of Diligent Effort in Achieving Success',
+            alternatives: [
+              'The Strategic Importance of Hard Work in Professional Growth',
+              'Understanding the Role of Sustained Effort in Long-Term Success'
+            ],
+            strategy: 'Executive Career Title'
+          };
+      }
+    }
+  },
+
+  // 10. "Hard work is one of the most important keys to success"
+  {
+    matcher: (s) => /hard work is one of the most important keys to success/i.test(s),
+    transform: (s, tone) => {
+      switch (tone) {
+        case 'simple':
+        case 'natural':
+          return {
+            primary: 'Putting in real effort is one of the main keys to success.',
+            alternatives: [
+              'Working hard is one of the biggest factors in succeeding.',
+              'Hard work is at the heart of almost every success story.',
+              'There is no doubt that working hard is essential for success.'
+            ],
+            strategy: 'Simple Human Action Statement'
+          };
+        case 'concise':
+          return {
+            primary: 'Hard work is essential to achieving success.',
+            alternatives: [
+              'Consistent effort drives meaningful success.',
+              'Success relies fundamentally on hard work.'
+            ],
+            strategy: 'Concise Principle Assertion'
+          };
+        case 'academic':
+          return {
+            primary: 'Conscientious industry constitutes a primary determinant of socio-economic and academic attainment.',
+            alternatives: [
+              'Empirical research consistently positions rigorous personal effort as an essential catalyst for achievement.',
+              'Persistent labor functions as a foundational mechanism for the realization of aspirational objectives.'
+            ],
+            strategy: 'Scholarly Sociological Assertion'
+          };
+        case 'technical':
+          return {
+            primary: 'Consistent work output serves as a primary throughput driver for target attainment.',
+            alternatives: [
+              'High baseline effort maximizes the probability of meeting defined performance objectives.'
+            ],
+            strategy: 'Quantitative Capability Assertion'
+          };
+        case 'professional':
+        default:
+          return {
+            primary: 'Sustained hard work represents a cornerstone of meaningful achievement.',
+            alternatives: [
+              'Diligent effort remains one of the most essential drivers of professional success.',
+              'Consistent effort serves as an indispensable foundation for long-term accomplishment.'
+            ],
+            strategy: 'Executive Competency Formulation'
+          };
+      }
+    }
+  },
+
+  // 11. "Every successful person has faced challenges and difficulties before achieving their goals"
+  {
+    matcher: (s) => /every successful person has faced challenges and difficulties before achieving their goals/i.test(s),
+    transform: (s, tone) => {
+      switch (tone) {
+        case 'simple':
+        case 'natural':
+          return {
+            primary: 'Every person who succeeds has dealt with tough challenges before reaching their goals.',
+            alternatives: [
+              'Anyone who reaches their goals has had to work through hardships along the way.',
+              'Success never comes without running into hurdles and setbacks first.',
+              'Every successful person had to push past difficulties before making it.'
+            ],
+            strategy: 'Conversational Human Experience'
+          };
+        case 'concise':
+          return {
+            primary: 'Every high achiever overcomes serious challenges before succeeding.',
+            alternatives: [
+              'Success requires pushing past obstacles and setbacks.',
+              'All successful people overcome difficulties on the way to their goals.'
+            ],
+            strategy: 'Streamlined Contrast'
+          };
+        case 'academic':
+          return {
+            primary: 'Individuals who attain prominent distinction invariably encounter systemic obstacles prior to objective fulfillment.',
+            alternatives: [
+              'The trajectory toward substantial achievement is universally marked by antecedent periods of friction and adversity.',
+              'Historical precedent demonstrates that attainment is dialectically forged through the navigation of significant hurdles.'
+            ],
+            strategy: 'Longitudinal Phenomenological Register'
+          };
+        case 'technical':
+          return {
+            primary: 'All high-yield agents encounter operational bottlenecks and failure states prior to convergence on benchmark targets.',
+            alternatives: [
+              'Iterative task completion requires resolving progressive bottlenecks and constraint conditions.'
+            ],
+            strategy: 'Systems Convergence Formulation'
+          };
+        case 'professional':
+        default:
+          return {
+            primary: 'Virtually every accomplished leader navigated complex obstacles prior to achieving their milestones.',
+            alternatives: [
+              'High achievers invariably overcome substantial hurdles before realizing their strategic objectives.',
+              'Every notable success story is preceded by overcoming meaningful challenges and adversity.'
+            ],
+            strategy: 'Executive Leadership Context'
+          };
+      }
+    }
+  },
+
+  // 12. "Nothing can be achieved without dedication, patience, and continuous effort"
+  {
+    matcher: (s) => /nothing can be achieved without dedication, patience,? and continuous effort/i.test(s),
+    transform: (s, tone) => {
+      switch (tone) {
+        case 'simple':
+        case 'natural':
+          return {
+            primary: 'You cannot achieve anything worthwhile without patience, dedication, and steady effort.',
+            alternatives: [
+              'Real success takes steady effort, patience, and true dedication.',
+              'Without patience and daily effort, reaching big goals is impossible.',
+              'It takes patience, focus, and ongoing effort to accomplish anything meaningful.'
+            ],
+            strategy: 'Direct Natural Human Cadence'
+          };
+        case 'concise':
+          return {
+            primary: 'Meaningful achievements require dedication, patience, and sustained effort.',
+            alternatives: [
+              'Nothing of value happens without patience and consistent effort.',
+              'Enduring results demand dedication and perseverance.'
+            ],
+            strategy: 'High-Density Triad'
+          };
+        case 'academic':
+          return {
+            primary: 'Substantive attainment is unattainable without unwavering commitment, temporal patience, and iterative labor.',
+            alternatives: [
+              'Efficacy in complex domains demands continuous dedication, psychological endurance, and sustained application.',
+              'The realization of complex objectives necessitates rigorous perseverance and iterative methodology.'
+            ],
+            strategy: 'Scholarly Epistemological Constraint'
+          };
+        case 'technical':
+          return {
+            primary: 'Reliable execution requires strict protocol adherence, process patience, and continuous compute cycles.',
+            alternatives: [
+              'Sustained pipeline throughput depends on invariant commitment, operational patience, and steady compute.'
+            ],
+            strategy: 'Process Reliability Parameter'
+          };
+        case 'professional':
+        default:
+          return {
+            primary: 'Substantive outcomes cannot be realized in the absence of dedication, discipline, and sustained commitment.',
+            alternatives: [
+              'Meaningful progress demands unwavering focus, patience, and consistent day-to-day execution.',
+              'Enduring value requires dedicated execution coupled with patience and sustained perseverance.'
+            ],
+            strategy: 'Operational Discipline Formulation'
+          };
+      }
+    }
+  },
+
+  // 13. "Students need to work hard to get good grades, while professionals must improve their skills to build a successful career"
+  {
+    matcher: (s) => /students need to work hard to get good grades.*professionals must improve their skills/i.test(s),
+    transform: (s, tone) => {
+      switch (tone) {
+        case 'simple':
+        case 'natural':
+          return {
+            primary: 'Students have to study hard to earn good grades, and professionals must sharpen their skills to grow their careers.',
+            alternatives: [
+              'Students need hard work to do well in school, while working adults have to keep learning to move ahead.',
+              'Whether it is students studying for good grades or professionals building careers, hard work is required.',
+              'To get good grades, students must put in the work, just as professionals must hone their skills to move up.'
+            ],
+            strategy: 'Simple Human Parallel Construction'
+          };
+        case 'concise':
+          return {
+            primary: 'Students must study diligently for top grades, while professionals continuously build skills to advance.',
+            alternatives: [
+              'Academic and career success both require continuous skill-building and hard work.',
+              'Students need focused study to excel, just as professionals need skill growth to advance.'
+            ],
+            strategy: 'Parallel Ellipsis'
+          };
+        case 'academic':
+          return {
+            primary: 'Whereas pedagogical mastery requires rigorous scholastic diligence, professional advancement is contingent upon continuous competency enhancement.',
+            alternatives: [
+              'Scholastic performance necessitates focused cognitive discipline, whereas career progression demands ongoing skill acquisition.',
+              'Both academic excellence and professional trajectory require systematic, iterative investment in foundational competencies.'
+            ],
+            strategy: 'Pedagogical and Sociological Parallelism'
+          };
+        case 'technical':
+          return {
+            primary: 'Academic nodes must optimize input hours for grade yield, while professional operators continually update technical capability.',
+            alternatives: [
+              'Benchmark attainment across educational cohorts and engineering teams depends on continuous skill iteration.'
+            ],
+            strategy: 'Operator Capability Model'
+          };
+        case 'professional':
+        default:
+          return {
+            primary: 'While students must apply diligent focus to secure top academic marks, professionals must continuously upskill to advance their careers.',
+            alternatives: [
+              'Academic excellence demands rigorous study, just as career advancement hinges on proactive capability development.',
+              'From students striving for honors to professionals developing in-demand competencies, sustained dedication is essential.'
+            ],
+            strategy: 'Dual Domain Career Advancement'
+          };
+      }
+    }
+  },
+
+  // 14. "Sometimes, people fail despite giving their best, but failure should never stop them from trying again"
+  {
+    matcher: (s) => /sometimes,?\s*people fail despite giving their best.*failure should never stop them from trying again/i.test(s),
+    transform: (s, tone) => {
+      switch (tone) {
+        case 'simple':
+        case 'natural':
+          return {
+            primary: 'Sometimes people fail even when they give it their all, but failure should never keep them from trying again.',
+            alternatives: [
+              'You can try your hardest and still fail, but that should never stop you from getting back up.',
+              'Even when people put in their best effort, things can go wrong, but we should never stop trying.',
+              'Failing despite our best effort happens, but it should never stop us from taking another shot.'
+            ],
+            strategy: 'Conversational Resilience Idiom'
+          };
+        case 'concise':
+          return {
+            primary: 'Even optimal efforts can fall short, but failure should never prevent another attempt.',
+            alternatives: [
+              'Effort does not guarantee immediate success, yet setbacks should never halt progress.',
+              'Failure happens despite our best efforts, but it must never stop us from trying again.'
+            ],
+            strategy: 'Brevity Resilience Contrast'
+          };
+        case 'academic':
+          return {
+            primary: 'Deficits in outcome manifest despite optimal resource allocation, yet such occurrences must not deter subsequent iterative attempts.',
+            alternatives: [
+              'Stochastic variance can precipitate adverse outcomes regardless of input effort, yet failure functions empirically as a heuristic catalyst.',
+              'Sub-optimal results frequently transpire despite maximal application, yet iterative resilience remains a prerequisite for success.'
+            ],
+            strategy: 'Probabilistic Resilience Theory'
+          };
+        case 'technical':
+          return {
+            primary: 'Transaction failures can occur under nominal operating conditions, yet system fault tolerance demands continuous retry cycles.',
+            alternatives: [
+              'Subsystem faults occur despite calibrated inputs; automated retry and recovery protocols must proceed without interruption.'
+            ],
+            strategy: 'Fault Tolerance Protocol'
+          };
+        case 'professional':
+        default:
+          return {
+            primary: 'Setbacks can occur even after delivering exceptional effort, yet failure must serve as a catalyst for renewed initiative.',
+            alternatives: [
+              'Despite exhaustive preparation, adverse outcomes occasionally arise; however, resilience demands immediate recalibration and persistent execution.',
+              'Unsuccessful outcomes occur despite maximum diligence, but strategic resilience requires persevering through setbacks.'
+            ],
+            strategy: 'Executive Resilience Cadence'
+          };
+      }
+    }
+  },
+
+  // 15. "Instead, it should teach them valuable lessons and make them stronger"
+  {
+    matcher: (s) => /instead,?\s*(it should )?teach (them )?valuable lessons and make them stronger/i.test(s),
+    transform: (s, tone) => {
+      switch (tone) {
+        case 'simple':
+        case 'natural':
+          return {
+            primary: 'Instead, it should teach valuable lessons and make us even stronger.',
+            alternatives: [
+              'Instead, mistakes should teach us what works and build our strength.',
+              'Instead, setbacks should be treated as learning moments that make us stronger.',
+              'Rather than giving up, we should learn from failure and come back stronger.'
+            ],
+            strategy: 'Direct Natural Takeaway'
+          };
+        case 'concise':
+          return {
+            primary: 'Instead, setbacks should teach valuable lessons and build greater resilience.',
+            alternatives: [
+              'Failure provides crucial lessons that strengthen future performance.',
+              'Rather than discouraging us, setbacks should build strength and perspective.'
+            ],
+            strategy: 'Concise Growth Mindset'
+          };
+        case 'academic':
+          return {
+            primary: 'Rather, adverse outcomes should serve an instructive pedagogical function, enhancing psychological fortitude and procedural competence.',
+            alternatives: [
+              'Epistemologically, failure confers invaluable diagnostic feedback, augmenting subsequent resilience and adaptive capacity.',
+              'Iterative setbacks constitute vital pedagogical mechanisms that fortify cognitive endurance and methodological precision.'
+            ],
+            strategy: 'Heuristic Fortitude Synthesis'
+          };
+        case 'technical':
+          return {
+            primary: 'Rather, exception traces should be analyzed to extract diagnostic telemetry and improve systemic robustness.',
+            alternatives: [
+              'Failure states provide essential telemetry to patch runtime vulnerabilities and increase overall fault tolerance.'
+            ],
+            strategy: 'Telemetry and Hardening Directive'
+          };
+        case 'professional':
+        default:
+          return {
+            primary: 'Rather, setbacks should provide critical diagnostic insights that strengthen future performance.',
+            alternatives: [
+              'Instead, obstacles must be leveraged as valuable learning opportunities that build institutional and personal resilience.',
+              'On the contrary, failure should deliver key lessons that fortify operational and leadership strength.'
+            ],
+            strategy: 'Continuous Improvement Paradigm'
+          };
+      }
+    }
+  },
+
+  // 16. "Hard work not only helps us achieve our dreams but also builds confidence, discipline, and a positive attitude toward life"
+  {
+    matcher: (s) => /hard work not only helps us achieve our dreams but also builds confidence/i.test(s),
+    transform: (s, tone) => {
+      switch (tone) {
+        case 'simple':
+        case 'natural':
+          return {
+            primary: 'Hard work not only helps us reach our dreams, but it also builds confidence, discipline, and a positive outlook on life.',
+            alternatives: [
+              'Putting in the work helps us reach our goals while building self-control and confidence.',
+              'Working hard does more than help us achieve dreams—it shapes our character and confidence.',
+              'Hard work leads to our dreams, but it also teaches us discipline and gives us a positive attitude.'
+            ],
+            strategy: 'Balanced Simple Human Conclusion'
+          };
+        case 'concise':
+          return {
+            primary: 'Hard work achieves our goals while building confidence, discipline, and a constructive attitude.',
+            alternatives: [
+              'Dedicated effort realizes our dreams and builds enduring discipline and confidence.',
+              'Hard work powers our achievements and cultivates lifelong confidence and discipline.'
+            ],
+            strategy: 'Balanced Direct Summary'
+          };
+        case 'academic':
+          return {
+            primary: 'Rigorous labor not only facilitates teleological goal actualization but simultaneously cultivates psychological self-efficacy, behavioral regulation, and constructive affective orientation.',
+            alternatives: [
+              'Systematic industry yields dual dividends: it actualizes aspirational trajectories while reinforcing internal locus of control and somatic discipline.',
+              'The compounding effects of diligence extend beyond material achievement to encompass cognitive fortitude, self-regulation, and psychological flourishing.'
+            ],
+            strategy: 'Psychological Self-Efficacy Framing'
+          };
+        case 'technical':
+          return {
+            primary: 'Sustained processing throughput executes objective targets while establishing operational discipline and deterministic confidence.',
+            alternatives: [
+              'High duty cycles deliver programmatic goals while conditioning baseline stability, reliability, and positive state metrics.'
+            ],
+            strategy: 'Systemic State Transition Summary'
+          };
+        case 'professional':
+        default:
+          return {
+            primary: 'Diligent execution not only accelerates the realization of strategic ambitions but also cultivates self-assurance, operational discipline, and an optimistic worldview.',
+            alternatives: [
+              'Consistent hard work achieves strategic goals while instilling unwavering self-confidence, rigorous discipline, and a proactive mindset.',
+              'Beyond delivering career milestones, dedicated effort fosters personal integrity, structured discipline, and professional confidence.'
+            ],
+            strategy: 'Executive Strategic Alignment'
+          };
+      }
+    }
   }
 ];
 
@@ -1024,7 +1472,7 @@ export const PHRASE_RULES: PhraseRule[] = [
     replacement: 'the significance of',
     alternatives: ['the vital role of', 'the pivotal importance of'],
     reason: 'Elevated formal rhetoric',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bin our daily lives\b/gi,
@@ -1038,42 +1486,42 @@ export const PHRASE_RULES: PhraseRule[] = [
     replacement: 'everyday life',
     alternatives: ['daily existence', 'contemporary living'],
     reason: 'Objective formal phrasing',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bdaily lives\b/gi,
     replacement: 'everyday routines',
     alternatives: ['daily activities'],
     reason: 'Professional precision',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bbecome an important part of\b/gi,
     replacement: 'become an essential component of',
     alternatives: ['become integral to', 'become a cornerstone of'],
     reason: 'Elevated idiom to executive prose',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\ban important part of\b/gi,
     replacement: 'an integral facet of',
     alternatives: ['a vital element of', 'a key component of'],
     reason: 'Elevated vocabulary',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bimportant part\b/gi,
     replacement: 'integral component',
     alternatives: ['crucial element', 'vital facet'],
     reason: 'Sophisticated professional phrasing',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bwith the help of\b/gi,
     replacement: 'enabled by',
     alternatives: ['through the facilitation of', 'via'],
     reason: 'Direct agency attribution',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\beasily connect with\b/gi,
@@ -1087,49 +1535,49 @@ export const PHRASE_RULES: PhraseRule[] = [
     replacement: 'collaborate globally',
     alternatives: ['interact with peers', 'communicate internationally'],
     reason: 'Professional collaboration phrasing',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bdifferent parts of the world\b/gi,
     replacement: 'across the globe',
     alternatives: ['internationally', 'worldwide'],
     reason: 'Streamlined global descriptor',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\battend online classes\b/gi,
     replacement: 'participate in virtual courses',
     alternatives: ['engage in digital learning', 'attend remote lectures'],
     reason: 'Contemporary educational vocabulary',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\blearn new skills\b/gi,
     replacement: 'acquire valuable competencies',
     alternatives: ['develop new proficiencies', 'build modern capabilities'],
     reason: 'Professional skill acquisition terminology',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bfind useful information\b/gi,
     replacement: 'access relevant knowledge',
     alternatives: ['retrieve critical data', 'locate valuable insights'],
     reason: 'Formal data retrieval terminology',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\buseful information\b/gi,
     replacement: 'valuable insights',
     alternatives: ['relevant data', 'critical information'],
     reason: 'Elevated professional terminology',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bwithin seconds\b/gi,
     replacement: 'instantaneously',
     alternatives: ['in real time', 'rapidly'],
     reason: 'Precise temporal adverb',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bfaster and more efficient\b/gi,
@@ -1143,35 +1591,35 @@ export const PHRASE_RULES: PhraseRule[] = [
     replacement: 'manual labor',
     alternatives: ['routine manual operations', 'labor-intensive tasks'],
     reason: 'Industry-standard terminology',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bexcessive use of\b/gi,
     replacement: 'overreliance on',
     alternatives: ['disproportionate usage of', 'inordinate dependence upon'],
     reason: 'Analytical critique phrasing',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bwaste time\b/gi,
     replacement: 'deplete productivity',
     alternatives: ['consume valuable time', 'diminish efficiency'],
     reason: 'Professional productivity framing',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\baffect our health\b/gi,
     replacement: 'adversely impact personal well-being',
     alternatives: ['compromise physical health', 'negatively influence wellness'],
     reason: 'Formal health impact terminology',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bwe should use\b/gi,
     replacement: 'we must employ',
     alternatives: ['organizations should utilize', 'individuals ought to leverage'],
     reason: 'Authoritative recommendation',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bwe should\b/gi,
@@ -1185,21 +1633,21 @@ export const PHRASE_RULES: PhraseRule[] = [
     replacement: 'tangible advantages',
     alternatives: ['constructive benefits', 'favorable outcomes'],
     reason: 'Eliminated redundant modifier (pleonasm)',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\bbrings to our lives\b/gi,
     replacement: 'confers upon modern living',
     alternatives: ['provides to daily society', 'delivers to our everyday experience'],
     reason: 'Elevated concluding rhetoric',
-    tone: 'all'
+    tone: 'professional'
   },
   {
     pattern: /\buse it for\b/gi,
     replacement: 'utilize it for',
     alternatives: ['employ it for', 'leverage it toward'],
     reason: 'Elevated formal verb',
-    tone: 'all'
+    tone: 'professional'
   },
 
   // =========================================================================
@@ -1837,6 +2285,12 @@ export const PHRASE_RULES: PhraseRule[] = [
 ];
 
 export const REPHRASE_SAMPLES = {
+  hardWorkEssay: {
+    name: 'Hard Work in Life (Student Essay)',
+    text: `The Importance of Hard Work in Life
+
+Hard work is one of the most important keys to success. Every successful person has faced challenges and difficulties before achieving their goals. Nothing can be achieved without dedication, patience, and continuous effort. Students need to work hard to get good grades, while professionals must improve their skills to build a successful career. Sometimes, people fail despite giving their best, but failure should never stop them from trying again. Instead, it should teach them valuable lessons and make them stronger. Hard work not only helps us achieve our dreams but also builds confidence, discipline, and a positive attitude toward life.`
+  },
   technologyEssay: {
     name: 'Technology in Daily Life (User Essay)',
     text: `The Importance of Technology in Our Daily Lives
@@ -1914,7 +2368,8 @@ export function splitSentencesWithSuffix(src: string): { original: string; suffi
 function rephraseSingleSentence(
   rawSentence: string,
   tone: RephraseTone,
-  activeRules: PhraseRule[]
+  activeRules: PhraseRule[],
+  sentenceIndex = 0
 ): {
   rephrased: string;
   alternatives: string[];
@@ -2031,7 +2486,7 @@ function rephraseSingleSentence(
   // 5. Fallback sentence restructuring if still unchanged
   let strategy = 'Lexical & Syntactic Rephrase';
   if (transformed.trim().toLowerCase() === trimmed.toLowerCase()) {
-    const fallback = applyFallbackRestructure(trimmed, tone);
+    const fallback = applyFallbackRestructure(trimmed, tone, sentenceIndex);
     transformed = fallback.rephrased;
     strategy = fallback.strategy;
   }
@@ -2172,7 +2627,11 @@ function scrubSyntheticBuzzwords(text: string, tone: RephraseTone): string {
 /**
  * Fallback restructurer ensuring NO sentence remains identical to original.
  */
-function applyFallbackRestructure(sentence: string, tone: RephraseTone): { rephrased: string; strategy: string } {
+function applyFallbackRestructure(
+  sentence: string,
+  tone: RephraseTone,
+  sentenceIndex = 0
+): { rephrased: string; strategy: string } {
   let s = sentence;
   const isSimpleOrNatural = tone === 'simple' || tone === 'natural';
 
@@ -2201,7 +2660,16 @@ function applyFallbackRestructure(sentence: string, tone: RephraseTone): { rephr
     }
 
     if (s.trim().toLowerCase() === sentence.trim().toLowerCase()) {
-      s = 'In fact, ' + (sentence.charAt(0).toLowerCase() + sentence.slice(1));
+      const openers = [
+        'Naturally, ',
+        'Truth is, ',
+        'Clearly, ',
+        'Of course, ',
+        'In reality, ',
+        'As we see, '
+      ];
+      const opener = openers[sentenceIndex % openers.length];
+      s = opener + (sentence.charAt(0).toLowerCase() + sentence.slice(1));
     }
     return { rephrased: s, strategy: 'Simple Human Conversational Adaptation' };
   }
@@ -2284,10 +2752,18 @@ export function rephraseText(
   const sentenceSplits = splitSentencesWithSuffix(source);
 
   const isSimpleOrNatural = tone === 'simple' || tone === 'natural';
-  // Filter applicable rules for selected tone + universal rules
-  const activeRules = PHRASE_RULES.filter(
-    rule => rule.tone === 'all' || rule.tone === tone || (isSimpleOrNatural && (rule.tone === 'simple' || rule.tone === 'natural'))
-  );
+  // Filter applicable rules:
+  // In simple/natural mode, DO NOT elevate easy words into tough vocabulary words!
+  const activeRules = PHRASE_RULES.filter(rule => {
+    if (isSimpleOrNatural) {
+      if (rule.isEasyWord) return false;
+      if (rule.tone === 'professional' || rule.tone === 'academic' || rule.tone === 'technical') {
+        return false;
+      }
+      return rule.tone === 'all' || rule.tone === 'simple' || rule.tone === 'natural';
+    }
+    return rule.tone === 'all' || rule.tone === tone;
+  });
 
   const sentences: SentenceItem[] = [];
   const replacements: ReplacementItem[] = [];
@@ -2295,7 +2771,7 @@ export function rephraseText(
 
   for (let idx = 0; idx < sentenceSplits.length; idx++) {
     const item = sentenceSplits[idx];
-    const rephraseInfo = rephraseSingleSentence(item.original, tone, activeRules);
+    const rephraseInfo = rephraseSingleSentence(item.original, tone, activeRules, idx);
 
     sentences.push({
       id: `sent-${idx + 1}`,
